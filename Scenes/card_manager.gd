@@ -3,6 +3,7 @@ extends Node2D
 var COLLISION_MASK = 1
 var card_dragged
 var screen_size
+var is_hovering_on_card
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,9 +21,10 @@ func _input(event):
 		if event.pressed:
 			var card = raycast_check_for_card()
 			if card:
-				card_dragged = card
+				start_drag(card)
 		else:
-			card_dragged = null
+			if card_dragged:
+				finish_drag()
 
 func raycast_check_for_card():
 	var space_state = get_world_2d().direct_space_state
@@ -32,5 +34,54 @@ func raycast_check_for_card():
 	parameters.collision_mask = COLLISION_MASK
 	var result = space_state.intersect_point(parameters)
 	if result.size() > 0:
-		return result[0].collider.get_parent()
+		return get_card_with_highest_z_index(result)
 	return null
+
+func get_card_with_highest_z_index(cards):
+	#I will assume that the first card in the array has the highest z index
+	var highest_z_card = cards[0].collider.get_parent()
+	var highest_z_index = highest_z_card.z_index
+	
+	#Loop through the rest of the cards and check if there are higher Z indexes
+	#Start from 1 because we can skip the first card as we make the assumtion above
+	for i in range(1, cards.size()):
+		var current_card = cards[i].collider.get_parent()
+		if current_card.z_index > highest_z_index:
+			highest_z_card = current_card
+			highest_z_index = highest_z_card.z_index
+	return highest_z_card
+
+func connect_card_signals(card):
+	card.connect("hovered", on_hover_over_card)
+	card.connect("hovered_off", on_hover_off_card)
+
+func on_hover_over_card(card):
+	if not is_hovering_on_card:
+		is_hovering_on_card = true
+		highlight_card(card, true)
+
+func on_hover_off_card(card):
+	if not card_dragged:
+		#If I am not dragging a card
+		highlight_card(card, false)
+		var new_card_hovered = raycast_check_for_card()
+		if new_card_hovered:
+			highlight_card(new_card_hovered, true)
+		else:
+			is_hovering_on_card = false
+
+func start_drag(card):
+	card_dragged = card
+	card.scale = Vector2(1, 1)
+
+func finish_drag():
+	card_dragged.scale = Vector2(1.05, 1.05)
+	card_dragged = null
+
+func highlight_card(card, hovered):
+	if hovered:
+		card.scale = Vector2(1.05, 1.05)
+		card.z_index = 2
+	else:
+		card.scale = Vector2(1, 1)
+		card.z_index = 1
