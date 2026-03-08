@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://scalydaq17nx" path="res://Textures/CardSlotVertical.png" id="1_luhj6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_12ej0"]
-size = Vector2(130, 214)
+size = Vector2(68, 109)
 
 [node name="Slot" type="Node2D" unique_id=1269968676]
 script = ExtResource("1_4h18v")
@@ -17,4 +17,5 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1355243781]
+position = Vector2(-1, -0.5)
 shape = SubResource("RectangleShape2D_12ej0")
