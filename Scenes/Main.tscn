@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://6lgx3sg0cb5l" path="res://Scenes/Slot.tscn" id="3_kln2b"]
 [ext_resource type="Texture2D" uid="uid://b3vmnk4feq8qn" path="res://Textures/background.png" id="4_rgh2o"]
 [ext_resource type="Script" uid="uid://bypqiw2yqwxyj" path="res://Scripts/player_hand.gd" id="5_pbw6q"]
+[ext_resource type="PackedScene" uid="uid://cg2jseaexr3pe" path="res://Scenes/CardPile.tscn" id="5_v1gob"]
+[ext_resource type="Script" uid="uid://b812w7pi7o6ba" path="res://Scripts/input_manager.gd" id="7_jw32o"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 position = Vector2(-3, 0)
@@ -28,3 +30,9 @@ metadata/_edit_lock_ = true
 
 [node name="PlayerHand" type="Node2D" parent="." unique_id=406687866]
 script = ExtResource("5_pbw6q")
+
+[node name="CardPile" parent="." unique_id=489780070 instance=ExtResource("5_v1gob")]
+position = Vector2(865, 485)
+
+[node name="InputManager" type="Node2D" parent="." unique_id=1059191440]
+script = ExtResource("7_jw32o")

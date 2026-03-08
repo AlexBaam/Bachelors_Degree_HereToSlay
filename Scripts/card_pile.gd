@@ -1,0 +1,35 @@
+extends Node2D
+
+const HAND_COUNT = 5
+const CARD_SCENE_PATH = "res://Scenes/Card.tscn"
+
+var game_card_pile = ["Card", "Card", "Card", "Card", "Card"]
+
+@export var card_draw_speed = 0.5
+
+@onready var player_hand_reference: Node2D = $"../PlayerHand"
+@onready var card_manager_reference: Node2D = $"../CardManager"
+@onready var cards_left_reference: RichTextLabel = $RichTextLabel
+@onready var card_collider: CollisionShape2D = $Area2D/CollisionShape2D
+@onready var card_sprite: Sprite2D = $Sprite2D
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	cards_left_reference.text = str(game_card_pile.size())
+
+func draw_card():
+	var card_drawn = game_card_pile[0]
+	game_card_pile.erase(card_drawn)
+	
+	# Setting the deck to invisible if there are no cards left
+	if game_card_pile.size() == 0:
+		card_collider.disabled = true
+		card_sprite.visible = false
+		cards_left_reference.visible = false
+	
+	cards_left_reference.text = str(game_card_pile.size())
+	var card_scene = preload(CARD_SCENE_PATH)
+	var new_card = card_scene.instantiate()
+	card_manager_reference.add_child(new_card)
+	new_card.name = "Card"
+	player_hand_reference.add_card_to_hand(new_card, card_draw_speed)
