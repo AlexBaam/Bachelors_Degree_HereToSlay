@@ -18,5 +18,35 @@ texture = ExtResource("1_pnb5n")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1456164049]
 shape = SubResource("RectangleShape2D_3p273")
 
+[node name="Description" type="RichTextLabel" parent="." unique_id=1014177313]
+modulate = Color(0.012617188, 0.012617188, 0.012617188, 1)
+offset_left = -27.0
+offset_top = 18.0
+offset_right = 27.0
+offset_bottom = 48.0
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "Default"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DiceRoll" type="RichTextLabel" parent="." unique_id=930265900]
+modulate = Color(0.012617188, 0.012617188, 0.012617188, 1)
+offset_left = -27.0
+offset_top = -5.0
+offset_right = -10.0
+offset_bottom = 12.0
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
