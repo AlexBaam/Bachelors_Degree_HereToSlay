@@ -35,8 +35,8 @@ func draw_card():
 	var card_scene = preload(CARD_SCENE_PATH)
 	var new_card = card_scene.instantiate()
 	
-	# Custom card images
-	var card_image_path = str("res://Textures/"+ card_drawn_name +".png")
+	# Custom card images"
+	var card_image_path = str("res://Textures/Cards/"+ card_drawn_name +".png")
 	new_card.get_node("CardImage").texture = load(card_image_path)
 	
 	# Settings the dice roll and the description of the card

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0wmkswbj6bj"
-path="res://.godot/imported/Rogue.png-d3e3a5cd0c25e1ac74962e52fc27b0fb.ctex"
+uid="uid://dblc1u7ow7xdu"
+path="res://.godot/imported/Bard.png-c0f0360a63021e46194b82d88b8c9147.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Rogue.png"
-dest_files=["res://.godot/imported/Rogue.png-d3e3a5cd0c25e1ac74962e52fc27b0fb.ctex"]
+source_file="res://Textures/Cards/Bard.png"
+dest_files=["res://.godot/imported/Bard.png-c0f0360a63021e46194b82d88b8c9147.ctex"]
 
 [params]
 

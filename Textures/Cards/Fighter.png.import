@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn4hpdwx8xx40"
-path="res://.godot/imported/Ranger.png-3d38c2d1cf18531e97a566e222625f1a.ctex"
+uid="uid://bfbuinbfe3qce"
+path="res://.godot/imported/Fighter.png-1a42eb9430498d37ed3b9a92a101619e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Ranger.png"
-dest_files=["res://.godot/imported/Ranger.png-3d38c2d1cf18531e97a566e222625f1a.ctex"]
+source_file="res://Textures/Cards/Fighter.png"
+dest_files=["res://.godot/imported/Fighter.png-1a42eb9430498d37ed3b9a92a101619e.ctex"]
 
 [params]
 

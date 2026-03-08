@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfe5h7w55jkp0"
-path="res://.godot/imported/Card.png-5731c0c187141787a2d36ca778990871.ctex"
+uid="uid://dn4hpdwx8xx40"
+path="res://.godot/imported/Ranger.png-6e67e8f062fd06852bb107b5a4ea4a26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Card.png"
-dest_files=["res://.godot/imported/Card.png-5731c0c187141787a2d36ca778990871.ctex"]
+source_file="res://Textures/Cards/Ranger.png"
+dest_files=["res://.godot/imported/Ranger.png-6e67e8f062fd06852bb107b5a4ea4a26.ctex"]
 
 [params]
 

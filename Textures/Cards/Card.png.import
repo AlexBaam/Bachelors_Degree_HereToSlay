@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfbuinbfe3qce"
-path="res://.godot/imported/Fighter.png-3cb29f8d6878074a0e24af8a53cdf736.ctex"
+uid="uid://dfe5h7w55jkp0"
+path="res://.godot/imported/Card.png-1ed7096df3f28618052d431682817e66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Fighter.png"
-dest_files=["res://.godot/imported/Fighter.png-3cb29f8d6878074a0e24af8a53cdf736.ctex"]
+source_file="res://Textures/Cards/Card.png"
+dest_files=["res://.godot/imported/Card.png-1ed7096df3f28618052d431682817e66.ctex"]
 
 [params]
 

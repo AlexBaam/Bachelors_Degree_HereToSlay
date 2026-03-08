@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b1pi6ghx52vni"
-path="res://.godot/imported/Paladin.png-97fd61dd901370dc01d4ea8a062ea137.ctex"
+path="res://.godot/imported/Paladin.png-8da1636366ab42c042b139b55cc3f8a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Paladin.png"
-dest_files=["res://.godot/imported/Paladin.png-97fd61dd901370dc01d4ea8a062ea137.ctex"]
+source_file="res://Textures/Cards/Paladin.png"
+dest_files=["res://.godot/imported/Paladin.png-8da1636366ab42c042b139b55cc3f8a9.ctex"]
 
 [params]
 
