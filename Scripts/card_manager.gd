@@ -6,10 +6,12 @@ const COLLISION_MASK_SLOT = 2
 var card_dragged
 var screen_size
 var is_hovering_on_card
+var player_hand_reference
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
+	player_hand_reference = $"../PlayerHand"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -92,9 +94,12 @@ func finish_drag():
 	var card_slot_found = raycast_check_for_card_slot()
 	if card_slot_found and not card_slot_found.card_in_slot:
 		#Card dropped over the slot and the slot is empty
+		player_hand_reference.remove_card_from_hand(card_dragged)
 		card_dragged.position = card_slot_found.position
 		card_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 		card_slot_found.card_in_slot = true
+	else: 
+		player_hand_reference.add_card_to_hand(card_dragged)
 	card_dragged = null
 
 func highlight_card(card, hovered):

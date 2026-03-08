@@ -1,21 +1,15 @@
 [gd_scene format=3 uid="uid://bmvsemixpl63l"]
 
 [ext_resource type="Script" uid="uid://co701idtmni5j" path="res://Scripts/card_manager.gd" id="1_idj7w"]
-[ext_resource type="PackedScene" uid="uid://dnch7iy0wcifv" path="res://Scenes/Card.tscn" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://6lgx3sg0cb5l" path="res://Scenes/Slot.tscn" id="3_kln2b"]
 [ext_resource type="Texture2D" uid="uid://b3vmnk4feq8qn" path="res://Textures/background.png" id="4_rgh2o"]
+[ext_resource type="Script" uid="uid://bypqiw2yqwxyj" path="res://Scripts/player_hand.gd" id="5_pbw6q"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 position = Vector2(-3, 0)
 
 [node name="CardManager" type="Node2D" parent="." unique_id=1097512592]
 script = ExtResource("1_idj7w")
-
-[node name="Card" parent="CardManager" unique_id=1524001771 instance=ExtResource("1_r150o")]
-position = Vector2(404, 263)
-
-[node name="Card2" parent="CardManager" unique_id=698816937 instance=ExtResource("1_r150o")]
-position = Vector2(263, 337)
 
 [node name="Slot3" parent="." unique_id=1269968676 instance=ExtResource("3_kln2b")]
 position = Vector2(718, 668)
@@ -31,3 +25,6 @@ z_index = -4096
 position = Vector2(967, 542)
 texture = ExtResource("4_rgh2o")
 metadata/_edit_lock_ = true
+
+[node name="PlayerHand" type="Node2D" parent="." unique_id=406687866]
+script = ExtResource("5_pbw6q")
