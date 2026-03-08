@@ -4,7 +4,8 @@ signal left_mouse_button_clicked
 signal left_mouse_button_released
 
 const COLLISION_MASK_CARD = 1
-const COLLISION_MASK_CARD_PILE = 4 # Even if the layer is 3, for some reason the output is 4, tied to binary mask
+# Even if the layer is 3, for some reason the output is 4, tied to binary mask
+const COLLISION_MASK_CARD_PILE = 4
 
 var card_manager_reference
 var card_pile_reference

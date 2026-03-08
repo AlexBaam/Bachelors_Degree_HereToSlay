@@ -9,7 +9,10 @@ var screen_size
 var is_hovering_on_card
 
 var player_hand_reference
-var input_manager_reference 
+var input_manager_reference
+
+@export var card_scale: float = 1
+@export var hovered_card_scale: float = 1.05
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -86,10 +89,10 @@ func on_hover_off_card(card):
 
 func start_drag(card):
 	card_dragged = card
-	card.scale = Vector2(1, 1)
+	card.scale = Vector2(card_scale, card_scale)
 
 func finish_drag():
-	card_dragged.scale = Vector2(1.05, 1.05)
+	card_dragged.scale = Vector2(hovered_card_scale, hovered_card_scale)
 	var card_slot_found = raycast_check_for_card_slot()
 	if card_slot_found and not card_slot_found.card_in_slot:
 		#Card dropped over the slot and the slot is empty
@@ -103,8 +106,8 @@ func finish_drag():
 
 func highlight_card(card, hovered):
 	if hovered:
-		card.scale = Vector2(1.05, 1.05)
+		card.scale = Vector2(hovered_card_scale, hovered_card_scale)
 		card.z_index = 2
 	else:
-		card.scale = Vector2(1, 1)
+		card.scale = Vector2(card_scale, card_scale)
 		card.z_index = 1

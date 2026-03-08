@@ -13,15 +13,6 @@ position = Vector2(-3, 0)
 [node name="CardManager" type="Node2D" parent="." unique_id=1097512592]
 script = ExtResource("1_idj7w")
 
-[node name="Slot3" parent="." unique_id=1269968676 instance=ExtResource("3_kln2b")]
-position = Vector2(718, 668)
-
-[node name="Slot" parent="." unique_id=777131751 instance=ExtResource("3_kln2b")]
-position = Vector2(551, 669)
-
-[node name="Slot2" parent="." unique_id=1677192425 instance=ExtResource("3_kln2b")]
-position = Vector2(635, 668)
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1067400795]
 z_index = -4096
 position = Vector2(967, 542)
@@ -36,3 +27,38 @@ position = Vector2(865, 485)
 
 [node name="InputManager" type="Node2D" parent="." unique_id=1059191440]
 script = ExtResource("7_jw32o")
+
+[node name="CardSlots" type="Node2D" parent="." unique_id=493997794]
+
+[node name="Slot3" parent="CardSlots" unique_id=1269968676 instance=ExtResource("3_kln2b")]
+position = Vector2(718, 668)
+
+[node name="Slot1" parent="CardSlots" unique_id=777131751 instance=ExtResource("3_kln2b")]
+position = Vector2(550, 669)
+
+[node name="Slot4" parent="CardSlots" unique_id=239759795 instance=ExtResource("3_kln2b")]
+position = Vector2(802, 668)
+
+[node name="Slot5" parent="CardSlots" unique_id=420916802 instance=ExtResource("3_kln2b")]
+position = Vector2(886, 667)
+
+[node name="Slot6" parent="CardSlots" unique_id=532535602 instance=ExtResource("3_kln2b")]
+position = Vector2(970, 668)
+
+[node name="Slot7" parent="CardSlots" unique_id=2023113850 instance=ExtResource("3_kln2b")]
+position = Vector2(1054, 667)
+
+[node name="Slot8" parent="CardSlots" unique_id=256797347 instance=ExtResource("3_kln2b")]
+position = Vector2(1138, 668)
+
+[node name="Slot9" parent="CardSlots" unique_id=1462365873 instance=ExtResource("3_kln2b")]
+position = Vector2(1222, 668)
+
+[node name="Slot10" parent="CardSlots" unique_id=1051963423 instance=ExtResource("3_kln2b")]
+position = Vector2(1306, 668)
+
+[node name="Slot11" parent="CardSlots" unique_id=424543998 instance=ExtResource("3_kln2b")]
+position = Vector2(1390, 668)
+
+[node name="Slot2" parent="CardSlots" unique_id=1677192425 instance=ExtResource("3_kln2b")]
+position = Vector2(634, 668)

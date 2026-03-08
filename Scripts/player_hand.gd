@@ -1,8 +1,8 @@
 extends Node2D
 
-const CARD_WIDTH = 100
-const HARDCODED_Y_POSITION = 890
-const DEFAULT_CARD_MOVE_SPEED = 0.1
+const CARD_WIDTH = 75 # Width between the cards
+const HARDCODED_Y_POSITION = 950 # Position on the Y axis of the cards
+const DEFAULT_CARD_MOVE_SPEED = 0.1 # Cards default speed around the deck
 
 var player_hand = []
 var center_screen_x
