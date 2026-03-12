@@ -14,7 +14,7 @@ func _ready() -> void:
 	card_manager_reference = $"../CardManager"
 	card_pile_reference = $"../CardPiles/CardPile"
 
-func _input(event):
+func _input(event) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			emit_signal("left_mouse_button_clicked")
@@ -22,7 +22,7 @@ func _input(event):
 		else:
 			emit_signal("left_mouse_button_released")
 
-func raycast_at_cursor():
+func raycast_at_cursor() -> void:
 	var space_state = get_world_2d().direct_space_state
 	var parameters = PhysicsPointQueryParameters2D.new()
 	parameters. position = get_global_mouse_position()

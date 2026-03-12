@@ -7,7 +7,7 @@ const DEFAULT_CARD_MOVE_SPEED = 0.1
 
 var card_dragged
 var screen_size
-var is_hovering_on_card
+var is_hovering_on_card: bool
 
 var player_hand_reference
 var input_manager_reference
@@ -24,7 +24,7 @@ func _ready() -> void:
 	discard_pile_reference = $"../CardPiles/DiscardPile"
 	input_manager_reference.connect("left_mouse_button_released", on_left_click_released)
 
-func on_left_click_released():
+func on_left_click_released() -> void:
 	if card_dragged:
 		finish_drag()
 
@@ -82,16 +82,16 @@ func get_card_with_highest_z_index(cards):
 			highest_z_index = highest_z_card.z_index
 	return highest_z_card
 
-func connect_card_signals(card):
+func connect_card_signals(card) -> void:
 	card.connect("hovered", on_hover_over_card)
 	card.connect("hovered_off", on_hover_off_card)
 
-func on_hover_over_card(card):
+func on_hover_over_card(card) -> void:
 	if not is_hovering_on_card:
 		is_hovering_on_card = true
 		highlight_card(card, true)
 
-func on_hover_off_card(card):
+func on_hover_off_card(card) -> void:
 	if not card_dragged:
 		#If I am not dragging a card
 		highlight_card(card, false)
@@ -101,11 +101,11 @@ func on_hover_off_card(card):
 		else:
 			is_hovering_on_card = false
 
-func start_drag(card):
+func start_drag(card) -> void:
 	card_dragged = card
 	card.scale = Vector2(card_scale, card_scale)
 
-func finish_drag():
+func finish_drag() -> void:
 	card_dragged.scale = Vector2(hovered_card_scale, hovered_card_scale)
 	var card_slot_found = raycast_check_for_card_slot()
 	var discard_pile_found = raycast_check_for_discard_pile()
@@ -123,7 +123,7 @@ func finish_drag():
 		player_hand_reference.add_card_to_hand(card_dragged, DEFAULT_CARD_MOVE_SPEED)
 	card_dragged = null
 
-func highlight_card(card, hovered):
+func highlight_card(card, hovered) -> void:
 	if hovered:
 		card.scale = Vector2(hovered_card_scale, hovered_card_scale)
 		card.z_index = 2

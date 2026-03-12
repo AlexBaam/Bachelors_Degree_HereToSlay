@@ -1,6 +1,6 @@
 extends Node2D
 
-var game_discard_pile = []
+var game_discard_pile: Array[String] = []
 
 @onready var cards_in_discard_pile: RichTextLabel = $RichTextLabel
 @onready var discard_pile_sprite: Sprite2D = $Sprite2D
@@ -11,7 +11,7 @@ func _ready() -> void:
 		discard_pile_sprite.visible = false
 		cards_in_discard_pile.visible = false
 
-func update_discard_pile(card):
+func update_discard_pile(card) -> void:
 	if game_discard_pile.size() == 0:
 		discard_pile_sprite.visible = true
 		cards_in_discard_pile.visible = true
