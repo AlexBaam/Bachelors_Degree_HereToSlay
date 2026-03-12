@@ -2,6 +2,7 @@ extends Node2D
 
 const COLLISION_MASK_CARD = 1
 const COLLISION_MASK_SLOT = 2
+const COLLISION_MASK_DISCARD_PILE = 8
 const DEFAULT_CARD_MOVE_SPEED = 0.1
 
 var card_dragged
@@ -10,6 +11,7 @@ var is_hovering_on_card
 
 var player_hand_reference
 var input_manager_reference
+var discard_pile_reference
 
 @export var card_scale: float = 1
 @export var hovered_card_scale: float = 1.05
@@ -19,6 +21,7 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	player_hand_reference = $"../PlayerHand"
 	input_manager_reference = $"../InputManager"
+	discard_pile_reference = $"../CardPiles/DiscardPile"
 	input_manager_reference.connect("left_mouse_button_released", on_left_click_released)
 
 func on_left_click_released():
@@ -49,6 +52,17 @@ func raycast_check_for_card_slot():
 	parameters. position = get_global_mouse_position()
 	parameters.collide_with_areas = true
 	parameters.collision_mask = COLLISION_MASK_SLOT
+	var result = space_state.intersect_point(parameters)
+	if result.size() > 0:
+		return result[0].collider.get_parent()
+	return null
+
+func raycast_check_for_discard_pile():
+	var space_state = get_world_2d().direct_space_state
+	var parameters = PhysicsPointQueryParameters2D.new()
+	parameters. position = get_global_mouse_position()
+	parameters.collide_with_areas = true
+	parameters.collision_mask = COLLISION_MASK_DISCARD_PILE
 	var result = space_state.intersect_point(parameters)
 	if result.size() > 0:
 		return result[0].collider.get_parent()
@@ -94,12 +108,17 @@ func start_drag(card):
 func finish_drag():
 	card_dragged.scale = Vector2(hovered_card_scale, hovered_card_scale)
 	var card_slot_found = raycast_check_for_card_slot()
+	var discard_pile_found = raycast_check_for_discard_pile()
 	if card_slot_found and not card_slot_found.card_in_slot:
 		#Card dropped over the slot and the slot is empty
 		player_hand_reference.remove_card_from_hand(card_dragged)
 		card_dragged.position = card_slot_found.position
 		card_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 		card_slot_found.card_in_slot = true
+	elif discard_pile_found:
+		#Card over the discard pile
+		player_hand_reference.remove_card_from_hand(card_dragged)
+		discard_pile_reference.update_discard_pile(card_dragged)
 	else: 
 		player_hand_reference.add_card_to_hand(card_dragged, DEFAULT_CARD_MOVE_SPEED)
 	card_dragged = null

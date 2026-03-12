@@ -14,6 +14,7 @@ func _ready() -> void:
 func add_card_to_hand(card, speed):
 	if card not in player_hand:
 		player_hand.insert(0, card)
+		
 		update_hand_positions(speed)
 	else:
 		animate_card_to_position(card, card.in_hand_position, DEFAULT_CARD_MOVE_SPEED)

@@ -48,5 +48,20 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="CardName" type="RichTextLabel" parent="." unique_id=1506802629]
+modulate = Color(0.012617188, 0.012617188, 0.012617188, 1)
+offset_left = -27.0
+offset_top = -50.0
+offset_right = 27.0
+offset_bottom = -33.0
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

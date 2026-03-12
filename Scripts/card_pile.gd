@@ -9,11 +9,12 @@ var card_databate_reference
 
 @export var card_draw_speed = 0.5
 
-@onready var player_hand_reference: Node2D = $"../PlayerHand"
-@onready var card_manager_reference: Node2D = $"../CardManager"
+@onready var player_hand_reference: Node2D = $"../../PlayerHand"
+@onready var card_manager_reference: Node2D = $"../../CardManager"
 @onready var cards_left_reference: RichTextLabel = $RichTextLabel
 @onready var card_collider: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var card_sprite: Sprite2D = $Sprite2D
+@onready var card_name: RichTextLabel = $CardName
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,7 +43,9 @@ func draw_card():
 	# Settings the dice roll and the description of the card
 	new_card.get_node("DiceRoll").text = str(card_databate_reference.CARDS[card_drawn_name][0])
 	new_card.get_node("Description").text = str(card_databate_reference.CARDS[card_drawn_name][1])
+	new_card.get_node("CardName").text = str(card_drawn_name)
 	
 	card_manager_reference.add_child(new_card)
-	new_card.name = "Card"
+	# Adaugam in player hand o carte, acea entitate carte va avea acelasi nume cu ce carte reprezinta ea
+	new_card.name = card_drawn_name
 	player_hand_reference.add_card_to_hand(new_card, card_draw_speed)
