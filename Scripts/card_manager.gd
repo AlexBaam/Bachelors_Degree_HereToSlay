@@ -118,7 +118,7 @@ func finish_drag() -> void:
 	elif discard_pile_found:
 		#Card over the discard pile
 		player_hand_reference.remove_card_from_hand(card_dragged)
-		discard_pile_reference.update_discard_pile(card_dragged)
+		discard_pile_reference.add_to_discard_pile(card_dragged)
 	else: 
 		player_hand_reference.add_card_to_hand(card_dragged, DEFAULT_CARD_MOVE_SPEED)
 	card_dragged = null

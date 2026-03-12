@@ -14,7 +14,8 @@ func _ready() -> void:
 	if game_discard_pile.size() == 0:
 		card_pile_gen.pile_visibility(false, discard_pile_sprite, cards_in_discard_pile)
 
-func update_discard_pile(card) -> void:
+# A function to update the discard pile by adding a card
+func add_to_discard_pile(card) -> void:
 	if game_discard_pile.size() == 0:
 		card_pile_gen.pile_visibility(true, discard_pile_sprite, cards_in_discard_pile)
 	
@@ -25,8 +26,6 @@ func update_discard_pile(card) -> void:
 	game_discard_pile.append(card_name)
 	cards_in_discard_pile.text = str(game_discard_pile.size())
 	card.queue_free()
-	
-	print(game_discard_pile)
 	
 # We empty the discard pile so after refilling the card pile we can delete it
 func empty_discard_pile() -> void:
