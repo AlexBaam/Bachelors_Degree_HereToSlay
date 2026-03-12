@@ -26,3 +26,7 @@ func update_discard_pile(card) -> void:
 	
 	print(game_discard_pile)
 	
+func empty_discard_pile() -> void:
+	game_discard_pile.clear()
+	discard_pile_sprite.visible = false
+	cards_in_discard_pile.visible = false
