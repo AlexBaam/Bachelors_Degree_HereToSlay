@@ -17,6 +17,10 @@ var card_databate_reference
 @onready var card_sprite: Sprite2D = $Sprite2D
 @onready var card_name: RichTextLabel = $CardName
 
+# CardPileGenerals class instance
+# Used for generalising redundant code
+var card_pile_gen : CardPileGen = CardPileGen.new()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	game_card_pile.shuffle() # Shuffling the deck for random cards
@@ -24,7 +28,6 @@ func _ready() -> void:
 	card_databate_reference = preload(CARDS_DATABASE_PATH)
 
 func get_discard_pile_size() -> int:
-	print("The size of the discard pile is: ", discard_pile_reference.game_discard_pile.size())
 	return discard_pile_reference.game_discard_pile.size()
 
 func draw_card() -> void:
@@ -40,8 +43,7 @@ func draw_card() -> void:
 			discard_pile_reference.empty_discard_pile()
 		else:
 			card_collider.disabled = true
-			card_sprite.visible = false
-			cards_left_reference.visible = false
+			card_pile_gen.pile_visibility(false,card_sprite,cards_left_reference)
 	
 	cards_left_reference.text = str(game_card_pile.size())
 	var card_scene = preload(CARD_SCENE_PATH)

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cg2jseaexr3pe" path="res://Scenes/CardPile.tscn" id="5_v1gob"]
 [ext_resource type="PackedScene" uid="uid://dvwl3nxpgoppo" path="res://Scenes/DiscardPile.tscn" id="7_50glp"]
 [ext_resource type="Script" uid="uid://b812w7pi7o6ba" path="res://Scripts/input_manager.gd" id="7_jw32o"]
-[ext_resource type="Script" uid="uid://cna18h5mybs3l" path="res://Scripts/discard_pile.gd" id="8_50glp"]
+[ext_resource type="Script" uid="uid://cna18h5mybs3l" path="res://Scripts/CardPiles/discard_pile.gd" id="8_50glp"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 position = Vector2(-3, 0)

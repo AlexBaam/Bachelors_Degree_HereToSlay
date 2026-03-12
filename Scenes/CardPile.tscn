@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cg2jseaexr3pe"]
 
-[ext_resource type="Script" uid="uid://bvyixms70d6jt" path="res://Scripts/card_pile.gd" id="1_7ix1s"]
+[ext_resource type="Script" uid="uid://bvyixms70d6jt" path="res://Scripts/CardPiles/card_pile.gd" id="1_7ix1s"]
 [ext_resource type="Texture2D" uid="uid://s8ga5ff3m3ud" path="res://Textures/CardPileFull.png" id="1_hn4my"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ix1s"]

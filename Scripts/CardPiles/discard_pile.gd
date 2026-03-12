@@ -5,16 +5,18 @@ var game_discard_pile: Array[String] = []
 @onready var cards_in_discard_pile: RichTextLabel = $RichTextLabel
 @onready var discard_pile_sprite: Sprite2D = $Sprite2D
 
+# CardPileGenerals class instance
+# Used for generalising redundant code
+var card_pile_gen : CardPileGen = CardPileGen.new()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if game_discard_pile.size() == 0:
-		discard_pile_sprite.visible = false
-		cards_in_discard_pile.visible = false
+		card_pile_gen.pile_visibility(false, discard_pile_sprite, cards_in_discard_pile)
 
 func update_discard_pile(card) -> void:
 	if game_discard_pile.size() == 0:
-		discard_pile_sprite.visible = true
-		cards_in_discard_pile.visible = true
+		card_pile_gen.pile_visibility(true, discard_pile_sprite, cards_in_discard_pile)
 	
 	# Adaugam carti in discard pile (adica array, strict doar numele cartii)
 	# Crestem nr de carti in discard pile
@@ -26,7 +28,7 @@ func update_discard_pile(card) -> void:
 	
 	print(game_discard_pile)
 	
+# We empty the discard pile so after refilling the card pile we can delete it
 func empty_discard_pile() -> void:
 	game_discard_pile.clear()
-	discard_pile_sprite.visible = false
-	cards_in_discard_pile.visible = false
+	card_pile_gen.pile_visibility(false, discard_pile_sprite, cards_in_discard_pile)
