@@ -7,6 +7,7 @@
 size = Vector2(96, 156)
 
 [node name="MonsterSlot" type="Node2D" unique_id=1837468609]
+z_index = -2020
 script = ExtResource("1_78eg4")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1304303623]
