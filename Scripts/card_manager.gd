@@ -6,7 +6,7 @@ const COLLISION_MASK_DISCARD_PILE = 8
 const DEFAULT_CARD_MOVE_SPEED = 0.1
 
 var card_dragged
-var screen_size
+var screen_size : Vector2
 var is_hovering_on_card: bool
 
 var player_hand_reference
@@ -113,6 +113,7 @@ func finish_drag() -> void:
 		#Card dropped over the slot and the slot is empty
 		player_hand_reference.remove_card_from_hand(card_dragged)
 		card_dragged.position = card_slot_found.position
+		card_slot_found.rotate_card(card_dragged)
 		card_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 		card_slot_found.card_in_slot = true
 	elif discard_pile_found:

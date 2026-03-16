@@ -36,7 +36,7 @@ func draw_card() -> void:
 	
 	# Setting the deck to invisible if there are no cards left
 	if game_card_pile.size() == 0:
-		if get_discard_pile_size() != 0:
+		if get_discard_pile_size() > 0:
 			game_card_pile = discard_pile_reference.game_discard_pile.duplicate(true)
 			game_card_pile.shuffle()
 			cards_left_reference.text = str(game_card_pile.size())

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bmvsemixpl63l"]
 
 [ext_resource type="Script" uid="uid://co701idtmni5j" path="res://Scripts/card_manager.gd" id="1_idj7w"]
+[ext_resource type="Texture2D" uid="uid://b5k4md166us1b" path="res://Textures/bigger_background.png" id="2_50glp"]
 [ext_resource type="PackedScene" uid="uid://6lgx3sg0cb5l" path="res://Scenes/Slot.tscn" id="3_kln2b"]
-[ext_resource type="Texture2D" uid="uid://b3vmnk4feq8qn" path="res://Textures/background.png" id="4_rgh2o"]
 [ext_resource type="Script" uid="uid://bypqiw2yqwxyj" path="res://Scripts/player_hand.gd" id="5_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://cg2jseaexr3pe" path="res://Scenes/CardPile.tscn" id="5_v1gob"]
 [ext_resource type="PackedScene" uid="uid://dvwl3nxpgoppo" path="res://Scenes/DiscardPile.tscn" id="7_50glp"]
@@ -15,10 +15,10 @@ position = Vector2(-3, 0)
 [node name="CardManager" type="Node2D" parent="." unique_id=1097512592]
 script = ExtResource("1_idj7w")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1067400795]
+[node name="Background" type="Sprite2D" parent="." unique_id=1067400795]
 z_index = -4096
-position = Vector2(967, 542)
-texture = ExtResource("4_rgh2o")
+position = Vector2(963, 540)
+texture = ExtResource("2_50glp")
 metadata/_edit_lock_ = true
 
 [node name="PlayerHand" type="Node2D" parent="." unique_id=406687866]
@@ -29,44 +29,176 @@ script = ExtResource("7_jw32o")
 
 [node name="CardSlots" type="Node2D" parent="." unique_id=493997794]
 
-[node name="Slot3" parent="CardSlots" unique_id=1269968676 instance=ExtResource("3_kln2b")]
-position = Vector2(718, 668)
+[node name="Slot01" parent="CardSlots" unique_id=777131751 instance=ExtResource("3_kln2b")]
+position = Vector2(546, 780)
 
-[node name="Slot1" parent="CardSlots" unique_id=777131751 instance=ExtResource("3_kln2b")]
-position = Vector2(550, 669)
+[node name="Slot02" parent="CardSlots" unique_id=1677192425 instance=ExtResource("3_kln2b")]
+position = Vector2(630, 780)
 
-[node name="Slot4" parent="CardSlots" unique_id=239759795 instance=ExtResource("3_kln2b")]
-position = Vector2(802, 668)
+[node name="Slot03" parent="CardSlots" unique_id=1269968676 instance=ExtResource("3_kln2b")]
+position = Vector2(714, 780)
 
-[node name="Slot5" parent="CardSlots" unique_id=420916802 instance=ExtResource("3_kln2b")]
-position = Vector2(886, 667)
+[node name="Slot04" parent="CardSlots" unique_id=239759795 instance=ExtResource("3_kln2b")]
+position = Vector2(798, 780)
 
-[node name="Slot6" parent="CardSlots" unique_id=532535602 instance=ExtResource("3_kln2b")]
-position = Vector2(970, 668)
+[node name="Slot05" parent="CardSlots" unique_id=420916802 instance=ExtResource("3_kln2b")]
+position = Vector2(882, 779)
 
-[node name="Slot7" parent="CardSlots" unique_id=2023113850 instance=ExtResource("3_kln2b")]
-position = Vector2(1054, 667)
+[node name="Slot06" parent="CardSlots" unique_id=532535602 instance=ExtResource("3_kln2b")]
+position = Vector2(966, 780)
 
-[node name="Slot8" parent="CardSlots" unique_id=256797347 instance=ExtResource("3_kln2b")]
-position = Vector2(1138, 668)
+[node name="Slot07" parent="CardSlots" unique_id=2023113850 instance=ExtResource("3_kln2b")]
+position = Vector2(1050, 779)
 
-[node name="Slot9" parent="CardSlots" unique_id=1462365873 instance=ExtResource("3_kln2b")]
-position = Vector2(1222, 668)
+[node name="Slot08" parent="CardSlots" unique_id=256797347 instance=ExtResource("3_kln2b")]
+position = Vector2(1134, 780)
+
+[node name="Slot09" parent="CardSlots" unique_id=1462365873 instance=ExtResource("3_kln2b")]
+position = Vector2(1218, 780)
 
 [node name="Slot10" parent="CardSlots" unique_id=1051963423 instance=ExtResource("3_kln2b")]
-position = Vector2(1306, 668)
+position = Vector2(1302, 780)
 
 [node name="Slot11" parent="CardSlots" unique_id=424543998 instance=ExtResource("3_kln2b")]
-position = Vector2(1390, 668)
+position = Vector2(1386, 780)
 
-[node name="Slot2" parent="CardSlots" unique_id=1677192425 instance=ExtResource("3_kln2b")]
-position = Vector2(634, 668)
+[node name="Slot12" parent="CardSlots" unique_id=2076298596 instance=ExtResource("3_kln2b")]
+position = Vector2(714, 66)
+rotation = 3.1415927
+
+[node name="Slot13" parent="CardSlots" unique_id=1004281920 instance=ExtResource("3_kln2b")]
+position = Vector2(546, 67)
+rotation = 3.1415927
+
+[node name="Slot14" parent="CardSlots" unique_id=861433985 instance=ExtResource("3_kln2b")]
+position = Vector2(798, 66)
+rotation = 3.1415927
+
+[node name="Slot15" parent="CardSlots" unique_id=119314037 instance=ExtResource("3_kln2b")]
+position = Vector2(882, 65)
+rotation = 3.1415927
+
+[node name="Slot16" parent="CardSlots" unique_id=475819338 instance=ExtResource("3_kln2b")]
+position = Vector2(966, 66)
+rotation = 3.1415927
+
+[node name="Slot17" parent="CardSlots" unique_id=730264159 instance=ExtResource("3_kln2b")]
+position = Vector2(1050, 65)
+rotation = 3.1415927
+
+[node name="Slot18" parent="CardSlots" unique_id=818790436 instance=ExtResource("3_kln2b")]
+position = Vector2(1134, 66)
+rotation = 3.1415927
+
+[node name="Slot19" parent="CardSlots" unique_id=1442035193 instance=ExtResource("3_kln2b")]
+position = Vector2(1218, 66)
+rotation = 3.1415927
+
+[node name="Slot20" parent="CardSlots" unique_id=541184726 instance=ExtResource("3_kln2b")]
+position = Vector2(1302, 66)
+rotation = 3.1415927
+
+[node name="Slot21" parent="CardSlots" unique_id=1093591430 instance=ExtResource("3_kln2b")]
+position = Vector2(1386, 66)
+rotation = 3.1415927
+
+[node name="Slot22" parent="CardSlots" unique_id=1099432182 instance=ExtResource("3_kln2b")]
+position = Vector2(630, 66)
+rotation = 3.1415927
+
+[node name="Slot23" parent="CardSlots" unique_id=787011707 instance=ExtResource("3_kln2b")]
+position = Vector2(453, 63)
+rotation = 1.5707964
+
+[node name="Slot24" parent="CardSlots" unique_id=2026430161 instance=ExtResource("3_kln2b")]
+position = Vector2(453, 783)
+rotation = 1.5707964
+
+[node name="Slot25" parent="CardSlots" unique_id=865012817 instance=ExtResource("3_kln2b")]
+position = Vector2(453, 711)
+rotation = 1.5707964
+
+[node name="Slot26" parent="CardSlots" unique_id=2067812844 instance=ExtResource("3_kln2b")]
+position = Vector2(453, 639)
+rotation = 1.5707964
+
+[node name="Slot27" parent="CardSlots" unique_id=393969361 instance=ExtResource("3_kln2b")]
+position = Vector2(453, 567)
+rotation = 1.5707964
+
+[node name="Slot28" parent="CardSlots" unique_id=648474096 instance=ExtResource("3_kln2b")]
+position = Vector2(453, 423)
+rotation = 1.5707964
+
+[node name="Slot29" parent="CardSlots" unique_id=703854497 instance=ExtResource("3_kln2b")]
+position = Vector2(453, 207)
+rotation = 1.5707964
+
+[node name="Slot30" parent="CardSlots" unique_id=312164490 instance=ExtResource("3_kln2b")]
+position = Vector2(453, 279)
+rotation = 1.5707964
+
+[node name="Slot31" parent="CardSlots" unique_id=1578625308 instance=ExtResource("3_kln2b")]
+position = Vector2(453, 495)
+rotation = 1.5707964
+
+[node name="Slot32" parent="CardSlots" unique_id=1540772584 instance=ExtResource("3_kln2b")]
+position = Vector2(453, 351)
+rotation = 1.5707964
+
+[node name="Slot33" parent="CardSlots" unique_id=1866787568 instance=ExtResource("3_kln2b")]
+position = Vector2(453, 135)
+rotation = 1.5707964
+
+[node name="Slot34" parent="CardSlots" unique_id=258361759 instance=ExtResource("3_kln2b")]
+position = Vector2(1479, 63)
+rotation = -1.5707964
+
+[node name="Slot35" parent="CardSlots" unique_id=661619744 instance=ExtResource("3_kln2b")]
+position = Vector2(1479, 783)
+rotation = -1.5707964
+
+[node name="Slot36" parent="CardSlots" unique_id=1486169218 instance=ExtResource("3_kln2b")]
+position = Vector2(1479, 711)
+rotation = -1.5707964
+
+[node name="Slot37" parent="CardSlots" unique_id=210180413 instance=ExtResource("3_kln2b")]
+position = Vector2(1479, 639)
+rotation = -1.5707964
+
+[node name="Slot38" parent="CardSlots" unique_id=1198098253 instance=ExtResource("3_kln2b")]
+position = Vector2(1479, 567)
+rotation = -1.5707964
+
+[node name="Slot39" parent="CardSlots" unique_id=967195653 instance=ExtResource("3_kln2b")]
+position = Vector2(1479, 423)
+rotation = -1.5707964
+
+[node name="Slot40" parent="CardSlots" unique_id=1848806255 instance=ExtResource("3_kln2b")]
+position = Vector2(1479, 207)
+rotation = -1.5707964
+
+[node name="Slot41" parent="CardSlots" unique_id=2024425191 instance=ExtResource("3_kln2b")]
+position = Vector2(1479, 279)
+rotation = -1.5707964
+
+[node name="Slot42" parent="CardSlots" unique_id=303593723 instance=ExtResource("3_kln2b")]
+position = Vector2(1479, 495)
+rotation = -1.5707964
+
+[node name="Slot43" parent="CardSlots" unique_id=429958133 instance=ExtResource("3_kln2b")]
+position = Vector2(1479, 351)
+rotation = -1.5707964
+
+[node name="Slot44" parent="CardSlots" unique_id=16314812 instance=ExtResource("3_kln2b")]
+position = Vector2(1479, 135)
+rotation = -1.5707964
 
 [node name="CardPiles" type="Node2D" parent="." unique_id=1009674647]
 
 [node name="CardPile" parent="CardPiles" unique_id=489780070 instance=ExtResource("5_v1gob")]
-position = Vector2(865, 485)
+position = Vector2(860, 483)
 
 [node name="DiscardPile" parent="CardPiles" unique_id=388114536 instance=ExtResource("7_50glp")]
-position = Vector2(1070, 485)
+position = Vector2(1065, 483)
 script = ExtResource("8_50glp")
