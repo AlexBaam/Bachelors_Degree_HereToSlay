@@ -1,19 +1,18 @@
 [gd_scene format=3 uid="uid://bmvsemixpl63l"]
 
 [ext_resource type="Script" uid="uid://co701idtmni5j" path="res://Scripts/card_manager.gd" id="1_idj7w"]
-[ext_resource type="Texture2D" uid="uid://b5k4md166us1b" path="res://Textures/bigger_background.png" id="2_50glp"]
-[ext_resource type="PackedScene" uid="uid://6lgx3sg0cb5l" path="res://Scenes/Slot.tscn" id="3_kln2b"]
+[ext_resource type="Texture2D" uid="uid://b5k4md166us1b" path="res://Textures/Backgrounds/bigger_background.png" id="2_50glp"]
+[ext_resource type="PackedScene" uid="uid://6lgx3sg0cb5l" path="res://Scenes/CardSlot.tscn" id="3_kln2b"]
 [ext_resource type="Script" uid="uid://bypqiw2yqwxyj" path="res://Scripts/player_hand.gd" id="5_pbw6q"]
-[ext_resource type="PackedScene" uid="uid://cg2jseaexr3pe" path="res://Scenes/CardPile.tscn" id="5_v1gob"]
-[ext_resource type="PackedScene" uid="uid://dvwl3nxpgoppo" path="res://Scenes/DiscardPile.tscn" id="7_50glp"]
+[ext_resource type="PackedScene" uid="uid://cg2jseaexr3pe" path="res://Scenes/CardPiles/CardPile.tscn" id="5_v1gob"]
+[ext_resource type="PackedScene" uid="uid://dvwl3nxpgoppo" path="res://Scenes/CardPiles/DiscardPile.tscn" id="7_50glp"]
 [ext_resource type="Script" uid="uid://b812w7pi7o6ba" path="res://Scripts/input_manager.gd" id="7_jw32o"]
 [ext_resource type="Script" uid="uid://cna18h5mybs3l" path="res://Scripts/CardPiles/discard_pile.gd" id="8_50glp"]
+[ext_resource type="PackedScene" uid="uid://bcg07wl6lt2c6" path="res://Scenes/CardPiles/MonsterPile.tscn" id="9_vy5pj"]
+[ext_resource type="PackedScene" uid="uid://24ybs6fe8ds4" path="res://Scenes/MonsterSlot.tscn" id="10_bmxlf"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 position = Vector2(-3, 0)
-
-[node name="CardManager" type="Node2D" parent="." unique_id=1097512592]
-script = ExtResource("1_idj7w")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1067400795]
 z_index = -4096
@@ -21,11 +20,8 @@ position = Vector2(963, 540)
 texture = ExtResource("2_50glp")
 metadata/_edit_lock_ = true
 
-[node name="PlayerHand" type="Node2D" parent="." unique_id=406687866]
-script = ExtResource("5_pbw6q")
-
-[node name="InputManager" type="Node2D" parent="." unique_id=1059191440]
-script = ExtResource("7_jw32o")
+[node name="CardManager" type="Node2D" parent="." unique_id=1097512592]
+script = ExtResource("1_idj7w")
 
 [node name="CardSlots" type="Node2D" parent="." unique_id=493997794]
 
@@ -197,8 +193,30 @@ rotation = -1.5707964
 [node name="CardPiles" type="Node2D" parent="." unique_id=1009674647]
 
 [node name="CardPile" parent="CardPiles" unique_id=489780070 instance=ExtResource("5_v1gob")]
-position = Vector2(860, 483)
+position = Vector2(861, 483)
 
 [node name="DiscardPile" parent="CardPiles" unique_id=388114536 instance=ExtResource("7_50glp")]
 position = Vector2(1065, 483)
 script = ExtResource("8_50glp")
+
+[node name="MonsterPile" parent="CardPiles" unique_id=295384922 instance=ExtResource("9_vy5pj")]
+position = Vector2(711, 360)
+
+[node name="InputManager" type="Node2D" parent="." unique_id=1059191440]
+script = ExtResource("7_jw32o")
+
+[node name="MonsterManager" type="Node2D" parent="." unique_id=979303943]
+
+[node name="MonsterSlots" type="Node2D" parent="." unique_id=569197960]
+
+[node name="MonsterSlot" parent="MonsterSlots" unique_id=1837468609 instance=ExtResource("10_bmxlf")]
+position = Vector2(1065, 336)
+
+[node name="MonsterSlot2" parent="MonsterSlots" unique_id=1976858784 instance=ExtResource("10_bmxlf")]
+position = Vector2(963, 336)
+
+[node name="MonsterSlot3" parent="MonsterSlots" unique_id=347694837 instance=ExtResource("10_bmxlf")]
+position = Vector2(861, 336)
+
+[node name="PlayerHand" type="Node2D" parent="." unique_id=406687866]
+script = ExtResource("5_pbw6q")

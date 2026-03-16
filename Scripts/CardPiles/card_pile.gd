@@ -1,11 +1,10 @@
 extends Node2D
 
-const HAND_COUNT = 5
 const CARD_SCENE_PATH = "res://Scenes/Card.tscn"
 const CARDS_DATABASE_PATH = "res://Scripts/cards_database.gd"
 
 var game_card_pile : Array[String] = ["Bard", "Wizard", "Fighter", "Paladin", "Ranger", "Rogue"]
-var card_databate_reference
+var card_databate_reference: Resource = preload(CARDS_DATABASE_PATH)
 
 @export var card_draw_speed : float = 0.5
 
@@ -25,7 +24,6 @@ var card_pile_gen : CardPileGen = CardPileGen.new()
 func _ready() -> void:
 	game_card_pile.shuffle() # Shuffling the deck for random cards
 	cards_left_reference.text = str(game_card_pile.size())
-	card_databate_reference = preload(CARDS_DATABASE_PATH)
 
 func get_discard_pile_size() -> int:
 	return discard_pile_reference.game_discard_pile.size()
@@ -46,8 +44,8 @@ func draw_card() -> void:
 			card_pile_gen.pile_visibility(false,card_sprite,cards_left_reference)
 	
 	cards_left_reference.text = str(game_card_pile.size())
-	var card_scene = preload(CARD_SCENE_PATH)
-	var new_card = card_scene.instantiate()
+	var card_scene: Resource = preload(CARD_SCENE_PATH)
+	var new_card: Node = card_scene.instantiate()
 	
 	# Custom card images
 	var card_image_path : String = str("res://Textures/Cards/"+ card_drawn_name +".png")

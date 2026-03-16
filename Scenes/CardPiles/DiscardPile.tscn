@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ix1s"]
 size = Vector2(108, 66)
 
-[node name="CardPile" type="Node2D" unique_id=489780070]
+[node name="DiscardPile" type="Node2D" unique_id=489780070]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=775758559]
 z_index = -2

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3vmnk4feq8qn"
-path="res://.godot/imported/background.png-80ce42bb8b3b7d506d65426f02cf456d.ctex"
+uid="uid://c2s0b0hdbgsfu"
+path="res://.godot/imported/MonsterSlot.png-c36da6c4280ca5d2dee16911addbc196.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/background.png"
-dest_files=["res://.godot/imported/background.png-80ce42bb8b3b7d506d65426f02cf456d.ctex"]
+source_file="res://Textures/MonsterSlot.png"
+dest_files=["res://.godot/imported/MonsterSlot.png-c36da6c4280ca5d2dee16911addbc196.ctex"]
 
 [params]
 

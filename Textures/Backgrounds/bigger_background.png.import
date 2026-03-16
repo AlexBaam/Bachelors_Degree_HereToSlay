@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btc854esqqxoc"
-path="res://.godot/imported/CardSlotHorizontal.png-dc5d69f184f109002a6cc3a7cd167147.ctex"
+uid="uid://b5k4md166us1b"
+path="res://.godot/imported/bigger_background.png-de9f2a3c445d8fbcd371b110aba66a6a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/CardSlotHorizontal.png"
-dest_files=["res://.godot/imported/CardSlotHorizontal.png-dc5d69f184f109002a6cc3a7cd167147.ctex"]
+source_file="res://Textures/Backgrounds/bigger_background.png"
+dest_files=["res://.godot/imported/bigger_background.png-de9f2a3c445d8fbcd371b110aba66a6a.ctex"]
 
 [params]
 

@@ -33,7 +33,7 @@ func calculate_card_position(index: int):
 	return x_position
 
 func animate_card_to_position(card, new_position, speed):
-	var tween = get_tree().create_tween()
+	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(card, "position", new_position, speed)
 
 func remove_card_from_hand(card_to_remove):
