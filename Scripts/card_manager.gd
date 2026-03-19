@@ -116,10 +116,9 @@ func finish_drag() -> void:
 		player_hand_reference.remove_card_from_hand(card_dragged)
 		card_dragged.position = card_slot_found.position
 		
-		# Rotate and adjust card scale after the slot
+		# Adjust card scale after the slot
 		card_dragged.slot_of_the_card = card_slot_found
 		card_dragged.z_index = -1
-		card_slot_found.rotate_card(card_dragged)
 		card_dragged.scale = Vector2(smaller_card_scale, smaller_card_scale)
 		
 		# Disable card colision once inthe card slot and set the "card in slot" to true

@@ -17,9 +17,9 @@ var moster_database_reference: Resource
 @onready var monster_name: RichTextLabel = $MonsterName
 
 # References toward the monster slots
-@onready var monster_slot_1: Node2D = $"../../MonsterSlots/MonsterSlot"
-@onready var monster_slot_2: Node2D = $"../../MonsterSlots/MonsterSlot2"
-@onready var monster_slot_3: Node2D = $"../../MonsterSlots/MonsterSlot3"
+@onready var monster_slot_1: Node2D = $"../../CardSlots/MonsterCardSlots/MonsterSlot1"
+@onready var monster_slot_2: Node2D = $"../../CardSlots/MonsterCardSlots/MonsterSlot2"
+@onready var monster_slot_3: Node2D = $"../../CardSlots/MonsterCardSlots/MonsterSlot3"
 
 # Array made out of references to every monster slot so I can check them when needed
 @onready var monster_slots: Array[Node2D] = [ monster_slot_1, monster_slot_2, monster_slot_3]
