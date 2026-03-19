@@ -1,8 +1,11 @@
 extends Node2D
 
-const CARD_WIDTH = 75 # Width between the cards
 const HARDCODED_Y_POSITION = 950 # Position on the Y axis of the cards
 const DEFAULT_CARD_MOVE_SPEED: float = 0.1 # Cards default speed around the deck
+
+## This variable is the width we set between the cards in hand. 
+## This is used in the following function: "calculate_card_position" where it is used as multiplier for the x_offset and x_position
+@export var card_width = 85
 
 var player_hand : Array = []
 var center_screen_x : float
@@ -28,8 +31,8 @@ func update_hand_positions(speed) -> void:
 		animate_card_to_position(card, new_position, speed)
 		
 func calculate_card_position(index: int):
-	var x_offset = (player_hand.size() - 1) * CARD_WIDTH
-	var x_position = center_screen_x + index * CARD_WIDTH - x_offset / 2
+	var x_offset = (player_hand.size() - 1) * card_width
+	var x_position = center_screen_x + index * card_width - x_offset / 2
 	return x_position
 
 func animate_card_to_position(card, new_position, speed):

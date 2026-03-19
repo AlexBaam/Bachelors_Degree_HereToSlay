@@ -1,12 +1,16 @@
 extends Node2D
 
 const CARD_SCENE_PATH = "res://Scenes/Card.tscn"
-const CARDS_DATABASE_PATH = "res://Scripts/cards_database.gd"
+const CARDS_DATABASE_PATH = "res://Scripts/GameData/cards_database.gd"
 
-var game_card_pile : Array[String] = ["Bard", "Wizard", "Fighter", "Paladin", "Ranger", "Rogue"]
+var game_card_pile : Array[String] = ["Bard", "Wizard", "Fighter", "Paladin", "Ranger", "Rogue",
+ "Bard", "Wizard", "Fighter", "Paladin", "Ranger", "Rogue",
+ "Bard", "Wizard", "Fighter", "Paladin", "Ranger", "Rogue"]
+
 var card_databate_reference: Resource = preload(CARDS_DATABASE_PATH)
 
 @export var card_draw_speed : float = 0.5
+@export var starting_player_hand_size: int = 5
 
 @onready var discard_pile_reference: Node2D = $"../DiscardPile"
 @onready var player_hand_reference: Node2D = $"../../PlayerHand"
@@ -24,6 +28,8 @@ var card_pile_gen : CardPileGen = CardPileGen.new()
 func _ready() -> void:
 	game_card_pile.shuffle() # Shuffling the deck for random cards
 	cards_left_reference.text = str(game_card_pile.size())
+	for i in range(starting_player_hand_size):
+		draw_card()
 
 func get_discard_pile_size() -> int:
 	return discard_pile_reference.game_discard_pile.size()
@@ -52,9 +58,15 @@ func draw_card() -> void:
 	new_card.get_node("CardImage").texture = load(card_image_path)
 	
 	# Settings the dice roll and the description of the card
-	new_card.get_node("DiceRoll").text = str(card_databate_reference.CARDS[card_drawn_name][0])
-	new_card.get_node("Description").text = str(card_databate_reference.CARDS[card_drawn_name][1])
+	new_card.get_node("DiceRoll").text = card_databate_reference.CARDS[card_drawn_name][0]
+	new_card.get_node("Description").text = card_databate_reference.CARDS[card_drawn_name][1]
+	
+	# Setting a name on the card so we know what card we dragged
 	new_card.get_node("CardName").text = card_drawn_name
+	
+	# Settings the card type and class of a card
+	new_card.card_type = card_databate_reference.CARDS[card_drawn_name][2]
+	new_card.card_class = card_databate_reference.CARDS[card_drawn_name][3]
 	
 	card_manager_reference.add_child(new_card)
 	# Adaugam in player hand o carte, acea entitate carte va avea acelasi nume cu ce carte reprezinta ea
