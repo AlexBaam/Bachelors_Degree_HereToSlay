@@ -1,6 +1,6 @@
 extends Node2D
 
-const MONSTER_SCENE_PATH = "res://Scenes/Monster.tscn"
+const MONSTER_SCENE_PATH = "res://Scenes/Cards/MonsterCards.tscn"
 const MONSTER_DATABASE_PATH = "res://Scripts/GameData/monsters_database.gd"
 
 const COLLISION_MASK_MONSTER_SLOT = 32

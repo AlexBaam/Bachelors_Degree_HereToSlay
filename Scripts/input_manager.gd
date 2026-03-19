@@ -7,6 +7,8 @@ const COLLISION_MASK_CARD = 1
 # Even if the layer is 3, for some reason the output is 4, tied to binary mask
 const COLLISION_MASK_CARD_PILE = 4
 
+@onready var player_hand: Node2D = $"../GameHands/PlayerHand"
+
 var card_manager_reference
 var card_pile_reference
 
@@ -37,4 +39,4 @@ func raycast_at_cursor() -> void:
 				card_manager_reference.start_drag(card_found)
 		elif result_collision_mask == COLLISION_MASK_CARD_PILE:
 			# Card pile clicked
-			card_pile_reference.draw_card()
+			card_pile_reference.draw_card(player_hand)

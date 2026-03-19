@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://doc4jn6ykyb5h"]
+
+[ext_resource type="Script" uid="uid://dcp7d5ykn3lb7" path="res://Scripts/Cards/enemy_card.gd" id="1_21h5t"]
+[ext_resource type="Texture2D" uid="uid://dfe5h7w55jkp0" path="res://Textures/Cards/Card.png" id="2_u2hp4"]
+
+[node name="EnemyCard" type="Node2D" unique_id=1524001771]
+position = Vector2(865, 485)
+scale = Vector2(1.4, 1.4)
+script = ExtResource("1_21h5t")
+
+[node name="CardImage" type="Sprite2D" parent="." unique_id=1687203742]
+texture = ExtResource("2_u2hp4")
+
+[node name="Description" type="RichTextLabel" parent="." unique_id=1014177313]
+modulate = Color(0.012617188, 0.012617188, 0.012617188, 1)
+offset_left = -27.0
+offset_top = 18.0
+offset_right = 27.0
+offset_bottom = 48.0
+theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 10
+theme_override_font_sizes/bold_italics_font_size = 10
+theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/mono_font_size = 10
+text = "Default"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DiceRoll" type="RichTextLabel" parent="." unique_id=930265900]
+modulate = Color(0.012617188, 0.012617188, 0.012617188, 1)
+offset_left = -27.0
+offset_top = -5.0
+offset_right = -10.0
+offset_bottom = 12.0
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardName" type="RichTextLabel" parent="." unique_id=1506802629]
+modulate = Color(0.012617188, 0.012617188, 0.012617188, 1)
+offset_left = -27.0
+offset_top = -50.0
+offset_right = 27.0
+offset_bottom = -33.0
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1

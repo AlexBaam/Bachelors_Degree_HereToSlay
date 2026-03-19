@@ -1,6 +1,7 @@
 extends Node2D
 
-const CARD_SCENE_PATH = "res://Scenes/Card.tscn"
+const CARD_SCENE_PATH = "res://Scenes/Cards/PlayerCards.tscn"
+const ENEMY_CARD_SCENE_PATH = "res://Scenes/Cards/EnemyCards.tscn"
 const CARDS_DATABASE_PATH = "res://Scripts/GameData/cards_database.gd"
 
 var game_card_pile : Array[String] = ["Bard", "Wizard", "Fighter", "Paladin", "Ranger", "Rogue",
@@ -10,11 +11,6 @@ var game_card_pile : Array[String] = ["Bard", "Wizard", "Fighter", "Paladin", "R
 var card_databate_reference: Resource = preload(CARDS_DATABASE_PATH)
 
 @export var card_draw_speed : float = 0.5
-@export var starting_player_hand_size: int = 5
-
-# The playing hands of each player
-@onready var player_hand_reference: Node2D = $"../../GameHands/PlayerHand"
-@onready var enemy_1_hand_reference: Node2D = $"../../GameHands/Enemy1Hand"
 
 @onready var discard_pile_reference: Node2D = $"../DiscardPile"
 @onready var card_manager_reference: Node2D = $"../../CardManager"
@@ -31,13 +27,11 @@ var card_pile_gen : CardPileGen = CardPileGen.new()
 func _ready() -> void:
 	game_card_pile.shuffle() # Shuffling the deck for random cards
 	cards_left_reference.text = str(game_card_pile.size())
-	for i in range(starting_player_hand_size):
-		draw_card()
 
 func get_discard_pile_size() -> int:
 	return discard_pile_reference.game_discard_pile.size()
 
-func draw_card() -> void:
+func draw_card(player_hand) -> void:
 	var card_drawn_name : String = game_card_pile[0]
 	game_card_pile.erase(card_drawn_name)
 	
@@ -74,9 +68,9 @@ func draw_card() -> void:
 	card_manager_reference.add_child(new_card)
 	# Adaugam in player hand o carte, acea entitate carte va avea acelasi nume cu ce carte reprezinta ea
 	new_card.name = card_drawn_name
-	player_hand_reference.add_card_to_hand(new_card, card_draw_speed)
+	player_hand.add_card_to_hand(new_card, card_draw_speed)
 
-func enemy_draw_card() -> void:
+func enemy_draw_card(enemy_hand) -> void:
 	var card_drawn_name : String = game_card_pile[0]
 	game_card_pile.erase(card_drawn_name)
 	
@@ -92,7 +86,7 @@ func enemy_draw_card() -> void:
 			card_pile_gen.pile_visibility(false,card_sprite,cards_left_reference)
 	
 	cards_left_reference.text = str(game_card_pile.size())
-	var card_scene: Resource = preload(CARD_SCENE_PATH)
+	var card_scene: Resource = preload(ENEMY_CARD_SCENE_PATH)
 	var new_card: Node = card_scene.instantiate()
 	
 	# Custom card images
@@ -113,4 +107,4 @@ func enemy_draw_card() -> void:
 	card_manager_reference.add_child(new_card)
 	# Adaugam in player hand o carte, acea entitate carte va avea acelasi nume cu ce carte reprezinta ea
 	new_card.name = card_drawn_name
-	enemy_1_hand_reference.add_card_to_hand(new_card, card_draw_speed)
+	enemy_hand.add_card_to_hand(new_card, card_draw_speed)
