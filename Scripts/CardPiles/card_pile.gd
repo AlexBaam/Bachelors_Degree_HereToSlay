@@ -12,8 +12,11 @@ var card_databate_reference: Resource = preload(CARDS_DATABASE_PATH)
 @export var card_draw_speed : float = 0.5
 @export var starting_player_hand_size: int = 5
 
+# The playing hands of each player
+@onready var player_hand_reference: Node2D = $"../../GameHands/PlayerHand"
+@onready var enemy_1_hand_reference: Node2D = $"../../GameHands/Enemy1Hand"
+
 @onready var discard_pile_reference: Node2D = $"../DiscardPile"
-@onready var player_hand_reference: Node2D = $"../../PlayerHand"
 @onready var card_manager_reference: Node2D = $"../../CardManager"
 @onready var cards_left_reference: RichTextLabel = $RichTextLabel
 @onready var card_collider: CollisionShape2D = $Area2D/CollisionShape2D
@@ -72,3 +75,42 @@ func draw_card() -> void:
 	# Adaugam in player hand o carte, acea entitate carte va avea acelasi nume cu ce carte reprezinta ea
 	new_card.name = card_drawn_name
 	player_hand_reference.add_card_to_hand(new_card, card_draw_speed)
+
+func enemy_draw_card() -> void:
+	var card_drawn_name : String = game_card_pile[0]
+	game_card_pile.erase(card_drawn_name)
+	
+	# Setting the deck to invisible if there are no cards left
+	if game_card_pile.size() == 0:
+		if get_discard_pile_size() > 0:
+			game_card_pile = discard_pile_reference.game_discard_pile.duplicate(true)
+			game_card_pile.shuffle()
+			cards_left_reference.text = str(game_card_pile.size())
+			discard_pile_reference.empty_discard_pile()
+		else:
+			card_collider.disabled = true
+			card_pile_gen.pile_visibility(false,card_sprite,cards_left_reference)
+	
+	cards_left_reference.text = str(game_card_pile.size())
+	var card_scene: Resource = preload(CARD_SCENE_PATH)
+	var new_card: Node = card_scene.instantiate()
+	
+	# Custom card images
+	var card_image_path : String = str("res://Textures/Cards/"+ card_drawn_name +".png")
+	new_card.get_node("CardImage").texture = load(card_image_path)
+	
+	# Settings the dice roll and the description of the card
+	new_card.get_node("DiceRoll").text = card_databate_reference.CARDS[card_drawn_name][0]
+	new_card.get_node("Description").text = card_databate_reference.CARDS[card_drawn_name][1]
+	
+	# Setting a name on the card so we know what card we dragged
+	new_card.get_node("CardName").text = card_drawn_name
+	
+	# Settings the card type and class of a card
+	new_card.card_type = card_databate_reference.CARDS[card_drawn_name][2]
+	new_card.card_class = card_databate_reference.CARDS[card_drawn_name][3]
+	
+	card_manager_reference.add_child(new_card)
+	# Adaugam in player hand o carte, acea entitate carte va avea acelasi nume cu ce carte reprezinta ea
+	new_card.name = card_drawn_name
+	enemy_1_hand_reference.add_card_to_hand(new_card, card_draw_speed)

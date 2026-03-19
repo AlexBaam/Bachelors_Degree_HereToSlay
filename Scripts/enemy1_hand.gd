@@ -4,17 +4,20 @@ const DEFAULT_CARD_MOVE_SPEED: float = 0.1 # Cards default speed around the deck
 
 ## This variable is the width we set between the cards in hand. 
 ## This is used in the following function: "calculate_card_position" where it is used as multiplier for the x_offset and x_position
-@export var card_width = 85
+const CARD_WIDTH: float = 85.0
 
 ## Position on the Y axis of the cards
-@export var y_card_position = 1000
+const E1_X_HAND_POSITION: float = 1800.0
+
+## The angle at which I rotate the card for this enemy
+const CARD_ROTATION: float = -1.57
 
 var player_hand : Array = []
-var center_screen_x : float
+var center_screen_y : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	center_screen_x = get_viewport().size.x / 2
+	center_screen_y = get_viewport().size.y /2
 
 func add_card_to_hand(card, speed) -> void:
 	if card not in player_hand:
@@ -27,15 +30,16 @@ func add_card_to_hand(card, speed) -> void:
 func update_hand_positions(speed) -> void:
 	for i in range(player_hand.size()):
 		# Setting the position of cards in the hand for adding and removing cards
-		var new_position : Vector2 = Vector2(calculate_card_position(i),y_card_position)
+		var new_position : Vector2 = Vector2(E1_X_HAND_POSITION, calculate_card_position(i))
 		var card = player_hand[i]
 		card.in_hand_position = new_position
+		card.rotation = CARD_ROTATION
 		animate_card_to_position(card, new_position, speed)
 		
 func calculate_card_position(index: int):
-	var x_offset = (player_hand.size() - 1) * card_width
-	var x_position = center_screen_x + index * card_width - x_offset / 2
-	return x_position
+	var y_offset = (player_hand.size() - 1) * CARD_WIDTH
+	var y_position = center_screen_y + index * CARD_WIDTH - y_offset / 2
+	return y_position
 
 func animate_card_to_position(card, new_position, speed):
 	var tween: Tween = get_tree().create_tween()

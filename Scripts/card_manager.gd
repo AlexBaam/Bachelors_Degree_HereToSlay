@@ -20,7 +20,7 @@ var discard_pile_reference
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
-	player_hand_reference = $"../PlayerHand"
+	player_hand_reference = $"../GameHands/PlayerHand"
 	input_manager_reference = $"../InputManager"
 	discard_pile_reference = $"../CardPiles/DiscardPile"
 	input_manager_reference.connect("left_mouse_button_released", on_left_click_released)

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c0vm1sxq18w3i"]
+
+[ext_resource type="Script" uid="uid://bypqiw2yqwxyj" path="res://Scripts/player_hand.gd" id="1_o0kkf"]
+[ext_resource type="Texture2D" uid="uid://cns6s4xaq60gv" path="res://Textures/Backgrounds/PlayerDeck.png" id="2_lr7te"]
+
+[node name="PlayerHand" type="Node2D" unique_id=1080421033]
+script = ExtResource("1_o0kkf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1540086498]
+z_index = -1024
+position = Vector2(967, 978)
+texture = ExtResource("2_lr7te")
