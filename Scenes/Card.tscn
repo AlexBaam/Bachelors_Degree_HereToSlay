@@ -2,12 +2,17 @@
 
 [ext_resource type="Script" uid="uid://crrwnimd2vvh2" path="res://Scripts/card.gd" id="1_3p273"]
 [ext_resource type="Texture2D" uid="uid://dfe5h7w55jkp0" path="res://Textures/Cards/Card.png" id="1_pnb5n"]
+[ext_resource type="Script" uid="uid://dg1gtq8yl5mun" path="res://Scripts/State/state_machine.gd" id="3_h8wm0"]
+[ext_resource type="Script" uid="uid://dtjk2aq4ui41x" path="res://Scripts/State/Card/in_pile.gd" id="4_3m7nw"]
+[ext_resource type="Script" uid="uid://cqplkfxmnkb1p" path="res://Scripts/State/Card/in_hand.gd" id="5_wejov"]
+[ext_resource type="Script" uid="uid://bokoi60ajdu4n" path="res://Scripts/State/Card/in_party.gd" id="6_c6tr3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3p273"]
 size = Vector2(54, 96)
 
 [node name="Card" type="Node2D" unique_id=1524001771]
 position = Vector2(865, 485)
+scale = Vector2(1.4, 1.4)
 script = ExtResource("1_3p273")
 
 [node name="CardImage" type="Sprite2D" parent="." unique_id=1687203742]
@@ -62,6 +67,19 @@ theme_override_font_sizes/mono_font_size = 12
 text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="State Machine" type="Node2D" parent="." unique_id=281275954 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_h8wm0")
+initial_state = NodePath("Pile")
+
+[node name="Pile" type="Node2D" parent="State Machine" unique_id=1837002098]
+script = ExtResource("4_3m7nw")
+
+[node name="Hand" type="Node2D" parent="State Machine" unique_id=1234593816]
+script = ExtResource("5_wejov")
+
+[node name="Party" type="Node2D" parent="State Machine" unique_id=1598623782]
+script = ExtResource("6_c6tr3")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

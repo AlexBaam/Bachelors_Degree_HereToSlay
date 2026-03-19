@@ -13,8 +13,9 @@ var player_hand_reference
 var input_manager_reference
 var discard_pile_reference
 
-@export var card_scale: float = 1
-@export var hovered_card_scale: float = 1.05
+@export var card_scale: float = 1.4
+@export var smaller_card_scale = 1.0
+@export var hover_scale_increase: float = 1.2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -92,28 +93,36 @@ func on_hover_over_card(card) -> void:
 		highlight_card(card, true)
 
 func on_hover_off_card(card) -> void:
-	if not card_dragged:
-		#If I am not dragging a card
-		highlight_card(card, false)
-		var new_card_hovered = raycast_check_for_card()
-		if new_card_hovered:
-			highlight_card(new_card_hovered, true)
-		else:
-			is_hovering_on_card = false
+	# Here we first check if the card is not in a slot
+	# Second if we are not dragging a card
+	if (!card.slot_of_the_card && !card_dragged):
+			highlight_card(card, false)
+			var new_card_hovered = raycast_check_for_card()
+			if new_card_hovered:
+				highlight_card(new_card_hovered, true)
+			else:
+				is_hovering_on_card = false
 
 func start_drag(card) -> void:
 	card_dragged = card
 	card.scale = Vector2(card_scale, card_scale)
 
 func finish_drag() -> void:
-	card_dragged.scale = Vector2(hovered_card_scale, hovered_card_scale)
+	card_dragged.scale = Vector2(card_scale * hover_scale_increase,card_scale * hover_scale_increase)
 	var card_slot_found = raycast_check_for_card_slot()
 	var discard_pile_found = raycast_check_for_discard_pile()
 	if card_slot_found and not card_slot_found.card_in_slot:
 		#Card dropped over the slot and the slot is empty
 		player_hand_reference.remove_card_from_hand(card_dragged)
 		card_dragged.position = card_slot_found.position
+		
+		# Rotate and adjust card scale after the slot
+		card_dragged.slot_of_the_card = card_slot_found
+		card_dragged.z_index = -1
 		card_slot_found.rotate_card(card_dragged)
+		card_dragged.scale = Vector2(smaller_card_scale, smaller_card_scale)
+		
+		# Disable card colision once inthe card slot and set the "card in slot" to true
 		card_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 		card_slot_found.card_in_slot = true
 	elif discard_pile_found:
@@ -126,7 +135,7 @@ func finish_drag() -> void:
 
 func highlight_card(card, hovered) -> void:
 	if hovered:
-		card.scale = Vector2(hovered_card_scale, hovered_card_scale)
+		card.scale = Vector2(card_scale * hover_scale_increase, card_scale * hover_scale_increase)
 		card.z_index = 2
 	else:
 		card.scale = Vector2(card_scale, card_scale)

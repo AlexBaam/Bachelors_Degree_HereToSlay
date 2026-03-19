@@ -4,7 +4,8 @@ signal hovered
 signal hovered_off
 
 # Used in player hand
-var in_hand_position
+var in_hand_position: Vector2
+var slot_of_the_card
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
