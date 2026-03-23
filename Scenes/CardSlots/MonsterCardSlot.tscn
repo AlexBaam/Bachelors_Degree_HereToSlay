@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://24ybs6fe8ds4"]
 
-[ext_resource type="Script" uid="uid://cjd32k8ju443v" path="res://Scripts/monster_slot.gd" id="1_78eg4"]
+[ext_resource type="Script" uid="uid://cjd32k8ju443v" path="res://Scripts/Slots/monster_slot.gd" id="1_78eg4"]
 [ext_resource type="Texture2D" uid="uid://c2s0b0hdbgsfu" path="res://Textures/MonsterSlot.png" id="1_ubgf2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78eg4"]
