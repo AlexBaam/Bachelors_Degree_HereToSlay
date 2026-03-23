@@ -17,11 +17,20 @@ var enemy_manager: EnemyManager = EnemyManager.new()
 
 func _ready() -> void:
 	battle_timer.one_shot = true
-	battle_timer.wait_time = 1.0
 	
+	battle_timer.wait_time = 0.2
 	for i in range(turn_based_gen.BASE_HAND_SIZE):
 		card_pile.draw_card(player_hand)
+		
+		battle_timer.start()
+		await battle_timer.timeout
+		
 		card_pile.enemy_draw_card(enemy_1_hand)
+		
+		battle_timer.start()
+		await battle_timer.timeout
+	
+	battle_timer.wait_time = 1.0
 	
 func _on_end_turn_button_pressed() -> void:
 	opponent_turn()

@@ -5,22 +5,12 @@
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_abo04"]
 load_path = "res://.godot/imported/MonsterPileFull.png-c3f2baaf1220e238878935f24dd5e0e8.ctex"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ix1s"]
-size = Vector2(156, 96)
-
 [node name="MonsterPile" type="Node2D" unique_id=489780070]
 script = ExtResource("1_abo04")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=775758559]
 z_index = -2
 texture = SubResource("CompressedTexture2D_abo04")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=1487135230]
-collision_layer = 16
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1300905322]
-shape = SubResource("RectangleShape2D_7ix1s")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1023674699]
 modulate = Color(0.012617188, 0.012617188, 0.012617188, 1)
