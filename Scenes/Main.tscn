@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://24ybs6fe8ds4" path="res://Scenes/CardSlots/MonsterCardSlot.tscn" id="10_bmxlf"]
 [ext_resource type="PackedScene" uid="uid://c0vm1sxq18w3i" path="res://Scenes/PlayerHand.tscn" id="11_4kpch"]
 [ext_resource type="Script" uid="uid://c6od5r1eqwvo3" path="res://Scripts/enemy1_hand.gd" id="11_frkhe"]
-[ext_resource type="Script" uid="uid://d3n1jyev62aab" path="res://Scripts/battle_manager.gd" id="12_grg3l"]
+[ext_resource type="Script" uid="uid://d3n1jyev62aab" path="res://Scripts/Turns/battle_manager.gd" id="12_grg3l"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 position = Vector2(-3, 0)
