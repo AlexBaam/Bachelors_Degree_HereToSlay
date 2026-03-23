@@ -30,7 +30,7 @@ func enemy_play_card(enemy_hand) -> bool:
 	
 	# Animate card into position
 	var tween = enemy_hand.get_tree().create_tween()
-	tween.tween_property(card_to_play, "position", random_empty_enemy_slot.position, CARD_MOVE_SPEED)
+	tween.tween_property(card_to_play, "position", random_empty_enemy_slot.global_position, CARD_MOVE_SPEED)
 	
 	# Animate card scale
 	var tween2 = enemy_hand.get_tree().create_tween()
