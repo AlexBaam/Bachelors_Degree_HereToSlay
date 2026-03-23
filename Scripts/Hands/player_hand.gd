@@ -10,12 +10,25 @@ const DEFAULT_CARD_MOVE_SPEED: float = 0.1 # Cards default speed around the deck
 @export var y_card_position = 1000
 
 var player_hand : Array = []
+var player_slots : Array = []
 var center_screen_x : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	center_screen_x = get_viewport().size.x / 2
-
+	
+	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot01")
+	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot02")
+	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot03")
+	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot04")
+	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot05")
+	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot06")
+	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot07")
+	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot08")
+	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot09")
+	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot10")
+	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot11")
+	
 func add_card_to_hand(card, speed) -> void:
 	if card not in player_hand:
 		player_hand.insert(0, card)
