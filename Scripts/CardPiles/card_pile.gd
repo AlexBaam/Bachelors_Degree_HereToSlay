@@ -52,7 +52,7 @@ func draw_card(player_hand) -> void:
 	
 	# Custom card images
 	var card_image_path : String = str("res://Textures/Cards/"+ card_drawn_name +".png")
-	new_card.get_node("CardImage").texture = load(card_image_path)
+	new_card.get_node("CardImageFront").texture = load(card_image_path)
 	
 	# Settings the dice roll and the description of the card
 	new_card.get_node("DiceRoll").text = card_databate_reference.CARDS[card_drawn_name][0]
@@ -69,6 +69,9 @@ func draw_card(player_hand) -> void:
 	# Adaugam in player hand o carte, acea entitate carte va avea acelasi nume cu ce carte reprezinta ea
 	new_card.name = card_drawn_name
 	player_hand.add_card_to_hand(new_card, card_draw_speed)
+	
+	# Animatie simpla de card flip ptr cartile noastre
+	new_card.get_node("CardFlipAnimation").play("card_flip")
 
 func enemy_draw_card(enemy_hand) -> void:
 	var card_drawn_name : String = game_card_pile[0]
@@ -91,7 +94,7 @@ func enemy_draw_card(enemy_hand) -> void:
 	
 	# Custom card images
 	var card_image_path : String = str("res://Textures/Cards/"+ card_drawn_name +".png")
-	new_card.get_node("CardImage").texture = load(card_image_path)
+	new_card.get_node("CardImageFront").texture = load(card_image_path)
 	
 	# Settings the dice roll and the description of the card
 	new_card.get_node("DiceRoll").text = card_databate_reference.CARDS[card_drawn_name][0]
