@@ -1,6 +1,7 @@
 extends Node
 
 var player_action_points_used: int
+@onready var action_points: Node2D = $"../ActionPoints"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,6 +9,11 @@ func _ready() -> void:
 
 func update_player_action_points(points_to_add: int) -> void:
 	player_action_points_used += points_to_add
-	
-func reset_player_turn_points() -> void:
+	action_points.update_sprite(player_action_points_used)
+
+func reset_player_turn_points_without_texture_update() -> void:
 	player_action_points_used = 0
+
+func reset_player_turn_points_with_texture_update() -> void:
+	player_action_points_used = 0
+	action_points.update_sprite(player_action_points_used)

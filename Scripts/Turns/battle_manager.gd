@@ -19,10 +19,7 @@ var enemy_manager: EnemyManager = EnemyManager.new()
 signal end_player_turn
 
 func _process(delta: float) -> void:
-	if turn_based_gen.NUMBER_OF_ACTION_POINTS == player.player_action_points_used:
-		print("The player's turn ended!")
-		emit_signal("end_player_turn")
-		player.reset_player_turn_points()
+	check_player_turn()
 
 func _ready() -> void:
 	battle_timer.one_shot = true
@@ -40,7 +37,6 @@ func _ready() -> void:
 		await battle_timer.timeout
 	
 	battle_timer.wait_time = 1.0
-	
 
 func _on_end_player_turn() -> void:
 	opponent_turn()
@@ -71,3 +67,10 @@ func opponent_turn() -> void:
 		
 	# End the turn and go to the next opponent
 	turn_based_gen.start_player_turn(card_pile_collision, player_hand, discard_pile_collision)
+	player.reset_player_turn_points_with_texture_update()
+
+func check_player_turn() -> void:
+	if turn_based_gen.NUMBER_OF_ACTION_POINTS == player.player_action_points_used:
+		print("The player's turn ended!")
+		emit_signal("end_player_turn")
+		player.reset_player_turn_points_without_texture_update()

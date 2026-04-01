@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://c6od5r1eqwvo3" path="res://Scripts/Hands/enemy1_hand.gd" id="11_frkhe"]
 [ext_resource type="Script" uid="uid://d3n1jyev62aab" path="res://Scripts/Turns/battle_manager.gd" id="12_grg3l"]
 [ext_resource type="PackedScene" uid="uid://bgscqfaayohr2" path="res://Scenes/Player.tscn" id="14_1p5hy"]
+[ext_resource type="PackedScene" uid="uid://b7qtbnkqkydkn" path="res://Scenes/ActionPoints.tscn" id="15_h1m7h"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 position = Vector2(-3, 0)
@@ -200,6 +201,7 @@ position = Vector2(104.999985, -454)
 position = Vector2(3, 0)
 
 [node name="PlayerHand" parent="GameHands" unique_id=1080421033 instance=ExtResource("11_4kpch")]
+z_index = -2
 position = Vector2(-3, 0)
 
 [node name="Enemy1Hand" type="Node2D" parent="GameHands" unique_id=1345053187]
@@ -217,5 +219,9 @@ script = ExtResource("12_grg3l")
 one_shot = true
 
 [node name="Player" parent="." unique_id=532426696 instance=ExtResource("14_1p5hy")]
+
+[node name="ActionPoints" parent="." unique_id=174833359 instance=ExtResource("15_h1m7h")]
+z_index = -1
+position = Vector2(936, 889)
 
 [connection signal="end_player_turn" from="BattleManager" to="BattleManager" method="_on_end_player_turn"]
