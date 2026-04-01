@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c0vm1sxq18w3i" path="res://Scenes/PlayerHand.tscn" id="11_4kpch"]
 [ext_resource type="Script" uid="uid://c6od5r1eqwvo3" path="res://Scripts/Hands/enemy1_hand.gd" id="11_frkhe"]
 [ext_resource type="Script" uid="uid://d3n1jyev62aab" path="res://Scripts/Turns/battle_manager.gd" id="12_grg3l"]
+[ext_resource type="PackedScene" uid="uid://bgscqfaayohr2" path="res://Scenes/Player.tscn" id="14_1p5hy"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 position = Vector2(-3, 0)
@@ -209,17 +210,12 @@ script = ExtResource("7_jw32o")
 
 [node name="MonsterManager" type="Node2D" parent="." unique_id=979303943]
 
-[node name="EndTurnButton" type="Button" parent="." unique_id=1481499534]
-offset_left = 1654.0
-offset_top = 934.0
-offset_right = 1765.0
-offset_bottom = 1021.0
-text = "End Turn"
-
 [node name="BattleManager" type="Node" parent="." unique_id=254983697]
 script = ExtResource("12_grg3l")
 
 [node name="BattleTimer" type="Timer" parent="." unique_id=1534095030]
 one_shot = true
 
-[connection signal="pressed" from="EndTurnButton" to="BattleManager" method="_on_end_turn_button_pressed"]
+[node name="Player" parent="." unique_id=532426696 instance=ExtResource("14_1p5hy")]
+
+[connection signal="end_player_turn" from="BattleManager" to="BattleManager" method="_on_end_player_turn"]

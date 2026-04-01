@@ -17,6 +17,8 @@ var discard_pile_reference
 @export var smaller_card_scale = 1.0
 @export var hover_scale_increase: float = 1.2
 
+@onready var player: Node = $"../Player"
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
@@ -124,10 +126,12 @@ func finish_drag() -> void:
 		# Disable card colision once inthe card slot and set the "card in slot" to true
 		card_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 		card_slot_found.card_in_slot = true
+		player.update_player_action_points(1)
 	elif discard_pile_found:
 		#Card over the discard pile
 		player_hand_reference.remove_card_from_hand(card_dragged)
 		discard_pile_reference.add_to_discard_pile(card_dragged)
+		player.update_player_action_points(1)
 	else: 
 		player_hand_reference.add_card_to_hand(card_dragged, DEFAULT_CARD_MOVE_SPEED)
 	card_dragged = null

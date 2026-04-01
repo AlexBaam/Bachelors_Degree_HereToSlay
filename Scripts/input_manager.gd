@@ -8,6 +8,7 @@ const COLLISION_MASK_CARD = 1
 const COLLISION_MASK_CARD_PILE = 4
 
 @onready var player_hand: Node2D = $"../GameHands/PlayerHand"
+@onready var player: Node = $"../Player"
 
 var card_manager_reference
 var card_pile_reference
@@ -40,3 +41,4 @@ func raycast_at_cursor() -> void:
 		elif result_collision_mask == COLLISION_MASK_CARD_PILE:
 			# Card pile clicked
 			card_pile_reference.draw_card(player_hand)
+			player.update_player_action_points(1)
