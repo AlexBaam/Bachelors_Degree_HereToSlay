@@ -222,6 +222,6 @@ one_shot = true
 
 [node name="ActionPoints" parent="." unique_id=174833359 instance=ExtResource("15_h1m7h")]
 z_index = -1
-position = Vector2(936, 889)
+position = Vector2(960, 885)
 
 [connection signal="end_player_turn" from="BattleManager" to="BattleManager" method="_on_end_player_turn"]

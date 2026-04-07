@@ -5,6 +5,8 @@ class_name EnemyManager
 const SMALL_CARD_SCALE = 1.0
 const CARD_MOVE_SPEED = 0.2
 
+var cards_played_by_opponent: Array = []
+
 func enemy_draw_card(card_pile, enemy_hand) -> bool: 
 	if(card_pile.game_card_pile.size() <= 0):
 		return false
@@ -40,5 +42,10 @@ func enemy_play_card(enemy_hand) -> bool:
 	card_to_play.get_node("CardFlipAnimation").play("card_flip")
 	
 	enemy_hand.remove_card_from_hand(card_to_play)
+	
+	# Add the card that the opponent played so we know it is on the battlefield
+	cards_played_by_opponent.append(card_to_play)
+	
+	print(cards_played_by_opponent)
 	
 	return true

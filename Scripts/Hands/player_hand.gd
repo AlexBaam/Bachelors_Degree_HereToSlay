@@ -17,17 +17,8 @@ var center_screen_x : float
 func _ready() -> void:
 	center_screen_x = get_viewport().size.x / 2
 	
-	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot01")
-	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot02")
-	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot03")
-	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot04")
-	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot05")
-	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot06")
-	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot07")
-	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot08")
-	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot09")
-	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot10")
-	player_slots.append($"../../CardSlots/PlayerCardSlots/Slot11")
+	for child in $"../../CardSlots/PlayerCardSlots".get_children():
+		player_slots.append(child)
 	
 func add_card_to_hand(card, speed) -> void:
 	if card not in player_hand:

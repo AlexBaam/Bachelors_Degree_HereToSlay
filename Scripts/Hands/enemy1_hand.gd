@@ -20,19 +20,8 @@ var center_screen_y : float
 func _ready() -> void:
 	center_screen_y = get_viewport().size.y /2
 	
-	# Gotta find a smarter way to do this
-	# Nu merge cu un for de la 1 la 12 ce sa construiasca path ca string for some reason
-	empty_enemy_slots.append($"../../CardSlots/EnemyCardSlots/Enemy1/EnemySlot1")
-	empty_enemy_slots.append($"../../CardSlots/EnemyCardSlots/Enemy1/EnemySlot2")
-	empty_enemy_slots.append($"../../CardSlots/EnemyCardSlots/Enemy1/EnemySlot3")
-	empty_enemy_slots.append($"../../CardSlots/EnemyCardSlots/Enemy1/EnemySlot4")
-	empty_enemy_slots.append($"../../CardSlots/EnemyCardSlots/Enemy1/EnemySlot5")
-	empty_enemy_slots.append($"../../CardSlots/EnemyCardSlots/Enemy1/EnemySlot6")
-	empty_enemy_slots.append($"../../CardSlots/EnemyCardSlots/Enemy1/EnemySlot7")
-	empty_enemy_slots.append($"../../CardSlots/EnemyCardSlots/Enemy1/EnemySlot8")
-	empty_enemy_slots.append($"../../CardSlots/EnemyCardSlots/Enemy1/EnemySlot9")
-	empty_enemy_slots.append($"../../CardSlots/EnemyCardSlots/Enemy1/EnemySlot10")
-	empty_enemy_slots.append($"../../CardSlots/EnemyCardSlots/Enemy1/EnemySlot11")
+	for child in $"../../CardSlots/EnemyCardSlots/Enemy1".get_children():
+		empty_enemy_slots.append(child)
 
 func add_card_to_hand(card, speed) -> void:
 	if card not in enemy_hand:

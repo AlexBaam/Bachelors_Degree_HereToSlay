@@ -24,19 +24,16 @@ func _process(delta: float) -> void:
 func _ready() -> void:
 	battle_timer.one_shot = true
 	
-	battle_timer.wait_time = 0.2
 	for i in range(turn_based_gen.BASE_HAND_SIZE):
 		card_pile.draw_card(player_hand)
 		
-		battle_timer.start()
-		await battle_timer.timeout
+		await turn_based_gen.wait(battle_timer,0.2)
 		
 		card_pile.enemy_draw_card(enemy_1_hand)
 		
-		battle_timer.start()
-		await battle_timer.timeout
+		await turn_based_gen.wait(battle_timer,0.2)
 	
-	battle_timer.wait_time = 1.0
+	await turn_based_gen.wait(battle_timer,1.0)
 
 func _on_end_player_turn() -> void:
 	opponent_turn()
@@ -47,8 +44,7 @@ func opponent_turn() -> void:
 	turn_points_used = 0
 	
 	# Wait a second before drawing a card for the illusion of thinking
-	battle_timer.start()
-	await battle_timer.timeout
+	await turn_based_gen.wait(battle_timer,1.0)
 	
 	while(turn_based_gen.NUMBER_OF_ACTION_POINTS != turn_points_used):
 		var random_number: float = randf()
@@ -62,8 +58,7 @@ func opponent_turn() -> void:
 				turn_points_used = turn_points_used + 1
 			
 		# Wait a second before drawing a card for the illusion of thinking
-		battle_timer.start()
-		await battle_timer.timeout
+		await turn_based_gen.wait(battle_timer,1.0)
 		
 	# End the turn and go to the next opponent
 	turn_based_gen.start_player_turn(card_pile_collision, player_hand, discard_pile_collision)

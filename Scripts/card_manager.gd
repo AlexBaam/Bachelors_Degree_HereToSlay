@@ -127,6 +127,7 @@ func finish_drag() -> void:
 		card_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 		card_slot_found.card_in_slot = true
 		player.update_player_action_points(1)
+		player.update_player_cards_in_party(card_dragged)
 	elif discard_pile_found:
 		#Card over the discard pile
 		player_hand_reference.remove_card_from_hand(card_dragged)
