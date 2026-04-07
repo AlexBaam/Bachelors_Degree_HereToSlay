@@ -1,36 +1,36 @@
 extends Node2D
 
-const COLLISION_MASK_CARD = 1
-const COLLISION_MASK_SLOT = 2
-const COLLISION_MASK_DISCARD_PILE = 8
-const DEFAULT_CARD_MOVE_SPEED = 0.1
+const COLLISION_MASK_CARD: int = 1
+const COLLISION_MASK_SLOT: int = 2
+const COLLISION_MASK_DISCARD_PILE: int = 8
+## The default speed for card movement on the screen
+const DEFAULT_CARD_MOVE_SPEED: float = 0.1
+## Constant to define how much we want to change the card position on the Y axis (vertical)
+const SELECTED_CARD_Y_UPDATE: int = 15
 
 var card_dragged
 var screen_size : Vector2
 var is_hovering_on_card: bool
 var selected_card
 
-var input_manager_reference
-
 @export var card_scale: float = 1.4
-@export var smaller_card_scale = 1.0
+@export var smaller_card_scale: float = 1.0
 @export var hover_scale_increase: float = 1.2
 
-@onready var player: Node = $"../Player"
+@onready var player_reference: Node = $"../Player"
 @onready var player_hand_reference: Node2D = $"../GameHands/PlayerHand"
 @onready var discard_pile_reference: Node2D = $"../CardPiles/DiscardPile"
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	screen_size = get_viewport_rect().size
-	input_manager_reference = $"../InputManager"
-	input_manager_reference.connect("left_mouse_button_released", on_left_click_released)
+@onready var input_manager_reference = $"../InputManager"
+@onready var card_selection_screen_reference: Node2D = $"../CardSelectionScreen"
 
 func on_left_click_released() -> void:
 	if card_dragged:
 		finish_drag()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _ready() -> void:
+	screen_size = get_viewport_rect().size
+	input_manager_reference.connect("left_mouse_button_released", on_left_click_released)
+
 func _process(delta: float) -> void:
 	if card_dragged:
 		var mouse_position = get_global_mouse_position()
@@ -42,20 +42,6 @@ func card_clicked(card) -> void:
 		select_card(card)
 	else:
 		start_drag(card)
-
-func select_card(card) -> void:
-	if selected_card: 
-		# Check if this card is already selected
-		if selected_card == card:
-			card.position.y += 15
-			selected_card = null
-		else: 
-			selected_card.position.y += 15
-			selected_card = card
-			card.position.y -= 15
-	else:
-		selected_card = card
-		card.position.y -= 15
 
 func raycast_check_for_card():
 	var space_state = get_world_2d().direct_space_state
@@ -104,6 +90,39 @@ func get_card_with_highest_z_index(cards):
 			highest_z_index = highest_z_card.z_index
 	return highest_z_card
 
+func start_drag(card) -> void:
+	unselect_card()
+	card_dragged = card
+	card.scale = Vector2(card_scale, card_scale)
+
+func finish_drag() -> void:
+	card_dragged.scale = Vector2(card_scale * hover_scale_increase,card_scale * hover_scale_increase)
+	var card_slot_found = raycast_check_for_card_slot()
+	var discard_pile_found = raycast_check_for_discard_pile()
+	if card_slot_found and not card_slot_found.card_in_slot:
+		#Card dropped over the slot and the slot is empty
+		player_hand_reference.remove_card_from_hand(card_dragged)
+		card_dragged.position = card_slot_found.position
+		
+		# Adjust card scale after the slot
+		card_dragged.slot_of_the_card = card_slot_found
+		card_dragged.z_index = -1
+		card_dragged.scale = Vector2(smaller_card_scale, smaller_card_scale)
+		
+		card_slot_found.card_in_slot = true
+		card_slot_found.get_node("Area2D/CollisionShape2D").disabled = true
+		
+		player_reference.update_player_action_points(1)
+		player_reference.update_player_cards_in_party(card_dragged)
+	elif discard_pile_found:
+		#Card over the discard pile
+		player_hand_reference.remove_card_from_hand(card_dragged)
+		discard_pile_reference.add_to_discard_pile(card_dragged)
+		player_reference.update_player_action_points(1)
+	else: 
+		player_hand_reference.add_card_to_hand(card_dragged, DEFAULT_CARD_MOVE_SPEED)
+	card_dragged = null
+
 func connect_card_signals(card) -> void:
 	card.connect("hovered", on_hover_over_card)
 	card.connect("hovered_off", on_hover_off_card)
@@ -127,38 +146,6 @@ func on_hover_off_card(card) -> void:
 			else:
 				is_hovering_on_card = false
 
-func start_drag(card) -> void:
-	card_dragged = card
-	card.scale = Vector2(card_scale, card_scale)
-
-func finish_drag() -> void:
-	card_dragged.scale = Vector2(card_scale * hover_scale_increase,card_scale * hover_scale_increase)
-	var card_slot_found = raycast_check_for_card_slot()
-	var discard_pile_found = raycast_check_for_discard_pile()
-	if card_slot_found and not card_slot_found.card_in_slot:
-		#Card dropped over the slot and the slot is empty
-		player_hand_reference.remove_card_from_hand(card_dragged)
-		card_dragged.position = card_slot_found.position
-		
-		# Adjust card scale after the slot
-		card_dragged.slot_of_the_card = card_slot_found
-		card_dragged.z_index = -1
-		card_dragged.scale = Vector2(smaller_card_scale, smaller_card_scale)
-		
-		card_slot_found.card_in_slot = true
-		card_slot_found.get_node("Area2D/CollisionShape2D").disabled = true
-		
-		player.update_player_action_points(1)
-		player.update_player_cards_in_party(card_dragged)
-	elif discard_pile_found:
-		#Card over the discard pile
-		player_hand_reference.remove_card_from_hand(card_dragged)
-		discard_pile_reference.add_to_discard_pile(card_dragged)
-		player.update_player_action_points(1)
-	else: 
-		player_hand_reference.add_card_to_hand(card_dragged, DEFAULT_CARD_MOVE_SPEED)
-	card_dragged = null
-
 func highlight_card(card, hovered) -> void:
 	if hovered:
 		card.scale = Vector2(card_scale * hover_scale_increase, card_scale * hover_scale_increase)
@@ -166,3 +153,29 @@ func highlight_card(card, hovered) -> void:
 	else:
 		card.scale = Vector2(card_scale, card_scale)
 		card.z_index = 1
+
+func select_card(card) -> void:
+	if selected_card:
+		if is_this_card_already_selected(card):
+			unselect_card()
+		else:
+			change_selected_card(card)
+	else:
+		selected_card = card
+		selected_card.position.y -= SELECTED_CARD_Y_UPDATE
+
+func unselect_card() -> void:
+	if selected_card:
+		selected_card.position.y += SELECTED_CARD_Y_UPDATE
+		selected_card = null
+
+func change_selected_card(card) -> void:
+	selected_card.position.y += SELECTED_CARD_Y_UPDATE
+	selected_card = card
+	card.position.y -= SELECTED_CARD_Y_UPDATE
+
+func is_this_card_already_selected(card) -> bool:
+	if selected_card == card:
+		return true
+	else: 
+		return false

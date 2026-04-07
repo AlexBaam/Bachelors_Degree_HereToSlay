@@ -5,6 +5,7 @@ extends Node
 @onready var discard_pile: Node2D = $"../CardPiles/DiscardPile"
 @onready var battle_timer: Timer = $"../BattleTimer"
 @onready var player: Node = $"../Player"
+@onready var card_manager: Node2D = $"../CardManager"
 
 @onready var enemy_1_hand: Node2D = $"../GameHands/Enemy1Hand"
 @onready var player_hand: Node2D = $"../GameHands/PlayerHand"
@@ -43,6 +44,7 @@ func _ready() -> void:
 	turn_based_gen.enable_player_interactions(card_pile_collision, player_hand, discard_pile_collision)
 	
 func _on_end_player_turn() -> void:
+	card_manager.unselect_card()
 	opponent_turn()
 
 func opponent_turn() -> void:

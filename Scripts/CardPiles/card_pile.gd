@@ -32,6 +32,8 @@ func get_discard_pile_size() -> int:
 	return discard_pile_reference.game_discard_pile.size()
 
 func draw_card(player_hand) -> void:
+	card_manager_reference.unselect_card()
+	
 	var card_drawn_name : String = game_card_pile[0]
 	game_card_pile.erase(card_drawn_name)
 	

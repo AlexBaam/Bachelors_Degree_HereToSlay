@@ -13,8 +13,8 @@ const COLLISION_MASK_CARD = 1
 ## The layer is equal to 3, bit 2 with a value of 4.
 const COLLISION_MASK_CARD_PILE = 4
 
-## The collision mask of the monster slot scene.
-const COLLISION_MASK_MONSTER_SLOT = 32
+## The collision mask of the monster card scene.
+const COLLISION_MASK_MONSTER_CARD = 64
 
 @onready var player_hand: Node2D = $"../GameHands/PlayerHand"
 @onready var player: Node = $"../Player"
@@ -47,6 +47,6 @@ func raycast_at_cursor() -> void:
 			# Card pile clicked
 			card_pile_reference.draw_card(player_hand)
 			player.update_player_action_points(1)
-		elif result_collision_mask == COLLISION_MASK_MONSTER_SLOT:
+		elif result_collision_mask == COLLISION_MASK_MONSTER_CARD:
 			# Monster slot clicked
-			print("You click a monster slot!")
+			print("You click a monster!")

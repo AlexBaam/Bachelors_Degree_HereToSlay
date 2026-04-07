@@ -65,3 +65,4 @@ func draw_monster(monster_slot) -> void:
 	# Adaugam pe masa un monstru, acea entitate monstru va avea acelasi nume cu ce monstru reprezinta ea
 	new_monster.name = monster_drawn_name
 	new_monster.position = monster_slot.position
+	monster_slot.get_node("Area2D/CollisionShape2D").disabled = true

@@ -7,7 +7,7 @@ const DEFAULT_CARD_MOVE_SPEED: float = 0.1 # Cards default speed around the deck
 @export var card_width = 85
 
 ## Position on the Y axis of the cards
-@export var y_card_position = 1000
+@export var y_card_position: float = 1000
 
 var player_hand : Array = []
 var player_slots : Array = []
@@ -26,7 +26,7 @@ func add_card_to_hand(card, speed) -> void:
 		
 		update_hand_positions(speed)
 	else:
-		animate_card_to_position(card, card.in_hand_position, DEFAULT_CARD_MOVE_SPEED)
+		animate_card_to_hand(card, card.in_hand_position, DEFAULT_CARD_MOVE_SPEED)
 	
 func update_hand_positions(speed) -> void:
 	for i in range(player_hand.size()):
@@ -34,14 +34,14 @@ func update_hand_positions(speed) -> void:
 		var new_position : Vector2 = Vector2(calculate_card_position(i),y_card_position)
 		var card = player_hand[i]
 		card.in_hand_position = new_position
-		animate_card_to_position(card, new_position, speed)
+		animate_card_to_hand(card, new_position, speed)
 		
 func calculate_card_position(index: int):
 	var x_offset = (player_hand.size() - 1) * card_width
 	var x_position = center_screen_x + index * card_width - x_offset / 2
 	return x_position
 
-func animate_card_to_position(card, new_position, speed):
+func animate_card_to_hand(card, new_position, speed):
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(card, "position", new_position, speed)
 
