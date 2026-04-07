@@ -9,7 +9,7 @@ const NUMBER_OF_ACTION_POINTS: int = 3
 const BASE_HAND_SIZE: int = 5
 
 ## Function that starts the opponent's turn by disabling the collider for slots, card pile and discard pile
-func start_opponent_turn(card_pile_collision: CollisionShape2D, player_hand, discard_pile_collision) -> void:
+func disable_player_interactions(card_pile_collision: CollisionShape2D, player_hand, discard_pile_collision) -> void:
 	card_pile_collision.disabled = true
 	discard_pile_collision.disabled = true
 	
@@ -17,7 +17,7 @@ func start_opponent_turn(card_pile_collision: CollisionShape2D, player_hand, dis
 		slot.get_child(1).get_child(0).disabled = true
 
 ## Function that starts the player's turn by enabling the collider for slots, card pile and discard pile
-func start_player_turn(card_pile_collision: CollisionShape2D, player_hand, discard_pile_collision) -> void:
+func enable_player_interactions(card_pile_collision: CollisionShape2D, player_hand, discard_pile_collision) -> void:
 	card_pile_collision.disabled = false
 	discard_pile_collision.disabled = false
 	

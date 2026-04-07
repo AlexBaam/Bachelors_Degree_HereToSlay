@@ -34,7 +34,6 @@ script = ExtResource("1_idj7w")
 position = Vector2(861, 525)
 
 [node name="DiscardPile" parent="CardPiles" unique_id=388114536 instance=ExtResource("7_50glp")]
-z_index = -1
 position = Vector2(1065, 525)
 script = ExtResource("8_50glp")
 

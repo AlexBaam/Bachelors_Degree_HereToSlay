@@ -22,8 +22,11 @@ func _process(delta: float) -> void:
 	check_player_turn()
 
 func _ready() -> void:
+	# Making sure the player cannot interact with the game until he got the cards in his hand
+	turn_based_gen.disable_player_interactions(card_pile_collision, player_hand, discard_pile_collision)
 	battle_timer.one_shot = true
 	
+	# Giving cards to each player
 	for i in range(turn_based_gen.BASE_HAND_SIZE):
 		card_pile.draw_card(player_hand)
 		
@@ -33,13 +36,17 @@ func _ready() -> void:
 		
 		await turn_based_gen.wait(battle_timer,0.2)
 	
-	await turn_based_gen.wait(battle_timer,1.0)
-
+	# Waiting half a second before the game actually starts
+	await turn_based_gen.wait(battle_timer,0.5)
+	
+	# Letting the player start his turn
+	turn_based_gen.enable_player_interactions(card_pile_collision, player_hand, discard_pile_collision)
+	
 func _on_end_player_turn() -> void:
 	opponent_turn()
 
 func opponent_turn() -> void:
-	turn_based_gen.start_opponent_turn(card_pile_collision, player_hand, discard_pile_collision)
+	turn_based_gen.disable_player_interactions(card_pile_collision, player_hand, discard_pile_collision)
 	
 	turn_points_used = 0
 	
@@ -61,7 +68,7 @@ func opponent_turn() -> void:
 		await turn_based_gen.wait(battle_timer,1.0)
 		
 	# End the turn and go to the next opponent
-	turn_based_gen.start_player_turn(card_pile_collision, player_hand, discard_pile_collision)
+	turn_based_gen.enable_player_interactions(card_pile_collision, player_hand, discard_pile_collision)
 	player.reset_player_turn_points_with_texture_update()
 
 func check_player_turn() -> void:

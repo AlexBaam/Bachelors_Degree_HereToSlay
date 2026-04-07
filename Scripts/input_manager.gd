@@ -1,23 +1,28 @@
 extends Node2D
 
+## Signal to define the click of the left mouse button.
 signal left_mouse_button_clicked
+
+## Signal to define the release of the left mouse button.
 signal left_mouse_button_released
 
+## The collision mask of card scenes.
 const COLLISION_MASK_CARD = 1
-# Even if the layer is 3, for some reason the output is 4, tied to binary mask
+
+## The collision mask of the card pile scene, this information can be found in the Area2D's collision from the inspector.
+## The layer is equal to 3, bit 2 with a value of 4.
 const COLLISION_MASK_CARD_PILE = 4
+
+## The collision mask of the monster slot scene.
+const COLLISION_MASK_MONSTER_SLOT = 32
 
 @onready var player_hand: Node2D = $"../GameHands/PlayerHand"
 @onready var player: Node = $"../Player"
 
-var card_manager_reference
-var card_pile_reference
+@onready var card_manager_reference: Node2D = $"../CardManager"
+@onready var card_pile_reference: Node2D = $"../CardPiles/CardPile"
 
-func _ready() -> void:
-	card_manager_reference = $"../CardManager"
-	card_pile_reference = $"../CardPiles/CardPile"
-
-func _input(event) -> void:
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			emit_signal("left_mouse_button_clicked")
@@ -37,8 +42,11 @@ func raycast_at_cursor() -> void:
 			# Card clicked
 			var card_found = result[0].collider.get_parent()
 			if card_found:
-				card_manager_reference.start_drag(card_found)
+				card_manager_reference.card_clicked(card_found)
 		elif result_collision_mask == COLLISION_MASK_CARD_PILE:
 			# Card pile clicked
 			card_pile_reference.draw_card(player_hand)
 			player.update_player_action_points(1)
+		elif result_collision_mask == COLLISION_MASK_MONSTER_SLOT:
+			# Monster slot clicked
+			print("You click a monster slot!")

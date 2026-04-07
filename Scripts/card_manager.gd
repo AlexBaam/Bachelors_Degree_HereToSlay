@@ -8,23 +8,22 @@ const DEFAULT_CARD_MOVE_SPEED = 0.1
 var card_dragged
 var screen_size : Vector2
 var is_hovering_on_card: bool
+var selected_card
 
-var player_hand_reference
 var input_manager_reference
-var discard_pile_reference
 
 @export var card_scale: float = 1.4
 @export var smaller_card_scale = 1.0
 @export var hover_scale_increase: float = 1.2
 
 @onready var player: Node = $"../Player"
+@onready var player_hand_reference: Node2D = $"../GameHands/PlayerHand"
+@onready var discard_pile_reference: Node2D = $"../CardPiles/DiscardPile"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
-	player_hand_reference = $"../GameHands/PlayerHand"
 	input_manager_reference = $"../InputManager"
-	discard_pile_reference = $"../CardPiles/DiscardPile"
 	input_manager_reference.connect("left_mouse_button_released", on_left_click_released)
 
 func on_left_click_released() -> void:
@@ -37,6 +36,26 @@ func _process(delta: float) -> void:
 		var mouse_position = get_global_mouse_position()
 		card_dragged.position = Vector2(clamp(mouse_position.x, 0, screen_size.x),
 		clamp(mouse_position.y, 0, screen_size.y))
+
+func card_clicked(card) -> void:
+	if card.slot_of_the_card:
+		select_card(card)
+	else:
+		start_drag(card)
+
+func select_card(card) -> void:
+	if selected_card: 
+		# Check if this card is already selected
+		if selected_card == card:
+			card.position.y += 15
+			selected_card = null
+		else: 
+			selected_card.position.y += 15
+			selected_card = card
+			card.position.y -= 15
+	else:
+		selected_card = card
+		card.position.y -= 15
 
 func raycast_check_for_card():
 	var space_state = get_world_2d().direct_space_state
@@ -90,6 +109,9 @@ func connect_card_signals(card) -> void:
 	card.connect("hovered_off", on_hover_off_card)
 
 func on_hover_over_card(card) -> void:
+	if card.slot_of_the_card:
+		return
+		
 	if not is_hovering_on_card:
 		is_hovering_on_card = true
 		highlight_card(card, true)
@@ -123,9 +145,9 @@ func finish_drag() -> void:
 		card_dragged.z_index = -1
 		card_dragged.scale = Vector2(smaller_card_scale, smaller_card_scale)
 		
-		# Disable card colision once inthe card slot and set the "card in slot" to true
-		card_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 		card_slot_found.card_in_slot = true
+		card_slot_found.get_node("Area2D/CollisionShape2D").disabled = true
+		
 		player.update_player_action_points(1)
 		player.update_player_cards_in_party(card_dragged)
 	elif discard_pile_found:
