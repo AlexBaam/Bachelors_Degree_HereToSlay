@@ -8,10 +8,10 @@ const DEFAULT_CARD_MOVE_SPEED: float = 0.1
 ## Constant to define how much we want to change the card position on the Y axis (vertical)
 const SELECTED_CARD_Y_UPDATE: int = 15
 
-var card_dragged
+var card_dragged: Node2D
 var screen_size : Vector2
 var is_hovering_on_card: bool
-var selected_card
+var selected_card: Node2D
 
 @export var card_scale: float = 1.4
 @export var smaller_card_scale: float = 1.0
@@ -21,7 +21,6 @@ var selected_card
 @onready var discard_pile: Node2D = $"../CardPiles/DiscardPile"
 @onready var input_manager: Node2D = $"../InputManager"
 @onready var card_selection_screen: Node2D = $"../CardSelectionScreen"
-
 
 const ACTION_POINTS: String = "action_points"
 const PLAYER_HAND: String =  "player_hand"
@@ -37,7 +36,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if card_dragged:
-		var mouse_position = get_global_mouse_position()
+		var mouse_position: Vector2 = get_global_mouse_position()
 		card_dragged.position = Vector2(clamp(mouse_position.x, 0, screen_size.x),
 		clamp(mouse_position.y, 0, screen_size.y))
 
@@ -48,9 +47,9 @@ func card_clicked(card: Node2D) -> void:
 		start_drag(card)
 
 func raycast_check_for_card():
-	var space_state = get_world_2d().direct_space_state
-	var parameters = PhysicsPointQueryParameters2D.new()
-	parameters. position = get_global_mouse_position()
+	var space_state: PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
+	var parameters: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
+	parameters.position = get_global_mouse_position()
 	parameters.collide_with_areas = true
 	parameters.collision_mask = COLLISION_MASK_CARD
 	var result = space_state.intersect_point(parameters)
