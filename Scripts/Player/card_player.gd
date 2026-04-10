@@ -4,6 +4,8 @@ extends Node2D
 
 enum actions {SHOW = 1, HIDE = 2, ATTACH = 3}
 
+var card_to_play: Node2D
+
 func _ready() -> void:
 	hide_button()
 
@@ -26,8 +28,9 @@ func hide_button() -> void:
 	play_card_button.disabled = true
 
 func _on_play_card_button_pressed() -> void:
-	print("Play card button pressed!")
+	print("Play button pressed!")
 
 func attach_to_card(card: Node2D) -> void:
 	play_card_button.position = Vector2(card.position.x - 23, card.position.y - 90)
+	card_to_play = card
 	show_button()

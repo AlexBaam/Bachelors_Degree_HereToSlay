@@ -16,3 +16,5 @@ z_index = -15
 position = Vector2(960, 885)
 
 [node name="CardPlayer" parent="." unique_id=571106932 instance=ExtResource("4_dewec")]
+
+[connection signal="card_selected" from="CardPlayer" to="CardPlayer" method="_on_card_selected"]
