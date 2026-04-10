@@ -6,15 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://cg2jseaexr3pe" path="res://Scenes/CardPiles/CardPile.tscn" id="5_v1gob"]
 [ext_resource type="PackedScene" uid="uid://c4xxdlkwr2nbd" path="res://Scenes/CardSlots/EnemyCardSlot.tscn" id="6_v1gob"]
 [ext_resource type="PackedScene" uid="uid://dvwl3nxpgoppo" path="res://Scenes/CardPiles/DiscardPile.tscn" id="7_50glp"]
-[ext_resource type="Script" uid="uid://b812w7pi7o6ba" path="res://Scripts/input_manager.gd" id="7_jw32o"]
+[ext_resource type="Script" uid="uid://b812w7pi7o6ba" path="res://Scripts/Player/input_manager.gd" id="7_jw32o"]
 [ext_resource type="Script" uid="uid://cna18h5mybs3l" path="res://Scripts/CardPiles/discard_pile.gd" id="8_50glp"]
 [ext_resource type="PackedScene" uid="uid://bcg07wl6lt2c6" path="res://Scenes/CardPiles/MonsterPile.tscn" id="9_vy5pj"]
 [ext_resource type="PackedScene" uid="uid://24ybs6fe8ds4" path="res://Scenes/CardSlots/MonsterCardSlot.tscn" id="10_bmxlf"]
-[ext_resource type="PackedScene" uid="uid://c0vm1sxq18w3i" path="res://Scenes/PlayerHand.tscn" id="11_4kpch"]
 [ext_resource type="Script" uid="uid://c6od5r1eqwvo3" path="res://Scripts/Hands/enemy1_hand.gd" id="11_frkhe"]
 [ext_resource type="Script" uid="uid://d3n1jyev62aab" path="res://Scripts/Turns/battle_manager.gd" id="12_grg3l"]
 [ext_resource type="PackedScene" uid="uid://bgscqfaayohr2" path="res://Scenes/Player.tscn" id="14_1p5hy"]
-[ext_resource type="PackedScene" uid="uid://b7qtbnkqkydkn" path="res://Scenes/ActionPoints.tscn" id="15_h1m7h"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 position = Vector2(-3, 0)
@@ -201,10 +199,6 @@ position = Vector2(104.999985, -454)
 [node name="GameHands" type="Node2D" parent="." unique_id=1529952241]
 position = Vector2(3, 0)
 
-[node name="PlayerHand" parent="GameHands" unique_id=1080421033 instance=ExtResource("11_4kpch")]
-z_index = -2
-position = Vector2(-3, 0)
-
 [node name="Enemy1Hand" type="Node2D" parent="GameHands" unique_id=1345053187]
 script = ExtResource("11_frkhe")
 
@@ -220,9 +214,5 @@ script = ExtResource("12_grg3l")
 one_shot = true
 
 [node name="Player" parent="." unique_id=532426696 instance=ExtResource("14_1p5hy")]
-
-[node name="ActionPoints" parent="." unique_id=174833359 instance=ExtResource("15_h1m7h")]
-z_index = -1
-position = Vector2(960, 885)
 
 [connection signal="end_player_turn" from="BattleManager" to="BattleManager" method="_on_end_player_turn"]

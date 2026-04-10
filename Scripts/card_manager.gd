@@ -17,11 +17,15 @@ var selected_card
 @export var smaller_card_scale: float = 1.0
 @export var hover_scale_increase: float = 1.2
 
-@onready var player_reference: Node = $"../Player"
-@onready var player_hand_reference: Node2D = $"../GameHands/PlayerHand"
-@onready var discard_pile_reference: Node2D = $"../CardPiles/DiscardPile"
-@onready var input_manager_reference = $"../InputManager"
-@onready var card_selection_screen_reference: Node2D = $"../CardSelectionScreen"
+@onready var player: Node = $"../Player"
+@onready var discard_pile: Node2D = $"../CardPiles/DiscardPile"
+@onready var input_manager: Node2D = $"../InputManager"
+@onready var card_selection_screen: Node2D = $"../CardSelectionScreen"
+
+
+const ACTION_POINTS: String = "action_points"
+const PLAYER_HAND: String =  "player_hand"
+enum {ADD = 1, REMOVE = 3, UPDATE = 3}
 
 func on_left_click_released() -> void:
 	if card_dragged:
@@ -29,7 +33,7 @@ func on_left_click_released() -> void:
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
-	input_manager_reference.connect("left_mouse_button_released", on_left_click_released)
+	input_manager.connect("left_mouse_button_released", on_left_click_released)
 
 func _process(delta: float) -> void:
 	if card_dragged:
@@ -101,7 +105,7 @@ func finish_drag() -> void:
 	var discard_pile_found = raycast_check_for_discard_pile()
 	if card_slot_found and not card_slot_found.card_in_slot:
 		#Card dropped over the slot and the slot is empty
-		player_hand_reference.remove_card_from_hand(card_dragged)
+		player.call_child(PLAYER_HAND, [REMOVE, card_dragged])
 		card_dragged.position = card_slot_found.position
 		
 		# Adjust card scale after the slot
@@ -112,15 +116,15 @@ func finish_drag() -> void:
 		card_slot_found.card_in_slot = true
 		card_slot_found.get_node("Area2D/CollisionShape2D").disabled = true
 		
-		player_reference.update_player_action_points(1)
-		player_reference.update_player_cards_in_party(card_dragged)
+		player.call_child(ACTION_POINTS, [UPDATE, 1])
+		player.update_player_cards_in_party(card_dragged)
 	elif discard_pile_found:
 		#Card over the discard pile
-		player_hand_reference.remove_card_from_hand(card_dragged)
-		discard_pile_reference.add_to_discard_pile(card_dragged)
-		player_reference.update_player_action_points(1)
+		player.call_child(PLAYER_HAND, [REMOVE, card_dragged])
+		discard_pile.add_to_discard_pile(card_dragged)
+		player.call_child(ACTION_POINTS, [UPDATE, 1])
 	else: 
-		player_hand_reference.add_card_to_hand(card_dragged, DEFAULT_CARD_MOVE_SPEED)
+		player.call_child(PLAYER_HAND, [ADD, card_dragged, DEFAULT_CARD_MOVE_SPEED])
 	card_dragged = null
 
 func connect_card_signals(card) -> void:

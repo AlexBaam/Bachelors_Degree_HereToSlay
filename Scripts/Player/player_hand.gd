@@ -13,14 +13,28 @@ var player_hand : Array = []
 var player_slots : Array = []
 var center_screen_x : float
 
-# Called when the node enters the scene tree for the first time.
+enum actions {ADD = 1, UPDATE = 2,  REMOVE = 3}
+
 func _ready() -> void:
 	center_screen_x = get_viewport().size.x / 2
 	
 	for child in $"../../CardSlots/PlayerCardSlots".get_children():
 		player_slots.append(child)
-	
-func add_card_to_hand(card, speed) -> void:
+
+func do(action: Array) -> void:
+	match action[0]:
+		actions.ADD:
+			var card = action[1]
+			var speed: float = float(action[2])
+			add_card_to_hand(card, speed)
+		actions.UPDATE:
+			var speed: float = float(action[1])
+			update_hand_positions(speed)
+		actions.REMOVE:
+			var card = action[1]
+			remove_card_from_hand(card)
+
+func add_card_to_hand(card, speed: float) -> void:
 	if card not in player_hand:
 		player_hand.insert(0, card)
 		
@@ -28,20 +42,20 @@ func add_card_to_hand(card, speed) -> void:
 	else:
 		animate_card_to_hand(card, card.in_hand_position, DEFAULT_CARD_MOVE_SPEED)
 	
-func update_hand_positions(speed) -> void:
+func update_hand_positions(speed: float) -> void:
 	for i in range(player_hand.size()):
 		# Setting the position of cards in the hand for adding and removing cards
 		var new_position : Vector2 = Vector2(calculate_card_position(i),y_card_position)
 		var card = player_hand[i]
 		card.in_hand_position = new_position
 		animate_card_to_hand(card, new_position, speed)
-		
+	
 func calculate_card_position(index: int):
 	var x_offset = (player_hand.size() - 1) * card_width
 	var x_position = center_screen_x + index * card_width - x_offset / 2
 	return x_position
 
-func animate_card_to_hand(card, new_position, speed):
+func animate_card_to_hand(card, new_position, speed: float):
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(card, "position", new_position, speed)
 

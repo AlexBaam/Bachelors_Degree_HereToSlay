@@ -2,8 +2,8 @@ extends Node
 
 class_name TurnBasedGen
 
-## The fixed number of points a player can use in a round
-const NUMBER_OF_ACTION_POINTS: int = 3
+## Defines when a turn should end based on the number of minimum action points
+const NUMBER_OF_ACTION_POINTS: int = 0
 
 ## The fixed size of a hand the player gets at the start of the game
 const BASE_HAND_SIZE: int = 5
