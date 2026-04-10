@@ -19,7 +19,7 @@ func define_player_components() -> void:
 	player_hand = player_components[0]
 	action_points = player_components[1]
 
-func update_player_cards_in_party(card_played) -> void:
+func update_player_cards_in_party(card_played: Node2D) -> void:
 	cards_in_slots.append(card_played)
 	print(cards_in_slots)
 

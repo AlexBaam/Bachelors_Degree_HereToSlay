@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 		card_dragged.position = Vector2(clamp(mouse_position.x, 0, screen_size.x),
 		clamp(mouse_position.y, 0, screen_size.y))
 
-func card_clicked(card) -> void:
+func card_clicked(card: Node2D) -> void:
 	if card.slot_of_the_card:
 		select_card(card)
 	else:
@@ -94,7 +94,7 @@ func get_card_with_highest_z_index(cards):
 			highest_z_index = highest_z_card.z_index
 	return highest_z_card
 
-func start_drag(card) -> void:
+func start_drag(card: Node2D) -> void:
 	unselect_card()
 	card_dragged = card
 	card.scale = Vector2(card_scale, card_scale)
@@ -127,11 +127,11 @@ func finish_drag() -> void:
 		player.call_child(PLAYER_HAND, [ADD, card_dragged, DEFAULT_CARD_MOVE_SPEED])
 	card_dragged = null
 
-func connect_card_signals(card) -> void:
+func connect_card_signals(card: Node2D) -> void:
 	card.connect("hovered", on_hover_over_card)
 	card.connect("hovered_off", on_hover_off_card)
 
-func on_hover_over_card(card) -> void:
+func on_hover_over_card(card: Node2D) -> void:
 	if card.slot_of_the_card:
 		return
 		
@@ -139,7 +139,7 @@ func on_hover_over_card(card) -> void:
 		is_hovering_on_card = true
 		highlight_card(card, true)
 
-func on_hover_off_card(card) -> void:
+func on_hover_off_card(card: Node2D) -> void:
 	# Here we first check if the card is not in a slot
 	# Second if we are not dragging a card
 	if (!card.slot_of_the_card && !card_dragged):
@@ -150,7 +150,7 @@ func on_hover_off_card(card) -> void:
 			else:
 				is_hovering_on_card = false
 
-func highlight_card(card, hovered) -> void:
+func highlight_card(card: Node2D, hovered) -> void:
 	if hovered:
 		card.scale = Vector2(card_scale * hover_scale_increase, card_scale * hover_scale_increase)
 		card.z_index = 2
@@ -158,7 +158,7 @@ func highlight_card(card, hovered) -> void:
 		card.scale = Vector2(card_scale, card_scale)
 		card.z_index = 1
 
-func select_card(card) -> void:
+func select_card(card: Node2D) -> void:
 	if selected_card:
 		if is_this_card_already_selected(card):
 			unselect_card()
@@ -173,12 +173,12 @@ func unselect_card() -> void:
 		selected_card.position.y += SELECTED_CARD_Y_UPDATE
 		selected_card = null
 
-func change_selected_card(card) -> void:
+func change_selected_card(card: Node2D) -> void:
 	selected_card.position.y += SELECTED_CARD_Y_UPDATE
 	selected_card = card
 	card.position.y -= SELECTED_CARD_Y_UPDATE
 
-func is_this_card_already_selected(card) -> bool:
+func is_this_card_already_selected(card: Node2D) -> bool:
 	if selected_card == card:
 		return true
 	else: 

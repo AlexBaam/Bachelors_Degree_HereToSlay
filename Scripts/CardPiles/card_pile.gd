@@ -31,7 +31,7 @@ func _ready() -> void:
 func get_discard_pile_size() -> int:
 	return discard_pile_reference.game_discard_pile.size()
 
-func draw_card(player_hand) -> void:
+func draw_card(player_hand: Node2D) -> void:
 	card_manager_reference.unselect_card()
 	
 	var card_drawn_name : String = game_card_pile[0]
@@ -75,7 +75,7 @@ func draw_card(player_hand) -> void:
 	# Animatie simpla de card flip ptr cartile noastre
 	new_card.get_node("CardFlipAnimation").play("card_flip")
 
-func enemy_draw_card(enemy_hand) -> void:
+func enemy_draw_card(enemy_hand: Node2D) -> void:
 	var card_drawn_name : String = game_card_pile[0]
 	game_card_pile.erase(card_drawn_name)
 	

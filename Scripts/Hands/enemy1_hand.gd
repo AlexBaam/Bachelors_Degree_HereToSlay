@@ -23,7 +23,7 @@ func _ready() -> void:
 	for child in $"../../CardSlots/EnemyCardSlots/Enemy1".get_children():
 		empty_enemy_slots.append(child)
 
-func add_card_to_hand(card, speed) -> void:
+func add_card_to_hand(card: Node2D, speed: float) -> void:
 	if card not in enemy_hand:
 		enemy_hand.insert(0, card)
 		
@@ -31,25 +31,25 @@ func add_card_to_hand(card, speed) -> void:
 	else:
 		animate_card_to_position(card, card.in_hand_position, DEFAULT_CARD_MOVE_SPEED)
 	
-func update_hand_positions(speed) -> void:
+func update_hand_positions(speed: float) -> void:
 	for i in range(enemy_hand.size()):
 		# Setting the position of cards in the hand for adding and removing cards
-		var new_position : Vector2 = Vector2(E1_X_HAND_POSITION, calculate_card_position(i))
-		var card = enemy_hand[i]
+		var new_position: Vector2 = Vector2(E1_X_HAND_POSITION, calculate_card_position(i))
+		var card: Node2D = enemy_hand[i]
 		card.in_hand_position = new_position
 		card.rotation = CARD_ROTATION
 		animate_card_to_position(card, new_position, speed)
 		
-func calculate_card_position(index: int):
-	var y_offset = (enemy_hand.size() - 1) * CARD_WIDTH
-	var y_position = center_screen_y + index * CARD_WIDTH - y_offset / 2
+func calculate_card_position(index: int) -> float:
+	var y_offset: float = (enemy_hand.size() - 1) * CARD_WIDTH
+	var y_position: float = center_screen_y + index * CARD_WIDTH - y_offset / 2
 	return y_position
 
-func animate_card_to_position(card, new_position, speed):
+func animate_card_to_position(card: Node2D, new_position: Vector2, speed: float) -> void:
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(card, "position", new_position, speed)
 
-func remove_card_from_hand(card_to_remove) -> void:
+func remove_card_from_hand(card_to_remove: Node2D) -> void:
 	if card_to_remove in enemy_hand:
 		enemy_hand.erase(card_to_remove)
 		update_hand_positions(DEFAULT_CARD_MOVE_SPEED)
