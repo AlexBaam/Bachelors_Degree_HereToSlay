@@ -24,7 +24,8 @@ var selected_card: Node2D
 
 const ACTION_POINTS: String = "action_points"
 const PLAYER_HAND: String =  "player_hand"
-enum {ADD = 1, REMOVE = 3, UPDATE = 3}
+const CARD_PLAY_BUTTON: String = "play_button"
+enum {ADD = 1, REMOVE = 3, UPDATE = 3, SHOW = 1, HIDE = 2, ATTACH = 3}
 
 func on_left_click_released() -> void:
 	if card_dragged:
@@ -166,16 +167,19 @@ func select_card(card: Node2D) -> void:
 	else:
 		selected_card = card
 		selected_card.position.y -= SELECTED_CARD_Y_UPDATE
+		player.call_child(CARD_PLAY_BUTTON, [ATTACH, selected_card])
 
 func unselect_card() -> void:
 	if selected_card:
 		selected_card.position.y += SELECTED_CARD_Y_UPDATE
+		player.call_child(CARD_PLAY_BUTTON, [HIDE])
 		selected_card = null
 
 func change_selected_card(card: Node2D) -> void:
 	selected_card.position.y += SELECTED_CARD_Y_UPDATE
 	selected_card = card
-	card.position.y -= SELECTED_CARD_Y_UPDATE
+	selected_card.position.y -= SELECTED_CARD_Y_UPDATE
+	player.call_child(CARD_PLAY_BUTTON, [ATTACH, selected_card])
 
 func is_this_card_already_selected(card: Node2D) -> bool:
 	if selected_card == card:

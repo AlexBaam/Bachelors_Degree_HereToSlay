@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ch8dhgum2bfcw"]
+
+[ext_resource type="Script" uid="uid://uedxigrxsd2h" path="res://Scripts/Player/card_player.gd" id="1_4nb4e"]
+
+[node name="CardPlayer" type="Node2D" unique_id=571106932]
+script = ExtResource("1_4nb4e")
+
+[node name="PlayCardButton" type="Button" parent="." unique_id=1100267990]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Play"
+
+[connection signal="pressed" from="PlayCardButton" to="." method="_on_play_card_button_pressed"]
