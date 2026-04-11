@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://1n4qkxooxoxf"]
+
+[ext_resource type="PackedScene" uid="uid://c08m6nr5cg803" path="res://Scenes/PlayerComponents/CardPlayer/Die.tscn" id="1_22shg"]
+[ext_resource type="Script" uid="uid://b0jauladocc5a" path="res://Scripts/Player/dice.gd" id="1_pedoj"]
+
+[node name="Dice" type="Node2D" unique_id=1823160856]
+script = ExtResource("1_pedoj")
+
+[node name="Die1" parent="." unique_id=1950750651 instance=ExtResource("1_22shg")]
+position = Vector2(-40.999996, -2.9999998)
+
+[node name="Die2" parent="." unique_id=739901731 instance=ExtResource("1_22shg")]
+position = Vector2(41.000008, -2.9999998)

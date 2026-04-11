@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b42bhas6qv6dt" path="res://Scripts/Player/player.gd" id="1_rpqav"]
 [ext_resource type="PackedScene" uid="uid://c0vm1sxq18w3i" path="res://Scenes/PlayerComponents/PlayerHand.tscn" id="2_dewec"]
-[ext_resource type="PackedScene" uid="uid://ch8dhgum2bfcw" path="res://Scenes/PlayerComponents/CardPlay.tscn" id="4_dewec"]
+[ext_resource type="PackedScene" uid="uid://ch8dhgum2bfcw" path="res://Scenes/PlayerComponents/CardPlayer/CardPlay.tscn" id="4_dewec"]
 [ext_resource type="PackedScene" uid="uid://b7qtbnkqkydkn" path="res://Scenes/PlayerComponents/ActionPoints.tscn" id="4_nn08x"]
 
 [node name="Player" type="Node" unique_id=1056602264]
@@ -16,5 +16,3 @@ z_index = -15
 position = Vector2(960, 885)
 
 [node name="CardPlayer" parent="." unique_id=571106932 instance=ExtResource("4_dewec")]
-
-[connection signal="card_selected" from="CardPlayer" to="CardPlayer" method="_on_card_selected"]

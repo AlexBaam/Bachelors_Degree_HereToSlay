@@ -25,7 +25,7 @@ var selected_card: Node2D
 const ACTION_POINTS: String = "action_points"
 const PLAYER_HAND: String =  "player_hand"
 const CARD_PLAY_BUTTON: String = "play_button"
-enum {ADD = 1, REMOVE = 3, UPDATE = 3, SHOW = 1, HIDE = 2, ATTACH = 3}
+enum {ADD = 1, REMOVE = 3, UPDATE = 3, SHOW = 1, HIDE = 2, ATTACH = 3, PLAY = 4}
 
 func on_left_click_released() -> void:
 	if card_dragged:
@@ -118,6 +118,8 @@ func finish_drag() -> void:
 		
 		player.call_child(ACTION_POINTS, [UPDATE, 1])
 		player.update_player_cards_in_party(card_dragged)
+		
+		player.call_child(CARD_PLAY_BUTTON, [PLAY, card_dragged])
 	elif discard_pile_found:
 		#Card over the discard pile
 		player.call_child(PLAYER_HAND, [REMOVE, card_dragged])

@@ -11,6 +11,8 @@ var slot_of_the_card
 
 var card_type: String
 var card_class: String
+var card_dice_roll: int
+var card_played_this_turn: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

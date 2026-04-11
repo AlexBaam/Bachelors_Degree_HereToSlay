@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://c08m6nr5cg803"]
+
+[ext_resource type="Texture2D" uid="uid://bqky707nvyhhy" path="res://Textures/dice.png" id="1_22shg"]
+[ext_resource type="Script" uid="uid://bao52du8yeim2" path="res://Scripts/Player/die.gd" id="1_pedoj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_22shg"]
+size = Vector2(16, 16)
+
+[node name="Dice" type="StaticBody2D" unique_id=1950750651]
+scale = Vector2(5, 5)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_pedoj")
+
+[node name="Faces" type="Node2D" parent="." unique_id=959307741]
+
+[node name="1Face" type="Sprite2D" parent="Faces" unique_id=1372509013]
+texture = ExtResource("1_22shg")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="2Face" type="Sprite2D" parent="Faces" unique_id=84484345]
+texture = ExtResource("1_22shg")
+region_enabled = true
+region_rect = Rect2(16, 0, 16, 16)
+
+[node name="3Face" type="Sprite2D" parent="Faces" unique_id=187867784]
+texture = ExtResource("1_22shg")
+region_enabled = true
+region_rect = Rect2(32, 0, 16, 16)
+
+[node name="4Face" type="Sprite2D" parent="Faces" unique_id=1100441908]
+texture = ExtResource("1_22shg")
+region_enabled = true
+region_rect = Rect2(48, 0, 16, 16)
+
+[node name="5Face" type="Sprite2D" parent="Faces" unique_id=1764777586]
+texture = ExtResource("1_22shg")
+region_enabled = true
+region_rect = Rect2(64, 0, 16, 16)
+
+[node name="6Face" type="Sprite2D" parent="Faces" unique_id=1834168719]
+texture = ExtResource("1_22shg")
+region_enabled = true
+region_rect = Rect2(80, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=840138081]
+shape = SubResource("RectangleShape2D_22shg")

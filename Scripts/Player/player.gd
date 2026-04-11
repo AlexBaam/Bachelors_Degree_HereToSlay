@@ -40,5 +40,5 @@ func get_child_via_name(child_name: String) -> Node2D:
 		return player_hand
 	elif child_name == CARD_PLAY_BUTTON:
 		return card_play
-	
+		
 	return null

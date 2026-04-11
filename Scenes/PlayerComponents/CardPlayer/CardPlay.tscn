@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ch8dhgum2bfcw"]
 
 [ext_resource type="Script" uid="uid://uedxigrxsd2h" path="res://Scripts/Player/card_player.gd" id="1_4nb4e"]
+[ext_resource type="PackedScene" uid="uid://1n4qkxooxoxf" path="res://Scenes/PlayerComponents/CardPlayer/Dice.tscn" id="2_x6etx"]
 
 [node name="CardPlayer" type="Node2D" unique_id=571106932]
 script = ExtResource("1_4nb4e")
@@ -9,5 +10,8 @@ script = ExtResource("1_4nb4e")
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Play"
+
+[node name="Dice" parent="." unique_id=1823160856 instance=ExtResource("2_x6etx")]
+position = Vector2(960, 630)
 
 [connection signal="pressed" from="PlayCardButton" to="." method="_on_play_card_button_pressed"]
