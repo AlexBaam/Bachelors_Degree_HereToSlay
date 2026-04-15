@@ -207,14 +207,12 @@ script = ExtResource("7_jw32o")
 
 [node name="MonsterManager" type="Node2D" parent="." unique_id=979303943]
 
-[node name="Player" parent="." unique_id=532426696 instance=ExtResource("14_1p5hy")]
-
-[node name="GameLogic" type="Node" parent="." unique_id=1106219574]
-
-[node name="BattleManager" type="Node" parent="GameLogic" unique_id=254983697]
+[node name="BattleManager" type="Node" parent="." unique_id=254983697]
 script = ExtResource("12_grg3l")
 
-[node name="BattleTimer" type="Timer" parent="GameLogic" unique_id=1534095030]
+[node name="BattleTimer" type="Timer" parent="." unique_id=1534095030]
 one_shot = true
 
-[connection signal="end_player_turn" from="GameLogic/BattleManager" to="GameLogic/BattleManager" method="_on_end_player_turn"]
+[node name="Player" parent="." unique_id=532426696 instance=ExtResource("14_1p5hy")]
+
+[connection signal="end_player_turn" from="BattleManager" to="BattleManager" method="_on_end_player_turn"]
