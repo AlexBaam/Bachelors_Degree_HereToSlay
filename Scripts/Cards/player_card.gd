@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name PlayerCard
+
 signal hovered
 signal hovered_off
 

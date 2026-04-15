@@ -7,15 +7,11 @@ extends Node2D
 
 @onready var card_piles: Node2D = $"../../CardPiles"
 
-const FAILED_TO_ROLL_DICE = -9999
-
-const PLAYER_HAND: String =  "player_hand"
-const ADD_CARD_TO_HAND: int = 1
-const DEFAULT_CARD_MOVE_SPEED: float = 0.1
-
 enum actions {SHOW = 1, HIDE = 2, ATTACH = 3, PLAY = 4}
 
 var card_to_play: Node2D
+
+var abillity_manager: AbillityManager = AbillityManager.new()
 var turn_gen: TurnBasedGen = TurnBasedGen.new()
 
 func _ready() -> void:
@@ -53,11 +49,20 @@ func attach_to_card(card: Node2D) -> void:
 	show_button()
 
 func play(card: Node2D) -> void:
-	print(card, " is now being played!")
-	
-	turn_gen.disable_player_UI()
-	
-	var result: int = await dice.roll_dice()
-	print("Roll result is: ", result)
-	
-	turn_gen.enable_player_UI()
+	if card.card_played_this_turn != true:
+		print(card, " is now being played!")
+		
+		turn_gen.disable_player_UI()
+		
+		var result: int = await dice.roll_dice()
+		print("Roll result is: ", result)
+		
+		if result >= card.card_dice_roll:
+			abillity_manager.play_abillity(card.card_class)
+		else: 
+			print("Failed to play the cards abillity!")
+		
+		card.card_played_this_turn = true
+		turn_gen.enable_player_UI()
+	else:
+		print(card, " already played this turn!")

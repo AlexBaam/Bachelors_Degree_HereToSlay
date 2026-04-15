@@ -23,7 +23,6 @@ func set_variables(card_pile: Node2D, discard_pile: Node2D, player_received: Nod
 func disable_player_UI() -> void:
 	update_card_pile_collider(true)
 	update_discard_pile_collider(true)
-	update_slots_collider(true)
 	update_cards_collider(true)
 	update_cards_in_slots_collider(true)
 
@@ -31,16 +30,11 @@ func disable_player_UI() -> void:
 func enable_player_UI() -> void:
 	update_card_pile_collider(false)
 	update_discard_pile_collider(false)
-	update_slots_collider(false)
 	update_cards_collider(false)
 	update_cards_in_slots_collider(false)
 
 func update_card_pile_collider(value: bool) -> void:
 	card_pile_collider.disabled = value
-
-func update_slots_collider(value: bool) -> void:
-	for slot in player_hand.player_slots:
-		slot.get_child(1).get_child(0).disabled = value
 
 func update_cards_collider(value: bool) -> void:
 	for card in player_hand.player_hand:
