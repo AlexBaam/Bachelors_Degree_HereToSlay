@@ -45,6 +45,7 @@ func hide_button() -> void:
 
 func _on_play_card_button_pressed() -> void:
 	play(card_to_play)
+	card_manager.unselect_card()
 
 func attach_to_card(card: Node2D) -> void:
 	play_card_button.position = Vector2(card.position.x - 23, card.position.y - 90)
