@@ -13,4 +13,3 @@ func use() -> void:
 	add_child(destroy_card)
 	
 	destroy_card.destroy_multiple_cards(NUMBER_OF_CARDS_TO_BE_DESTROYED)
-	

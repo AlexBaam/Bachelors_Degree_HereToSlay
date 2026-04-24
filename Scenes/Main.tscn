@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bmvsemixpl63l"]
 
+[ext_resource type="Script" uid="uid://h7anxnw4biuy" path="res://Scripts/CardAbillities/abillity_manager.gd" id="1_1p5hy"]
 [ext_resource type="Script" uid="uid://co701idtmni5j" path="res://Scripts/card_manager.gd" id="1_idj7w"]
 [ext_resource type="Texture2D" uid="uid://b5k4md166us1b" path="res://Textures/Backgrounds/bigger_background.png" id="2_50glp"]
 [ext_resource type="PackedScene" uid="uid://6lgx3sg0cb5l" path="res://Scenes/CardSlots/PlayerCardSlot.tscn" id="3_kln2b"]
@@ -16,6 +17,9 @@
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 position = Vector2(-3, 0)
+
+[node name="Abillities" type="Node" parent="." unique_id=365728511]
+script = ExtResource("1_1p5hy")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1067400795]
 z_index = -4096
@@ -111,6 +115,6 @@ script = ExtResource("12_grg3l")
 one_shot = true
 
 [node name="ChooseEnemy" parent="GameLogic" unique_id=2085281118 instance=ExtResource("14_h1m7h")]
-position = Vector2(0, -92)
+position = Vector2(0, 43)
 
 [connection signal="end_player_turn" from="GameLogic/BattleManager" to="GameLogic/BattleManager" method="_on_end_player_turn"]

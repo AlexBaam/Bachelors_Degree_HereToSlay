@@ -17,7 +17,7 @@ var selected_card: Node2D
 @export var smaller_card_scale: float = 1.0
 @export var hover_scale_increase: float = 1.2
 
-@onready var player: Node = $"../Player"
+@onready var player: PlayerClass = $"../Player"
 @onready var discard_pile: Node2D = $"../CardPiles/DiscardPile"
 @onready var input_manager: Node2D = $"../InputManager"
 @onready var card_selection_screen: Node2D = $"../CardSelectionScreen"
@@ -25,7 +25,7 @@ var selected_card: Node2D
 const ACTION_POINTS: String = "action_points"
 const PLAYER_HAND: String =  "player_hand"
 const CARD_PLAY_BUTTON: String = "play_button"
-enum {ADD = 1, REMOVE = 3, UPDATE = 3, SHOW = 1, HIDE = 2, ATTACH = 3, PLAY = 4}
+enum {ADD = 1, REMOVE = 3, SHOW = 1, HIDE = 2, ATTACH = 3, PLAY = 4}
 
 func on_left_click_released() -> void:
 	if card_dragged:
@@ -116,15 +116,9 @@ func finish_drag() -> void:
 		card_slot_found.card_in_slot = true
 		card_slot_found.get_node("Area2D/CollisionShape2D").disabled = true
 		
-		player.call_child(ACTION_POINTS, [UPDATE, 1])
 		player.update_player_cards_in_party(card_dragged)
 		
 		player.call_child(CARD_PLAY_BUTTON, [PLAY, card_dragged])
-	elif discard_pile_found:
-		#Card over the discard pile
-		player.call_child(PLAYER_HAND, [REMOVE, card_dragged])
-		discard_pile.add_to_discard_pile(card_dragged)
-		player.call_child(ACTION_POINTS, [UPDATE, 1])
 	else: 
 		player.call_child(PLAYER_HAND, [ADD, card_dragged, DEFAULT_CARD_MOVE_SPEED])
 	card_dragged = null

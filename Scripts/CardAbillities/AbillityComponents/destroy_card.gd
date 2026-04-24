@@ -2,14 +2,20 @@ extends Node
 
 class_name DestroyCard
 
-@onready var choose_enemy: ChooseEnemy = $GameLogic/ChooseEnemy
-@onready var battle_manager: BattleManager = $GameLogic/BattleManager
-@onready var discard_pile: DiscardPile = $CardPiles/DiscardPile
+var choose_enemy: ChooseEnemy
+var battle_manager: BattleManager
+var discard_pile: DiscardPile
+
+func _ready() -> void:
+	choose_enemy = $"../../../GameLogic/ChooseEnemy"
+	battle_manager = $"../../../GameLogic/BattleManager"
+	discard_pile = $"../../../CardPiles/DiscardPile"
+	print("READY")
 
 func destroy_card(card: Card, enemy: EnemyClass) -> void:
-	enemy.remove_card_from_party(card)
-	
 	card.animate_card_to_position(card, discard_pile.get_discard_pile_position(), card.DEFAULT_CARD_MOVE_SPEED)
+	
+	enemy.remove_card_from_party(card)
 	
 	discard_pile.add_to_discard_pile(card)
 

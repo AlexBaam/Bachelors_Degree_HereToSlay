@@ -50,7 +50,7 @@ func draw_card(player_hand: Node2D) -> void:
 	
 	cards_left_reference.text = str(game_card_pile.size())
 	var card_scene: Resource = preload(CARD_SCENE_PATH)
-	var new_card: Node = card_scene.instantiate()
+	var new_card: Card = card_scene.instantiate()
 	
 	# Custom card images
 	var card_image_path : String = str("res://Textures/Cards/"+ card_drawn_name +".png")
@@ -66,6 +66,7 @@ func draw_card(player_hand: Node2D) -> void:
 	# Settings the card type and class of a card
 	new_card.card_type = card_databate_reference.CARDS[card_drawn_name][2]
 	new_card.card_class = card_databate_reference.CARDS[card_drawn_name][3]
+	new_card.card_dice_roll = card_databate_reference.CARDS[card_drawn_name][0]
 	
 	card_manager_reference.add_child(new_card)
 	# Adaugam in player hand o carte, acea entitate carte va avea acelasi nume cu ce carte reprezinta ea
