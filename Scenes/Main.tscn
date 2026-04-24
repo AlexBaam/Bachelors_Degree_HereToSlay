@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://b5k4md166us1b" path="res://Textures/Backgrounds/bigger_background.png" id="2_50glp"]
 [ext_resource type="PackedScene" uid="uid://6lgx3sg0cb5l" path="res://Scenes/CardSlots/PlayerCardSlot.tscn" id="3_kln2b"]
 [ext_resource type="PackedScene" uid="uid://cg2jseaexr3pe" path="res://Scenes/CardPiles/CardPile.tscn" id="5_v1gob"]
-[ext_resource type="PackedScene" uid="uid://c4xxdlkwr2nbd" path="res://Scenes/CardSlots/EnemyCardSlot.tscn" id="6_v1gob"]
 [ext_resource type="PackedScene" uid="uid://dvwl3nxpgoppo" path="res://Scenes/CardPiles/DiscardPile.tscn" id="7_50glp"]
 [ext_resource type="Script" uid="uid://b812w7pi7o6ba" path="res://Scripts/Player/input_manager.gd" id="7_jw32o"]
 [ext_resource type="Script" uid="uid://cna18h5mybs3l" path="res://Scripts/CardPiles/discard_pile.gd" id="8_50glp"]
@@ -13,6 +12,7 @@
 [ext_resource type="Script" uid="uid://d3n1jyev62aab" path="res://Scripts/Turns/battle_manager.gd" id="12_grg3l"]
 [ext_resource type="PackedScene" uid="uid://dsv3ydy6cidtp" path="res://Scenes/EnemyComponents/Enemy.tscn" id="13_frkhe"]
 [ext_resource type="PackedScene" uid="uid://bgscqfaayohr2" path="res://Scenes/PlayerComponents/Player.tscn" id="14_1p5hy"]
+[ext_resource type="PackedScene" uid="uid://vpvo5so38p0u" path="res://Scenes/ChooseEnemy.tscn" id="14_h1m7h"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 position = Vector2(-3, 0)
@@ -87,123 +87,20 @@ position = Vector2(1302, 804)
 [node name="Slot11" parent="CardSlots/PlayerCardSlots" unique_id=424543998 instance=ExtResource("3_kln2b")]
 position = Vector2(1386, 804)
 
-[node name="EnemyCardSlots" type="Node2D" parent="CardSlots" unique_id=542571804]
-
-[node name="Enemy1" type="Node2D" parent="CardSlots/EnemyCardSlots" unique_id=500454324]
-rotation = 1.5707964
-
-[node name="EnemySlot1" parent="CardSlots/EnemyCardSlots/Enemy1" unique_id=2145217940 instance=ExtResource("6_v1gob")]
-position = Vector2(823.99994, -1479)
-
-[node name="EnemySlot2" parent="CardSlots/EnemyCardSlots/Enemy1" unique_id=1739947357 instance=ExtResource("6_v1gob")]
-position = Vector2(752.99994, -1479)
-
-[node name="EnemySlot3" parent="CardSlots/EnemyCardSlots/Enemy1" unique_id=328502120 instance=ExtResource("6_v1gob")]
-position = Vector2(679.99994, -1480)
-
-[node name="EnemySlot4" parent="CardSlots/EnemyCardSlots/Enemy1" unique_id=609132482 instance=ExtResource("6_v1gob")]
-position = Vector2(607.99994, -1480)
-
-[node name="EnemySlot5" parent="CardSlots/EnemyCardSlots/Enemy1" unique_id=423820058 instance=ExtResource("6_v1gob")]
-position = Vector2(535.99994, -1480)
-
-[node name="EnemySlot6" parent="CardSlots/EnemyCardSlots/Enemy1" unique_id=145794093 instance=ExtResource("6_v1gob")]
-position = Vector2(464.99994, -1480)
-
-[node name="EnemySlot7" parent="CardSlots/EnemyCardSlots/Enemy1" unique_id=1144454229 instance=ExtResource("6_v1gob")]
-position = Vector2(391.99994, -1480)
-
-[node name="EnemySlot8" parent="CardSlots/EnemyCardSlots/Enemy1" unique_id=1634201405 instance=ExtResource("6_v1gob")]
-position = Vector2(320.99997, -1480)
-
-[node name="EnemySlot9" parent="CardSlots/EnemyCardSlots/Enemy1" unique_id=966029704 instance=ExtResource("6_v1gob")]
-position = Vector2(248.99992, -1480)
-
-[node name="EnemySlot10" parent="CardSlots/EnemyCardSlots/Enemy1" unique_id=456013710 instance=ExtResource("6_v1gob")]
-position = Vector2(175.99992, -1479)
-
-[node name="EnemySlot11" parent="CardSlots/EnemyCardSlots/Enemy1" unique_id=571652529 instance=ExtResource("6_v1gob")]
-position = Vector2(104.99994, -1479)
-
-[node name="Enemy2" type="Node2D" parent="CardSlots/EnemyCardSlots" unique_id=1071964737]
-
-[node name="EnemySlot1" parent="CardSlots/EnemyCardSlots/Enemy2" unique_id=1503411703 instance=ExtResource("6_v1gob")]
-position = Vector2(1386, 126)
-
-[node name="EnemySlot2" parent="CardSlots/EnemyCardSlots/Enemy2" unique_id=1320769635 instance=ExtResource("6_v1gob")]
-position = Vector2(1303, 126)
-
-[node name="EnemySlot3" parent="CardSlots/EnemyCardSlots/Enemy2" unique_id=2045087819 instance=ExtResource("6_v1gob")]
-position = Vector2(1220, 126)
-
-[node name="EnemySlot4" parent="CardSlots/EnemyCardSlots/Enemy2" unique_id=1263935978 instance=ExtResource("6_v1gob")]
-position = Vector2(1135, 127)
-
-[node name="EnemySlot5" parent="CardSlots/EnemyCardSlots/Enemy2" unique_id=561399809 instance=ExtResource("6_v1gob")]
-position = Vector2(1050, 126)
-
-[node name="EnemySlot6" parent="CardSlots/EnemyCardSlots/Enemy2" unique_id=1218753703 instance=ExtResource("6_v1gob")]
-position = Vector2(967, 126)
-
-[node name="EnemySlot7" parent="CardSlots/EnemyCardSlots/Enemy2" unique_id=1248243588 instance=ExtResource("6_v1gob")]
-position = Vector2(884, 126)
-
-[node name="EnemySlot8" parent="CardSlots/EnemyCardSlots/Enemy2" unique_id=1315363837 instance=ExtResource("6_v1gob")]
-position = Vector2(799, 125)
-
-[node name="EnemySlot9" parent="CardSlots/EnemyCardSlots/Enemy2" unique_id=1863917550 instance=ExtResource("6_v1gob")]
-position = Vector2(716, 125)
-
-[node name="EnemySlot10" parent="CardSlots/EnemyCardSlots/Enemy2" unique_id=605546396 instance=ExtResource("6_v1gob")]
-position = Vector2(631, 126)
-
-[node name="EnemySlot11" parent="CardSlots/EnemyCardSlots/Enemy2" unique_id=662548846 instance=ExtResource("6_v1gob")]
-position = Vector2(546, 125)
-
-[node name="Enemy3" type="Node2D" parent="CardSlots/EnemyCardSlots" unique_id=344199486]
-rotation = 1.5707964
-
-[node name="EnemySlot1" parent="CardSlots/EnemyCardSlots/Enemy3" unique_id=1504815942 instance=ExtResource("6_v1gob")]
-position = Vector2(825, -453.00003)
-
-[node name="EnemySlot2" parent="CardSlots/EnemyCardSlots/Enemy3" unique_id=43347028 instance=ExtResource("6_v1gob")]
-position = Vector2(753, -454.00003)
-
-[node name="EnemySlot3" parent="CardSlots/EnemyCardSlots/Enemy3" unique_id=927796142 instance=ExtResource("6_v1gob")]
-position = Vector2(681, -454.00003)
-
-[node name="EnemySlot4" parent="CardSlots/EnemyCardSlots/Enemy3" unique_id=690897323 instance=ExtResource("6_v1gob")]
-position = Vector2(609, -454.00003)
-
-[node name="EnemySlot5" parent="CardSlots/EnemyCardSlots/Enemy3" unique_id=2112765701 instance=ExtResource("6_v1gob")]
-position = Vector2(537, -454.00003)
-
-[node name="EnemySlot6" parent="CardSlots/EnemyCardSlots/Enemy3" unique_id=1339724464 instance=ExtResource("6_v1gob")]
-position = Vector2(465.99997, -454.00003)
-
-[node name="EnemySlot7" parent="CardSlots/EnemyCardSlots/Enemy3" unique_id=1219868548 instance=ExtResource("6_v1gob")]
-position = Vector2(392.99997, -454)
-
-[node name="EnemySlot8" parent="CardSlots/EnemyCardSlots/Enemy3" unique_id=1389908357 instance=ExtResource("6_v1gob")]
-position = Vector2(322, -454)
-
-[node name="EnemySlot9" parent="CardSlots/EnemyCardSlots/Enemy3" unique_id=727484555 instance=ExtResource("6_v1gob")]
-position = Vector2(249.99997, -454)
-
-[node name="EnemySlot10" parent="CardSlots/EnemyCardSlots/Enemy3" unique_id=1424045846 instance=ExtResource("6_v1gob")]
-position = Vector2(176.99997, -453)
-
-[node name="EnemySlot11" parent="CardSlots/EnemyCardSlots/Enemy3" unique_id=1863374366 instance=ExtResource("6_v1gob")]
-position = Vector2(104.999985, -454)
-
 [node name="InputManager" type="Node2D" parent="." unique_id=1059191440]
 script = ExtResource("7_jw32o")
 
 [node name="MonsterManager" type="Node2D" parent="." unique_id=979303943]
 
-[node name="Player" parent="." unique_id=532426696 instance=ExtResource("14_1p5hy")]
+[node name="Enemies" type="Node" parent="." unique_id=1399036422]
 
-[node name="Enemy1" parent="." unique_id=1724859655 instance=ExtResource("13_frkhe")]
+[node name="Enemy1" parent="Enemies" unique_id=1724859655 instance=ExtResource("13_frkhe")]
+position = Vector2(1476, 465)
+
+[node name="Enemy3" parent="Enemies" unique_id=140054195 instance=ExtResource("13_frkhe")]
+position = Vector2(450, 465)
+
+[node name="Player" parent="." unique_id=532426696 instance=ExtResource("14_1p5hy")]
 
 [node name="GameLogic" type="Node" parent="." unique_id=1106219574]
 
@@ -212,5 +109,11 @@ script = ExtResource("12_grg3l")
 
 [node name="BattleTimer" type="Timer" parent="GameLogic" unique_id=1534095030]
 one_shot = true
+
+[node name="ChooseEnemy" parent="." unique_id=2085281118 instance=ExtResource("14_h1m7h")]
+offset_left = 14.0
+offset_top = -103.0
+offset_right = 14.0
+offset_bottom = -103.0
 
 [connection signal="end_player_turn" from="GameLogic/BattleManager" to="GameLogic/BattleManager" method="_on_end_player_turn"]
