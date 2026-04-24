@@ -204,6 +204,7 @@ script = ExtResource("7_jw32o")
 [node name="Player" parent="." unique_id=532426696 instance=ExtResource("14_1p5hy")]
 
 [node name="Enemy1" parent="." unique_id=1724859655 instance=ExtResource("13_frkhe")]
+script = null
 
 [node name="GameLogic" type="Node" parent="." unique_id=1106219574]
 

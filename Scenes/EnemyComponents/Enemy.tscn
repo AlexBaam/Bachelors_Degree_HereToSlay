@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dsv3ydy6cidtp"]
+
+[ext_resource type="Script" uid="uid://b20kdvrfxsj5k" path="res://Scripts/Enemy/enemy.gd" id="1_58nn6"]
+[ext_resource type="Script" uid="uid://c6od5r1eqwvo3" path="res://Scripts/Hands/enemy1_hand.gd" id="2_omxo3"]
+
+[node name="Enemy1" type="Node" unique_id=1724859655]
+script = ExtResource("1_58nn6")
+
+[node name="EnemyHand" type="Node2D" parent="." unique_id=951415929]
+script = ExtResource("2_omxo3")

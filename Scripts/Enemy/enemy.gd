@@ -1,20 +1,51 @@
 extends Node
 
-class_name EnemyManager
+class_name EnemyClass
 
 const SMALL_CARD_SCALE = 1.0
 const CARD_MOVE_SPEED = 0.2
 
+var enemy_hand: Node2D
+
 var cards_played_by_opponent: Array = []
 
-func enemy_draw_card(card_pile, enemy_hand) -> bool: 
+func _ready() -> void:
+	define_player_components()
+
+func define_player_components() -> void:
+	var enemy_components: Array = get_children()
+	
+	enemy_hand = enemy_components[0]
+
+func enemy_take_action(card_pile: Node2D, turn_points_remaining: int) -> int:
+	var random_number: float = randf()
+	var action_cost: int
+	
+	if random_number > 0.5:
+		# Draw a card
+		if enemy_draw_card(card_pile, enemy_hand):
+			action_cost = 1
+			turn_points_remaining = turn_points_remaining - action_cost
+	else: 
+		# Play the first card in hand
+		if enemy_play_card(enemy_hand):
+			action_cost = 1
+			turn_points_remaining = turn_points_remaining - action_cost
+			
+	return turn_points_remaining
+
+func enemy_draw_card(card_pile: Node2D, enemy_hand: Node2D) -> bool: 
 	if(card_pile.game_card_pile.size() <= 0):
 		return false
 		
 	card_pile.enemy_draw_card(enemy_hand)
 	return true
 
-func enemy_play_card(enemy_hand) -> bool:
+func update_enemy_cards_in_party(card_played: Node2D) -> void:
+	cards_played_by_opponent.append(card_played)
+	print(cards_played_by_opponent)
+
+func enemy_play_card(enemy_hand: Node2D) -> bool:
 	# Verificam daca inamicul are carti in mana
 	if enemy_hand.enemy_hand.size() == 0:
 		return false
@@ -28,14 +59,14 @@ func enemy_play_card(enemy_hand) -> bool:
 	enemy_hand.empty_enemy_slots.erase(random_empty_enemy_slot)
 	
 	# Play the first card in hand
-	var card_to_play = enemy_hand.enemy_hand[0]
+	var card_to_play: Node2D = enemy_hand.enemy_hand[0]
 	
 	# Animate card into position
-	var tween = enemy_hand.get_tree().create_tween()
+	var tween: Tween = enemy_hand.get_tree().create_tween()
 	tween.tween_property(card_to_play, "position", Vector2(random_empty_enemy_slot.global_position.x, random_empty_enemy_slot.global_position.y), CARD_MOVE_SPEED)
 	
 	# Animate card scale
-	var tween2 = enemy_hand.get_tree().create_tween()
+	var tween2: Tween = enemy_hand.get_tree().create_tween()
 	tween2.tween_property(card_to_play, "scale", Vector2(SMALL_CARD_SCALE, SMALL_CARD_SCALE), CARD_MOVE_SPEED)
 	
 	# Animate card flip using existing animation
