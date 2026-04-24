@@ -1,6 +1,6 @@
 extends Node2D
 
-const DEFAULT_CARD_MOVE_SPEED: float = 0.1 # Cards default speed around the deck
+class_name EnemyHand
 
 ## The Y position of both vertical enemies in the game
 ## Used to check enemy positioning to further position their hand on the screen
@@ -55,33 +55,29 @@ func set_hand_position() -> void:
 	else:
 		x_hand_position = 0 # TO BE CHANGED!!!!!
 
-func add_card_to_hand(card: Node2D, speed: float) -> void:
+func add_card_to_hand(card: Card, speed: float) -> void:
 	if card not in enemy_hand:
 		enemy_hand.insert(0, card)
 		
 		update_hand_positions(speed)
 	else:
-		animate_card_to_position(card, card.in_hand_position, DEFAULT_CARD_MOVE_SPEED)
+		card.animate_card_to_position(card, card.in_hand_position, card.DEFAULT_CARD_MOVE_SPEED)
 	
 func update_hand_positions(speed: float) -> void:
 	for i in range(enemy_hand.size()):
 		# Setting the position of cards in the hand for adding and removing cards
 		var new_position: Vector2 = Vector2(x_hand_position, calculate_card_position(i))
-		var card: Node2D = enemy_hand[i]
+		var card: Card = enemy_hand[i]
 		card.in_hand_position = new_position
 		card.rotation = CARD_ROTATION
-		animate_card_to_position(card, new_position, speed)
-		
+		card.animate_card_to_position(card, new_position, speed)
+
 func calculate_card_position(index: int) -> float:
 	var y_offset: float = (enemy_hand.size() - 1) * CARD_WIDTH
 	var y_position: float = center_screen_y + index * CARD_WIDTH - y_offset / 2
 	return y_position
 
-func animate_card_to_position(card: Node2D, new_position: Vector2, speed: float) -> void:
-	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(card, "position", new_position, speed)
-
-func remove_card_from_hand(card_to_remove: Node2D) -> void:
+func remove_card_from_hand(card_to_remove: Card) -> void:
 	if card_to_remove in enemy_hand:
 		enemy_hand.erase(card_to_remove)
-		update_hand_positions(DEFAULT_CARD_MOVE_SPEED)
+		update_hand_positions(card_to_remove.DEFAULT_CARD_MOVE_SPEED)

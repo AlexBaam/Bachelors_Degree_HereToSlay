@@ -2,7 +2,7 @@ extends Node
 
 class_name CardPileGen
 
-func pile_visibility(visibility, card_pile_sprite, card_pile_number) -> void:
+func pile_visibility(visibility: bool, card_pile_sprite: Sprite2D, card_pile_number: RichTextLabel) -> void:
 	if visibility:
 		card_pile_sprite.visible = true
 		card_pile_number.visible = true

@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name DiscardPile
+
 var game_discard_pile: Array[String] = []
 
 @onready var cards_in_discard_pile: RichTextLabel = $RichTextLabel
@@ -25,7 +27,7 @@ func sanitize_card_names(card_name: String) -> String:
 	return sanitized_card_name
 
 # A function to update the discard pile by adding a card
-func add_to_discard_pile(card) -> void:
+func add_to_discard_pile(card: Card) -> void:
 	if game_discard_pile.size() == 0:
 		card_pile_gen.pile_visibility(true, discard_pile_sprite, cards_in_discard_pile)
 	
@@ -41,3 +43,6 @@ func add_to_discard_pile(card) -> void:
 func empty_discard_pile() -> void:
 	game_discard_pile.clear()
 	card_pile_gen.pile_visibility(false, discard_pile_sprite, cards_in_discard_pile)
+
+func get_discard_pile_position() -> Vector2:
+	return Vector2(position.x, position.y)

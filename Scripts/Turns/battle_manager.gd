@@ -1,5 +1,7 @@
 extends Node
 
+class_name BattleManager
+
 @onready var card_pile: Node2D = $"../../CardPiles/CardPile"
 @onready var discard_pile: Node2D = $"../../CardPiles/DiscardPile"
 @onready var battle_timer: Timer = $"../BattleTimer"

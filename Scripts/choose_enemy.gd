@@ -1,4 +1,6 @@
-extends Control
+extends Node
+
+class_name ChooseEnemy
 
 var enemy1: Button
 var enemy2: Button
@@ -7,6 +9,8 @@ var enemy3: Button
 var all_buttons: Array[Button]
 
 var button_pressed: int
+
+signal any_button_pressed
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,8 +22,8 @@ func _ready() -> void:
 	
 	hide_buttons()
 	
-	position.y = get_viewport().size.y/2
-	position.x = get_viewport().size.x/2
+	$".".position.x = get_viewport().size.x/2
+	$".".position.y = get_viewport().size.y/2
 
 func define_children() -> void:
 	var buttons: Array = get_children()
@@ -35,20 +39,23 @@ func hide_buttons() -> void:
 
 func show_buttons() -> void:
 	for button in all_buttons:
-		button.visible = false
-		button.disabled = true
+		button.visible = true
+		button.disabled = false
 
 func _on_enemy_1_pressed() -> void:
 	button_pressed = 1
 	hide_buttons()
+	emit_signal("any_button_pressed")
 
 func _on_enemy_2_pressed() -> void:
 	button_pressed = 2
 	hide_buttons()
+	emit_signal("any_button_pressed")
 
 func _on_enemy_3_pressed() -> void:
 	button_pressed = 3
 	hide_buttons()
+	emit_signal("any_button_pressed")
 
 func get_button_pressed() -> int:
 	return button_pressed

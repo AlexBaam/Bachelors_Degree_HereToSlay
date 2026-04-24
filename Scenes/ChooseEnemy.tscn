@@ -2,30 +2,21 @@
 
 [ext_resource type="Script" uid="uid://b8ls4uvgq8tt6" path="res://Scripts/choose_enemy.gd" id="1_yewn6"]
 
-[node name="ChooseEnemy" type="Control" unique_id=2085281118]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ChooseEnemy" type="Node2D" unique_id=691130218]
 script = ExtResource("1_yewn6")
 
 [node name="Enemy1" type="Button" parent="." unique_id=1381917649]
-layout_mode = 0
 offset_right = 70.0
 offset_bottom = 31.0
 text = "Enemy1"
 
 [node name="Enemy2" type="Button" parent="." unique_id=1711791822]
-layout_mode = 0
 offset_top = 31.0
 offset_right = 70.0
 offset_bottom = 62.0
 text = "Enemy2"
 
 [node name="Enemy3" type="Button" parent="." unique_id=586601614]
-layout_mode = 0
 offset_top = 62.0
 offset_right = 70.0
 offset_bottom = 93.0
