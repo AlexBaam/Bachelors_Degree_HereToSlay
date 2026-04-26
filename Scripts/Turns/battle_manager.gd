@@ -7,10 +7,12 @@ class_name BattleManager
 @onready var battle_timer: Timer = $"../BattleTimer"
 @onready var player: PlayerClass = $"../../Player"
 @onready var enemy_1: EnemyClass = $"../../Enemies/Enemy1"
+@onready var enemy_2: EnemyClass = $"../../Enemies/Enemy2"
 @onready var enemy_3: EnemyClass = $"../../Enemies/Enemy3"
 @onready var card_manager: Node2D = $"../../CardManager"
 
 @onready var enemy_1_hand: Node2D = enemy_1.get_child(0)
+@onready var enemy_2_hand: Node2D = enemy_2.get_child(0)
 @onready var enemy_3_hand: Node2D = enemy_3.get_child(0)
 @onready var player_hand: Node2D = player.get_child(0)
 
@@ -56,12 +58,17 @@ func deal_cards() -> void:
 		
 		await turn_based_gen.wait(battle_timer,0.2)
 		
+		card_pile.enemy_draw_card(enemy_2_hand)
+		
+		await turn_based_gen.wait(battle_timer,0.2)
+		
 		card_pile.enemy_draw_card(enemy_3_hand)
 		
 		await turn_based_gen.wait(battle_timer,0.2)
 
 func set_enemies() -> void:
 	enemies.append(enemy_1)
+	enemies.append(enemy_2)
 	enemies.append(enemy_3)
 
 func get_enemy(number: int) -> Node:

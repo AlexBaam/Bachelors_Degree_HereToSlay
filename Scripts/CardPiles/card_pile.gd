@@ -6,6 +6,9 @@ const CARDS_DATABASE_PATH = "res://Scripts/GameData/cards_database.gd"
 
 var game_card_pile : Array[String] = ["Bard", "Wizard", "Fighter", "Paladin", "Ranger", "Rogue",
  "Bard", "Wizard", "Fighter", "Paladin", "Ranger", "Rogue",
+ "Bard", "Wizard", "Fighter", "Paladin", "Ranger", "Rogue",
+ "Bard", "Wizard", "Fighter", "Paladin", "Ranger", "Rogue",
+ "Bard", "Wizard", "Fighter", "Paladin", "Ranger", "Rogue",
  "Bard", "Wizard", "Fighter", "Paladin", "Ranger", "Rogue"]
 
 var card_databate_reference: Resource = preload(CARDS_DATABASE_PATH)
