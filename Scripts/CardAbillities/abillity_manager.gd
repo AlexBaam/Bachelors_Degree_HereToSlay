@@ -14,6 +14,7 @@ func play_abillity(card_class: String) -> void:
 	
 	match sanitized_class:
 		"rogue":
+			add_child(rogue)
 			rogue.use()
 		"bard":
 			bard.use()
@@ -25,6 +26,7 @@ func play_abillity(card_class: String) -> void:
 		"wizard":
 			wizard.use()
 		"ranger":
+			add_child(ranger)
 			ranger.use()
 
 func sanitize(card_class: String) -> String:

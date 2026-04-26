@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bexi20ct6eib5"]
+
+[ext_resource type="Script" uid="uid://b7m1uo3ukubri" path="res://Scripts/CardAbillities/AbillityComponents/discard_card.gd" id="1_7e32o"]
+
+[node name="DiscardCard" type="Node" unique_id=625777231]
+script = ExtResource("1_7e32o")

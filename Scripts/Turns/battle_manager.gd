@@ -67,6 +67,9 @@ func set_enemies() -> void:
 func get_enemy(number: int) -> Node:
 	return enemies[number - 1]
 
+func get_player() -> PlayerClass:
+	return player
+
 func _on_end_player_turn() -> void:
 	card_manager.unselect_card()
 	opponent_turn()

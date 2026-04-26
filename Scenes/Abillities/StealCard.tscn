@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ckdr6400i1xag"]
+
+[ext_resource type="Script" uid="uid://ce2etfa5ypcyf" path="res://Scripts/CardAbillities/AbillityComponents/steal_card.gd" id="1_e3wgb"]
+
+[node name="StealCard" type="Node" unique_id=582093238]
+script = ExtResource("1_e3wgb")

@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name PlayerHand
+
 const DEFAULT_CARD_MOVE_SPEED: float = 0.1 # Cards default speed around the deck
 
 ## This variable is the width we set between the cards in hand. 
