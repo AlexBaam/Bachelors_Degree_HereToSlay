@@ -42,3 +42,7 @@ func get_child_via_name(child_name: String) -> Node2D:
 		return card_play
 		
 	return null
+
+func reset_played_cards_status() -> void: 
+	for card: Card in cards_in_slots:
+		card.card_played_this_turn = false

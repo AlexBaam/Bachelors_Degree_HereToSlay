@@ -12,9 +12,12 @@ func _ready() -> void:
 	battle_manager = $"../../../GameLogic/BattleManager"
 
 func steal_card(card: Card, enemy_hand: EnemyHand, player_hand: PlayerHand) -> void:
-	enemy_hand.remove_card_from_hand(card)
-	
-	player_hand.add_card_to_hand(card, card.DEFAULT_CARD_MOVE_SPEED)
+	if card:
+		enemy_hand.remove_card_from_hand(card)
+		
+		card.convert_card_functionality(card)
+		
+		player_hand.add_card_to_hand(card, card.DEFAULT_CARD_MOVE_SPEED)
 
 func steal_multiple_cards(number: int) -> void:
 	choose_enemy.show_buttons()

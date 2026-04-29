@@ -13,11 +13,12 @@ func _ready() -> void:
 	print("READY")
 
 func destroy_card(card: Card, enemy: EnemyClass) -> void:
-	card.animate_card_to_position(card, discard_pile.get_discard_pile_position(), card.DEFAULT_CARD_MOVE_SPEED)
-	
-	enemy.remove_card_from_party(card)
-	
-	discard_pile.add_to_discard_pile(card)
+	if card:
+		card.animate_card_to_position(card, discard_pile.get_discard_pile_position(), card.DEFAULT_CARD_MOVE_SPEED)
+		
+		enemy.remove_card_from_party(card)
+		
+		discard_pile.add_to_discard_pile(card)
 
 func destroy_multiple_cards(number: int) -> void:
 	choose_enemy.show_buttons()

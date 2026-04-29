@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://doc4jn6ykyb5h"]
 
-[ext_resource type="Script" uid="uid://dcp7d5ykn3lb7" path="res://Scripts/Cards/enemy_card.gd" id="1_21h5t"]
+[ext_resource type="Script" uid="uid://crrwnimd2vvh2" path="res://Scripts/Cards/card.gd" id="1_10hm0"]
 [ext_resource type="Texture2D" uid="uid://ddu5h771aaiij" path="res://Textures/Cards/Back.png" id="2_10hm0"]
 [ext_resource type="Texture2D" uid="uid://dfe5h7w55jkp0" path="res://Textures/Cards/Card.png" id="2_u2hp4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_10hm0"]
+size = Vector2(54, 96)
 
 [sub_resource type="Animation" id="Animation_51hjl"]
 length = 0.001
@@ -188,7 +191,7 @@ _data = {
 [node name="EnemyCard" type="Node2D" unique_id=1524001771]
 position = Vector2(865, 485)
 scale = Vector2(1.4, 1.4)
-script = ExtResource("1_21h5t")
+script = ExtResource("1_10hm0")
 
 [node name="CardImageBack" type="Sprite2D" parent="." unique_id=2026985591]
 scale = Vector2(0.99999994, 0.99999994)
@@ -197,6 +200,13 @@ texture = ExtResource("2_10hm0")
 [node name="CardImageFront" type="Sprite2D" parent="." unique_id=1687203742]
 z_index = -1
 texture = ExtResource("2_u2hp4")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1836928960]
+scale = Vector2(0.99999994, 0.99999994)
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=708664145]
+shape = SubResource("RectangleShape2D_10hm0")
 
 [node name="Description" type="RichTextLabel" parent="." unique_id=1014177313]
 modulate = Color(0.011764706, 0.011764706, 0.011764706, 0)

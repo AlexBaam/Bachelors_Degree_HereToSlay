@@ -12,11 +12,12 @@ func _ready() -> void:
 	discard_pile = $"../../../CardPiles/DiscardPile"
 
 func discard_card(card: Card, enemy_hand: EnemyHand) -> void:
-	card.animate_card_to_position(card, discard_pile.get_discard_pile_position(), card.DEFAULT_CARD_MOVE_SPEED)
-	
-	enemy_hand.remove_card_from_hand(card)
-	
-	discard_pile.add_to_discard_pile(card)
+	if card:
+		card.animate_card_to_position(card, discard_pile.get_discard_pile_position(), card.DEFAULT_CARD_MOVE_SPEED)
+		
+		enemy_hand.remove_card_from_hand(card)
+		
+		discard_pile.add_to_discard_pile(card)
 
 func discard_multiple_cards(number: int) -> void:
 	choose_enemy.show_buttons()

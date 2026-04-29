@@ -98,6 +98,7 @@ func opponent_turn() -> void:
 		
 	# End the turn and go to the next opponent
 	turn_based_gen.enable_player_UI()
+	player.reset_played_cards_status()
 	player.call_child(action_points_name, [RESETT])
 
 func check_player_turn() -> void:
