@@ -1,6 +1,6 @@
 extends Node2D
 
-const CARD_SCENE_PATH = "res://Scenes/Cards/PlayerCards.tscn"
+const PLAYER_CARD_SCENE_PATH = "res://Scenes/Cards/PlayerCards.tscn"
 const ENEMY_CARD_SCENE_PATH = "res://Scenes/Cards/EnemyCards.tscn"
 const CARDS_DATABASE_PATH = "res://Scripts/GameData/cards_database.gd"
 
@@ -15,10 +15,10 @@ var card_databate_reference: Resource = preload(CARDS_DATABASE_PATH)
 
 @export var card_draw_speed : float = 0.5
 
-@onready var discard_pile_reference: Node2D = $"../DiscardPile"
+@onready var discard_pile_reference: DiscardPile = $"../DiscardPile"
 @onready var card_manager_reference: Node2D = $"../../CardManager"
 @onready var cards_left_reference: RichTextLabel = $RichTextLabel
-@onready var card_collider: CollisionShape2D = $Area2D/CollisionShape2D
+@onready var card_pile_collider: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var card_sprite: Sprite2D = $Sprite2D
 @onready var card_name: RichTextLabel = $CardName
 
@@ -31,10 +31,7 @@ func _ready() -> void:
 	game_card_pile.shuffle() # Shuffling the deck for random cards
 	cards_left_reference.text = str(game_card_pile.size())
 
-func get_discard_pile_size() -> int:
-	return discard_pile_reference.game_discard_pile.size()
-
-func draw_card(player_hand: Node2D) -> void:
+func draw_card(player_hand: PlayerHand) -> void:
 	card_manager_reference.unselect_card()
 	
 	var card_drawn_name : String = game_card_pile[0]
@@ -42,17 +39,17 @@ func draw_card(player_hand: Node2D) -> void:
 	
 	# Setting the deck to invisible if there are no cards left
 	if game_card_pile.size() == 0:
-		if get_discard_pile_size() > 0:
+		if discard_pile_reference.get_discard_pile_size() > 0:
 			game_card_pile = discard_pile_reference.game_discard_pile.duplicate(true)
 			game_card_pile.shuffle()
 			cards_left_reference.text = str(game_card_pile.size())
 			discard_pile_reference.empty_discard_pile()
 		else:
-			card_collider.disabled = true
+			card_pile_collider.disabled = true
 			card_pile_gen.pile_visibility(false,card_sprite,cards_left_reference)
 	
 	cards_left_reference.text = str(game_card_pile.size())
-	var card_scene: Resource = preload(CARD_SCENE_PATH)
+	var card_scene: Resource = preload(PLAYER_CARD_SCENE_PATH)
 	var new_card: Card = card_scene.instantiate()
 	
 	# Custom card images
@@ -85,13 +82,13 @@ func enemy_draw_card(enemy_hand: Node2D) -> void:
 	
 	# Setting the deck to invisible if there are no cards left
 	if game_card_pile.size() == 0:
-		if get_discard_pile_size() > 0:
+		if discard_pile_reference.get_discard_pile_size() > 0:
 			game_card_pile = discard_pile_reference.game_discard_pile.duplicate(true)
 			game_card_pile.shuffle()
 			cards_left_reference.text = str(game_card_pile.size())
 			discard_pile_reference.empty_discard_pile()
 		else:
-			card_collider.disabled = true
+			card_pile_collider.disabled = true
 			card_pile_gen.pile_visibility(false,card_sprite,cards_left_reference)
 	
 	cards_left_reference.text = str(game_card_pile.size())

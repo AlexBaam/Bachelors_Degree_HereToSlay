@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name CardManager
+
 const COLLISION_MASK_CARD: int = 1
 const COLLISION_MASK_SLOT: int = 2
 const COLLISION_MASK_DISCARD_PILE: int = 8

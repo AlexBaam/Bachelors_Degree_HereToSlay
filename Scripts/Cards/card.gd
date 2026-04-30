@@ -57,25 +57,25 @@ func animate_card_to_position(card: Card, new_position: Vector2, speed: float) -
 
 func change_card_collision_mask(collision_mask: int) -> int:
 	if collision_mask == COLLISION_MASK_ENEMY_CARD:
-		print("Old card collision mask: ", collision_mask)
+		#print("Old card collision mask: ", collision_mask)
 		collision_mask = COLLISION_MASK_PLAYER_CARD
-		print("New card collision mask: ", collision_mask)
+		#print("New card collision mask: ", collision_mask)
 	elif collision_mask == COLLISION_MASK_PLAYER_CARD:
-		print("Old card collision mask: ", collision_mask)
+		#print("Old card collision mask: ", collision_mask)
 		collision_mask = COLLISION_MASK_ENEMY_CARD
-		print("New card collision mask: ", collision_mask)
+		#print("New card collision mask: ", collision_mask)
 		
 	return collision_mask
 
 func update_card_rotation(collision_mask: int, card_rotation: float) -> float:
 	if collision_mask == COLLISION_MASK_ENEMY_CARD:
-		print("Old card rotation mask: ", card_rotation)
+		#print("Old card rotation mask: ", card_rotation)
 		card_rotation = VERTICAL_CARDS_ROTATION
-		print("New card rotation mask: ", card_rotation)
+		#print("New card rotation mask: ", card_rotation)
 	elif collision_mask == COLLISION_MASK_PLAYER_CARD:
-		print("Old card rotation mask: ", card_rotation)
+		#print("Old card rotation mask: ", card_rotation)
 		card_rotation = HORIZONTAL_CARDS_ROTATION
-		print("New card rotation mask: ", card_rotation)
+		#print("New card rotation mask: ", card_rotation)
 		
 	return card_rotation
 
