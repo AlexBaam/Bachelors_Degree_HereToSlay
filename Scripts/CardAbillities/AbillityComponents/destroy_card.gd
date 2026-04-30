@@ -1,6 +1,6 @@
 extends Node
 
-class_name DestroyCard
+class_name DestroyCardClass
 
 var choose_enemy: ChooseEnemy
 var battle_manager: BattleManager
@@ -12,7 +12,7 @@ func _ready() -> void:
 	discard_pile = $"../../../CardPiles/DiscardPile"
 	print("READY")
 
-func destroy_card(card: Card, enemy: EnemyClass) -> void:
+func destroy_card(card: CardClass, enemy: EnemyClass) -> void:
 	if card:
 		card.animate_card_to_position(card, discard_pile.get_discard_pile_position(), card.DEFAULT_CARD_MOVE_SPEED)
 		
@@ -30,5 +30,5 @@ func destroy_multiple_cards(number: int) -> void:
 	var enemy: EnemyClass = battle_manager.get_enemy(enemy_to_attack)
 	
 	for n in number:
-		var random_card: Card = enemy.cards_played_by_opponent.pick_random()
+		var random_card: CardClass = enemy.cards_played_by_opponent.pick_random()
 		self.destroy_card(random_card, enemy)

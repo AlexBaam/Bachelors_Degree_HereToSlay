@@ -8,7 +8,7 @@ const NUMBER_OF_CARDS_TO_BE_DESTROYED: int = 1
 
 func use() -> void:
 	var abillity_scene: PackedScene = preload(DISCARD_CARD_SCENE)
-	var discard_card: DiscardCard = abillity_scene.instantiate()
+	var discard_card: DiscardCardClass = abillity_scene.instantiate()
 	
 	add_child(discard_card)
 	

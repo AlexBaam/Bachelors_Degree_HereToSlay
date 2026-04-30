@@ -13,7 +13,7 @@ const UPDATE: int = 3
 
 enum actions {SHOW = 1, HIDE = 2, ATTACH = 3, PLAY = 4}
 
-var card_to_play: Card
+var card_to_play: CardClass
 
 var turn_gen: TurnBasedGen = TurnBasedGen.new()
 
@@ -28,10 +28,10 @@ func do(action: Array) -> void:
 		actions.HIDE:
 			hide_button()
 		actions.ATTACH:
-			var card: Card = action[1]
+			var card: CardClass = action[1]
 			attach_to_card(card)
 		actions.PLAY:
-			var card: Card = action[1]
+			var card: CardClass = action[1]
 			play(card)
 
 func show_button() -> void:
@@ -46,12 +46,12 @@ func _on_play_card_button_pressed() -> void:
 	play(card_to_play)
 	card_manager.unselect_card()
 
-func attach_to_card(card: Card) -> void:
+func attach_to_card(card: CardClass) -> void:
 	play_card_button.position = Vector2(card.position.x - 23, card.position.y - 90)
 	card_to_play = card
 	show_button()
 
-func play(card: Card) -> void:
+func play(card: CardClass) -> void:
 	if card.card_played_this_turn != true:
 		print(card, " is now being played!")
 		

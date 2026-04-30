@@ -1,6 +1,6 @@
 extends Node
 
-class_name CardPileGen
+class_name CardPileGenerals
 
 func pile_visibility(visibility: bool, card_pile_sprite: Sprite2D, card_pile_number: RichTextLabel) -> void:
 	if visibility:

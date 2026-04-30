@@ -1,6 +1,6 @@
 extends Node
 
-class_name Card
+class_name CardClass
 
 ## Constant that defines the collision mask of a player card
 const COLLISION_MASK_PLAYER_CARD: int = 1
@@ -51,7 +51,7 @@ func _on_area_2d_mouse_entered() -> void:
 func _on_area_2d_mouse_exited() -> void:
 	emit_signal("hovered_off", self)
 
-func animate_card_to_position(card: Card, new_position: Vector2, speed: float) -> void:
+func animate_card_to_position(card: CardClass, new_position: Vector2, speed: float) -> void:
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(card, "position", new_position, speed)
 
@@ -80,7 +80,7 @@ func update_card_rotation(collision_mask: int, card_rotation: float) -> float:
 	return card_rotation
 
 ## A function used to change a cards behavior and aspect from an enemy card to a player card
-func convert_card_functionality(card: Card) -> void:
+func convert_card_functionality(card: CardClass) -> void:
 	var collision_mask: int = card.get_child(2).collision_mask
 	var card_rotation: float = card.rotation
 	

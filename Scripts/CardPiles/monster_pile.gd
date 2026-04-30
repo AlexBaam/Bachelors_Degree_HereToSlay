@@ -26,7 +26,7 @@ var moster_database_reference: Resource
 
 # CardPileGenerals class instance
 # Used for generalising redundant code
-var card_pile_gen : CardPileGen = CardPileGen.new()
+var card_pile_gen : CardPileGenerals = CardPileGenerals.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

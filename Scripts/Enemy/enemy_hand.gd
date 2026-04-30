@@ -71,7 +71,7 @@ func update_hand_positions(speed: float) -> void:
 	else:
 		update_horizontal_hands_positions(speed)
 
-func add_card_to_hand(card: Card, speed: float) -> void:
+func add_card_to_hand(card: CardClass, speed: float) -> void:
 	if card not in enemy_hand:
 		enemy_hand.insert(0, card)
 		
@@ -84,7 +84,7 @@ func update_vertical_hands_positions(speed: float) -> void:
 		# Setting the position of cards in the hand for adding and removing cards
 		# If the hand is in a vertical position the card should be horizontal
 		var new_position: Vector2 = Vector2(x_hand_position, calculate_horizontal_card_position(i))
-		var card: Card = enemy_hand[i]
+		var card: CardClass = enemy_hand[i]
 		card.in_hand_position = new_position
 		card.rotation = CARD_ROTATION
 		card.animate_card_to_position(card, new_position, speed)
@@ -94,7 +94,7 @@ func update_horizontal_hands_positions(speed: float) -> void:
 		# Setting the position of cards in the hand for adding and removing cards
 		# If the hand is in a horizontal position the card should be in a vertical one
 		var new_position : Vector2 = Vector2(calculate_vertical_card_position(i), y_hand_position)
-		var card: Card = enemy_hand[i]
+		var card: CardClass = enemy_hand[i]
 		card.in_hand_position = new_position
 		card.animate_card_to_position(card, new_position, speed)
 
@@ -108,7 +108,7 @@ func calculate_vertical_card_position(index: int):
 	var x_position = center_screen_x + index * CARD_WIDTH - x_offset / 2
 	return x_position
 
-func remove_card_from_hand(card_to_remove: Card) -> void:
+func remove_card_from_hand(card_to_remove: CardClass) -> void:
 	if card_to_remove in enemy_hand:
 		enemy_hand.erase(card_to_remove)
 		update_hand_positions(card_to_remove.DEFAULT_CARD_MOVE_SPEED)

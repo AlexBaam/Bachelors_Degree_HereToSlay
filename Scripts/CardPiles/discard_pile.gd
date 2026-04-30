@@ -19,7 +19,7 @@ var game_discard_pile: Array[String] = []
 
 # CardPileGenerals class instance
 # Used for generalising redundant code
-var card_pile_gen : CardPileGen = CardPileGen.new()
+var card_pile_gen : CardPileGenerals = CardPileGenerals.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,7 +37,7 @@ func sanitize_card_names(card_name: String) -> String:
 	return sanitized_card_name
 
 # A function to update the discard pile by adding a card
-func add_to_discard_pile(card: Card) -> void:
+func add_to_discard_pile(card: CardClass) -> void:
 	if game_discard_pile.size() == 0:
 		card_pile_gen.pile_visibility(true, discard_pile_sprite, cards_in_discard_pile)
 	
@@ -73,7 +73,7 @@ func draw_discarded_card(player_hand: PlayerHand) -> void:
 	
 	cards_in_discard_pile.text = str(game_discard_pile.size())
 	var card_scene: Resource = preload(PLAYER_CARD_SCENE_PATH)
-	var new_card: Card = card_scene.instantiate()
+	var new_card: CardClass = card_scene.instantiate()
 	
 	# Custom card images
 	var card_image_path : String = str("res://Textures/Cards/"+ card_drawn_name +".png")

@@ -8,7 +8,7 @@ const NUMBER_OF_CARDS_TO_BE_DRAWN: int = 1
 
 func use() -> void:
 	var abillity_scene: PackedScene = preload(DRAW_DISCARDED_CARD_SCENE)
-	var draw_discarded_card: DrawDiscardedCard = abillity_scene.instantiate()
+	var draw_discarded_card: DrawDiscardedCardClass = abillity_scene.instantiate()
 	
 	add_child(draw_discarded_card)
 	

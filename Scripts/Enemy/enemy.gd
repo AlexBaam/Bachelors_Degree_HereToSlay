@@ -8,7 +8,7 @@ const CARD_MOVE_SPEED = 0.2
 var enemy_hand: EnemyHand
 var enemy_slots: Node2D
 
-var cards_played_by_opponent: Array[Card] = []
+var cards_played_by_opponent: Array[CardClass] = []
 
 func _ready() -> void:
 	define_enemy_components()
@@ -61,7 +61,7 @@ func enemy_play_card(enemy_hand: EnemyHand) -> bool:
 	enemy_hand.empty_enemy_slots.erase(random_empty_enemy_slot)
 	
 	# Play the first card in hand
-	var card_to_play: Card = enemy_hand.enemy_hand[0]
+	var card_to_play: CardClass = enemy_hand.enemy_hand[0]
 	
 	# Animate card into position
 	var tween: Tween = enemy_hand.get_tree().create_tween()
@@ -86,6 +86,6 @@ func enemy_play_card(enemy_hand: EnemyHand) -> bool:
 func get_enemy_hand() -> EnemyHand:
 	return self.get_child(0)
 
-func remove_card_from_party(card_to_remove: Card) -> void:
+func remove_card_from_party(card_to_remove: CardClass) -> void:
 		cards_played_by_opponent.erase(card_to_remove)
 		print(cards_played_by_opponent)

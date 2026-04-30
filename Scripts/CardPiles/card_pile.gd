@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name CardPileClass
+
 const PLAYER_CARD_SCENE_PATH = "res://Scenes/Cards/PlayerCards.tscn"
 const ENEMY_CARD_SCENE_PATH = "res://Scenes/Cards/EnemyCards.tscn"
 const CARDS_DATABASE_PATH = "res://Scripts/GameData/cards_database.gd"
@@ -24,7 +26,7 @@ var card_databate_reference: Resource = preload(CARDS_DATABASE_PATH)
 
 # CardPileGenerals class instance
 # Used for generalising redundant code
-var card_pile_gen : CardPileGen = CardPileGen.new()
+var card_pile_gen : CardPileGenerals = CardPileGenerals.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -50,7 +52,7 @@ func draw_card(player_hand: PlayerHand) -> void:
 	
 	cards_left_reference.text = str(game_card_pile.size())
 	var card_scene: Resource = preload(PLAYER_CARD_SCENE_PATH)
-	var new_card: Card = card_scene.instantiate()
+	var new_card: CardClass = card_scene.instantiate()
 	
 	# Custom card images
 	var card_image_path : String = str("res://Textures/Cards/"+ card_drawn_name +".png")

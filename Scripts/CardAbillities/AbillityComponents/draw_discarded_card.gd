@@ -1,6 +1,6 @@
 extends Node
 
-class_name DrawDiscardedCard
+class_name DrawDiscardedCardClass
 
 var battle_manager: BattleManager
 var discard_pile: DiscardPile

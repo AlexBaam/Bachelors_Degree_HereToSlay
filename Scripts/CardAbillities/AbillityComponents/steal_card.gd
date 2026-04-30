@@ -1,6 +1,6 @@
 extends Node
 
-class_name StealCard
+class_name StealCardClass
 
 var choose_enemy: ChooseEnemy
 var battle_manager: BattleManager
@@ -11,7 +11,7 @@ func _ready() -> void:
 	choose_enemy = $"../../../GameLogic/ChooseEnemy"
 	battle_manager = $"../../../GameLogic/BattleManager"
 
-func steal_card(card: Card, enemy_hand: EnemyHand, player_hand: PlayerHand) -> void:
+func steal_card(card: CardClass, enemy_hand: EnemyHand, player_hand: PlayerHand) -> void:
 	if card:
 		enemy_hand.remove_card_from_hand(card)
 		
@@ -35,5 +35,5 @@ func steal_multiple_cards(number: int) -> void:
 	var player_hand: PlayerHand = player.get_child_via_name(PLAYER_HAND)
 	
 	for n in number:
-		var random_card: Card = enemy_hand.enemy_hand.pick_random()
+		var random_card: CardClass = enemy_hand.enemy_hand.pick_random()
 		self.steal_card(random_card, enemy_hand, player_hand)

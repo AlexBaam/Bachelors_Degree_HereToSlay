@@ -1,6 +1,6 @@
 extends Node
 
-class_name DiscardCard
+class_name DiscardCardClass
 
 var choose_enemy: ChooseEnemy
 var battle_manager: BattleManager
@@ -11,7 +11,7 @@ func _ready() -> void:
 	battle_manager = $"../../../GameLogic/BattleManager"
 	discard_pile = $"../../../CardPiles/DiscardPile"
 
-func discard_card(card: Card, enemy_hand: EnemyHand) -> void:
+func discard_card(card: CardClass, enemy_hand: EnemyHand) -> void:
 	if card:
 		card.animate_card_to_position(card, discard_pile.get_discard_pile_position(), card.DEFAULT_CARD_MOVE_SPEED)
 		
@@ -31,5 +31,5 @@ func discard_multiple_cards(number: int) -> void:
 	var enemy_hand: EnemyHand = enemy.get_enemy_hand()
 	
 	for n in number:
-		var random_card: Card = enemy_hand.enemy_hand.pick_random()
+		var random_card: CardClass = enemy_hand.enemy_hand.pick_random()
 		self.discard_card(random_card, enemy_hand)
