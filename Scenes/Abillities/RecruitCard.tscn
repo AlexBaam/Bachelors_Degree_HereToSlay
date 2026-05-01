@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cr5fsotx3ct3t"]
+
+[ext_resource type="Script" uid="uid://cg80rhax03f14" path="res://Scripts/CardAbillities/AbillityComponents/recruit_card.gd" id="1_rcctr"]
+
+[node name="RecruitCard" type="Node" unique_id=952057577]
+script = ExtResource("1_rcctr")

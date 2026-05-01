@@ -23,6 +23,7 @@ func play_abillity(card_class: String) -> void:
 			add_child(fighter)
 			fighter.use()
 		"paladin":
+			add_child(paladin)
 			paladin.use()
 		"wizard":
 			add_child(wizard)

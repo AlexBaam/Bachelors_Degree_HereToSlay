@@ -15,14 +15,13 @@
 [ext_resource type="PackedScene" uid="uid://vpvo5so38p0u" path="res://Scenes/ChooseEnemy.tscn" id="14_h1m7h"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
-position = Vector2(-3, 0)
 
 [node name="Abillities" type="Node" parent="." unique_id=365728511]
 script = ExtResource("1_1p5hy")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1067400795]
 z_index = -4096
-position = Vector2(963, 540)
+position = Vector2(960, 540)
 texture = ExtResource("2_50glp")
 metadata/_edit_lock_ = true
 
@@ -32,28 +31,28 @@ script = ExtResource("1_idj7w")
 [node name="CardPiles" type="Node2D" parent="." unique_id=1009674647]
 
 [node name="CardPile" parent="CardPiles" unique_id=489780070 instance=ExtResource("5_v1gob")]
-position = Vector2(861, 525)
+position = Vector2(858, 525)
 
 [node name="DiscardPile" parent="CardPiles" unique_id=388114536 instance=ExtResource("7_50glp")]
 z_index = -1
-position = Vector2(1065, 525)
+position = Vector2(1062, 525)
 script = ExtResource("8_50glp")
 
 [node name="MonsterPile" parent="CardPiles" unique_id=295384922 instance=ExtResource("9_vy5pj")]
-position = Vector2(711, 402)
+position = Vector2(708, 402)
 
 [node name="CardSlots" type="Node2D" parent="." unique_id=1294477131]
 
 [node name="MonsterCardSlots" type="Node2D" parent="CardSlots" unique_id=569197960]
 
 [node name="MonsterSlot1" parent="CardSlots/MonsterCardSlots" unique_id=1837468609 instance=ExtResource("10_bmxlf")]
-position = Vector2(1065, 378)
+position = Vector2(1062, 378)
 
 [node name="MonsterSlot2" parent="CardSlots/MonsterCardSlots" unique_id=1976858784 instance=ExtResource("10_bmxlf")]
-position = Vector2(963, 378)
+position = Vector2(960, 378)
 
 [node name="MonsterSlot3" parent="CardSlots/MonsterCardSlots" unique_id=347694837 instance=ExtResource("10_bmxlf")]
-position = Vector2(861, 378)
+position = Vector2(858, 378)
 
 [node name="InputManager" type="Node2D" parent="." unique_id=1059191440]
 script = ExtResource("7_jw32o")

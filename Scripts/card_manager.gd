@@ -10,10 +10,10 @@ const DEFAULT_CARD_MOVE_SPEED: float = 0.1
 ## Constant to define how much we want to change the card position on the Y axis (vertical)
 const SELECTED_CARD_Y_UPDATE: int = 15
 
-var card_dragged: Node2D
+var card_dragged: CardClass
 var screen_size : Vector2
 var is_hovering_on_card: bool
-var selected_card: Node2D
+var selected_card: CardClass
 
 @export var card_scale: float = 1.4
 @export var smaller_card_scale: float = 1.0
@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 		card_dragged.position = Vector2(clamp(mouse_position.x, 0, screen_size.x),
 		clamp(mouse_position.y, 0, screen_size.y))
 
-func card_clicked(card: Node2D) -> void:
+func card_clicked(card: CardClass) -> void:
 	if card.slot_of_the_card:
 		select_card(card)
 	else:
@@ -96,7 +96,7 @@ func get_card_with_highest_z_index(cards):
 			highest_z_index = highest_z_card.z_index
 	return highest_z_card
 
-func start_drag(card: Node2D) -> void:
+func start_drag(card: CardClass) -> void:
 	unselect_card()
 	card_dragged = card
 	card.scale = Vector2(card_scale, card_scale)
@@ -156,7 +156,7 @@ func highlight_card(card: Node2D, hovered) -> void:
 		card.scale = Vector2(card_scale, card_scale)
 		card.z_index = 1
 
-func select_card(card: Node2D) -> void:
+func select_card(card: CardClass) -> void:
 	if selected_card:
 		if is_this_card_already_selected(card):
 			unselect_card()
@@ -173,13 +173,13 @@ func unselect_card() -> void:
 		player.call_child(CARD_PLAY_BUTTON, [HIDE])
 		selected_card = null
 
-func change_selected_card(card: Node2D) -> void:
+func change_selected_card(card: CardClass) -> void:
 	selected_card.position.y += SELECTED_CARD_Y_UPDATE
 	selected_card = card
 	selected_card.position.y -= SELECTED_CARD_Y_UPDATE
 	player.call_child(CARD_PLAY_BUTTON, [ATTACH, selected_card])
 
-func is_this_card_already_selected(card: Node2D) -> bool:
+func is_this_card_already_selected(card: CardClass) -> bool:
 	if selected_card == card:
 		return true
 	else: 

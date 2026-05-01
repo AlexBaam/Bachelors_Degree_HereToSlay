@@ -18,7 +18,7 @@ const VERTICAL_CARDS_ROTATION: float = 0.0
 const HORIZONTAL_CARDS_ROTATION: float = -1.57
 
 ## Used in card manager
-var slot_of_the_card
+var slot_of_the_card: SlotClass
 
 ## Used in player hand
 var in_hand_position: Vector2

@@ -10,7 +10,6 @@ func _ready() -> void:
 	choose_enemy = $"../../../GameLogic/ChooseEnemy"
 	battle_manager = $"../../../GameLogic/BattleManager"
 	discard_pile = $"../../../CardPiles/DiscardPile"
-	print("READY")
 
 func destroy_card(card: CardClass, enemy: EnemyClass) -> void:
 	if card:
