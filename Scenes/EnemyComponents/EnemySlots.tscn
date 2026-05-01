@@ -6,25 +6,25 @@
 rotation = 1.5707964
 
 [node name="EnemySlot1" parent="." unique_id=1269968676 instance=ExtResource("1_rt4bk")]
-position = Vector2(359, -1.5692387e-05)
+position = Vector2(360, 0)
 
 [node name="EnemySlot2" parent="." unique_id=787844156 instance=ExtResource("1_rt4bk")]
 position = Vector2(288, -1.5692387e-05)
 
 [node name="EnemySlot3" parent="." unique_id=1899350921 instance=ExtResource("1_rt4bk")]
-position = Vector2(215, -1.5692387e-05)
+position = Vector2(216, 0)
 
 [node name="EnemySlot4" parent="." unique_id=29066280 instance=ExtResource("1_rt4bk")]
-position = Vector2(143, -1.5692387e-05)
+position = Vector2(144, 0)
 
 [node name="EnemySlot5" parent="." unique_id=1279523658 instance=ExtResource("1_rt4bk")]
-position = Vector2(71, -1.5692387e-05)
+position = Vector2(72, 0)
 
 [node name="EnemySlot6" parent="." unique_id=579754001 instance=ExtResource("1_rt4bk")]
 position = Vector2(0, -1.5692387e-05)
 
 [node name="EnemySlot7" parent="." unique_id=1893281881 instance=ExtResource("1_rt4bk")]
-position = Vector2(-73, -1.5692387e-05)
+position = Vector2(-72, 0)
 
 [node name="EnemySlot8" parent="." unique_id=2078262084 instance=ExtResource("1_rt4bk")]
 position = Vector2(-143.99997, -1.5692387e-05)
@@ -33,7 +33,7 @@ position = Vector2(-143.99997, -1.5692387e-05)
 position = Vector2(-216.00002, -1.5692387e-05)
 
 [node name="EnemySlot10" parent="." unique_id=1710637655 instance=ExtResource("1_rt4bk")]
-position = Vector2(-289, -1.5692387e-05)
+position = Vector2(-288, 0)
 
 [node name="EnemySlot11" parent="." unique_id=50708785 instance=ExtResource("1_rt4bk")]
 position = Vector2(-360, -1.5692387e-05)

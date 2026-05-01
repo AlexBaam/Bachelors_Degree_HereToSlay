@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bxtgfodppmhsf"]
+
+[ext_resource type="PackedScene" uid="uid://6lgx3sg0cb5l" path="res://Scenes/CardSlots/PlayerCardSlot.tscn" id="1_x0sii"]
+
+[node name="PlayerCardSlots" type="Node2D" unique_id=606186446]
+
+[node name="Slot01" parent="." unique_id=1269968676 instance=ExtResource("1_x0sii")]
+position = Vector2(600, 804)
+
+[node name="Slot02" parent="." unique_id=6532737 instance=ExtResource("1_x0sii")]
+position = Vector2(672, 804)
+
+[node name="Slot03" parent="." unique_id=485990781 instance=ExtResource("1_x0sii")]
+position = Vector2(744, 804)
+
+[node name="Slot04" parent="." unique_id=2015492718 instance=ExtResource("1_x0sii")]
+position = Vector2(816, 804)
+
+[node name="Slot05" parent="." unique_id=730949077 instance=ExtResource("1_x0sii")]
+position = Vector2(888, 804)
+
+[node name="Slot06" parent="." unique_id=799173461 instance=ExtResource("1_x0sii")]
+position = Vector2(960, 804)
+
+[node name="Slot07" parent="." unique_id=681755838 instance=ExtResource("1_x0sii")]
+position = Vector2(1032, 804)
+
+[node name="Slot08" parent="." unique_id=1716617703 instance=ExtResource("1_x0sii")]
+position = Vector2(1104, 804)
+
+[node name="Slot09" parent="." unique_id=1580909282 instance=ExtResource("1_x0sii")]
+position = Vector2(1176, 804)
+
+[node name="Slot10" parent="." unique_id=737234665 instance=ExtResource("1_x0sii")]
+position = Vector2(1248, 804)
+
+[node name="Slot11" parent="." unique_id=1305228402 instance=ExtResource("1_x0sii")]
+position = Vector2(1320, 804)

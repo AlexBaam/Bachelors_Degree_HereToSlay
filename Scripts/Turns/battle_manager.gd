@@ -2,6 +2,9 @@ extends Node
 
 class_name BattleManager
 
+const action_points_name: String = "action_points"
+const player_hand_name: String =  "player_hand"
+
 @onready var card_pile: Node2D = $"../../CardPiles/CardPile"
 @onready var discard_pile: Node2D = $"../../CardPiles/DiscardPile"
 @onready var battle_timer: Timer = $"../BattleTimer"
@@ -14,10 +17,9 @@ class_name BattleManager
 @onready var enemy_1_hand: Node2D = enemy_1.get_child(0)
 @onready var enemy_2_hand: Node2D = enemy_2.get_child(0)
 @onready var enemy_3_hand: Node2D = enemy_3.get_child(0)
-@onready var player_hand: Node2D = player.get_child(0)
 
-const action_points_name: String = "action_points"
-const player_hand_name: String =  "player_hand"
+@onready var player_hand: Node2D = player.get_child_via_name(player_hand_name)
+
 enum {RESET = 1, RESETT = 2}
 
 var turn_points_remaining: int

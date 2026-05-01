@@ -4,6 +4,7 @@ class_name PlayerHand
 
 const DEFAULT_CARD_MOVE_SPEED: float = 0.1 # Cards default speed around the deck
 
+
 ## This variable is the width we set between the cards in hand. 
 ## This is used in the following function: "calculate_card_position" where it is used as multiplier for the x_offset and x_position
 @export var card_width = 85
@@ -20,8 +21,8 @@ enum actions {ADD = 1, UPDATE = 2,  REMOVE = 3}
 func _ready() -> void:
 	center_screen_x = get_viewport().size.x / 2
 	
-	for child in $"../../CardSlots/PlayerCardSlots".get_children():
-		player_slots.append(child)
+	for slot in $"../PlayerCardSlots".get_children():
+		player_slots.append(slot)
 
 func do(action: Array) -> void:
 	match action[0]:

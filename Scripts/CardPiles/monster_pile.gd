@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name MonsterPile
+
 const MONSTER_SCENE_PATH = "res://Scenes/Cards/MonsterCards.tscn"
 const MONSTER_DATABASE_PATH = "res://Scripts/GameData/monsters_database.gd"
 
@@ -26,7 +28,7 @@ var moster_database_reference: Resource
 
 # CardPileGenerals class instance
 # Used for generalising redundant code
-var card_pile_gen : CardPileGenerals = CardPileGenerals.new()
+var card_pile_gen: CardPileGenerals = CardPileGenerals.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
