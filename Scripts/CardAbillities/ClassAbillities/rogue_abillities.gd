@@ -12,4 +12,4 @@ func use() -> void:
 	
 	add_child(steal_card)
 	
-	steal_card.steal_multiple_cards(NUMBER_OF_CARDS_TO_BE_DESTROYED)
+	steal_card.ability_config(NUMBER_OF_CARDS_TO_BE_DESTROYED)

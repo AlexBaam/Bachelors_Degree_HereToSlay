@@ -12,4 +12,4 @@ func use() -> void:
 	
 	add_child(discard_card)
 	
-	discard_card.discard_multiple_cards(NUMBER_OF_CARDS_TO_BE_DESTROYED)
+	discard_card.ability_config(NUMBER_OF_CARDS_TO_BE_DESTROYED)

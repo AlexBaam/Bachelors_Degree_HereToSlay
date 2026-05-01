@@ -1,4 +1,4 @@
-extends Node
+extends AbilityComponent
 
 class_name StealCardClass
 
@@ -19,7 +19,7 @@ func steal_card(card: CardClass, enemy_hand: EnemyHand, player_hand: PlayerHand)
 		
 		player_hand.add_card_to_hand(card, card.DEFAULT_CARD_MOVE_SPEED)
 
-func steal_multiple_cards(number: int) -> void:
+func ability_config(number: int) -> void:
 	choose_enemy.show_buttons()
 	
 	await choose_enemy.any_button_pressed

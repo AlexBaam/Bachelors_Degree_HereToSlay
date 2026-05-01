@@ -1,4 +1,4 @@
-extends Node
+extends AbilityComponent
 
 class_name DrawDiscardedCardClass
 
@@ -11,7 +11,7 @@ func _ready() -> void:
 	battle_manager = $"../../../GameLogic/BattleManager"
 	discard_pile = $"../../../CardPiles/DiscardPile"
 
-func draw_discarded_cards(number: int) -> void:
+func ability_config(number: int) -> void:
 	var player: PlayerClass = battle_manager.get_player()
 	
 	var player_hand: PlayerHand = player.get_child_via_name(PLAYER_HAND)

@@ -12,4 +12,4 @@ func use() -> void:
 	
 	add_child(draw_discarded_card)
 	
-	draw_discarded_card.draw_discarded_cards(NUMBER_OF_CARDS_TO_BE_DRAWN)
+	draw_discarded_card.ability_config(NUMBER_OF_CARDS_TO_BE_DRAWN)

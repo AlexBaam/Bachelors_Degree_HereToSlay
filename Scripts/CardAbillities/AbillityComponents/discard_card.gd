@@ -1,4 +1,4 @@
-extends Node
+extends AbilityComponent
 
 class_name DiscardCardClass
 
@@ -19,7 +19,7 @@ func discard_card(card: CardClass, enemy_hand: EnemyHand) -> void:
 		
 		discard_pile.add_to_discard_pile(card)
 
-func discard_multiple_cards(number: int) -> void:
+func ability_config(number: int) -> void:
 	choose_enemy.show_buttons()
 	
 	await choose_enemy.any_button_pressed
