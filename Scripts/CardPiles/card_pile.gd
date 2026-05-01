@@ -33,6 +33,9 @@ func _ready() -> void:
 	game_card_pile.shuffle() # Shuffling the deck for random cards
 	cards_left_reference.text = str(game_card_pile.size())
 
+func get_card_pile_size() -> int:
+	return game_card_pile.size()
+
 func draw_card(player_hand: PlayerHand) -> void:
 	card_manager_reference.unselect_card()
 	

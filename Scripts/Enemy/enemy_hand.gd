@@ -103,9 +103,9 @@ func calculate_horizontal_card_position(index: int) -> float:
 	var y_position: float = center_screen_y + index * CARD_WIDTH - y_offset / 2
 	return y_position
 
-func calculate_vertical_card_position(index: int):
-	var x_offset = (enemy_hand.size() - 1) * CARD_WIDTH
-	var x_position = center_screen_x + index * CARD_WIDTH - x_offset / 2
+func calculate_vertical_card_position(index: int) -> float:
+	var x_offset: float = (enemy_hand.size() - 1) * CARD_WIDTH
+	var x_position: float = center_screen_x + index * CARD_WIDTH - x_offset / 2
 	return x_position
 
 func remove_card_from_hand(card_to_remove: CardClass) -> void:
