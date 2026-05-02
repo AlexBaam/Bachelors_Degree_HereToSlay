@@ -69,9 +69,9 @@ func draw_card(player_hand: PlayerHand) -> void:
 	new_card.get_node("CardName").text = card_drawn_name
 	
 	# Settings the card type and class of a card
+	new_card.card_dice_roll = int(card_databate_reference.CARDS[card_drawn_name][0])
 	new_card.card_type = card_databate_reference.CARDS[card_drawn_name][2]
 	new_card.card_class = card_databate_reference.CARDS[card_drawn_name][3]
-	new_card.card_dice_roll = card_databate_reference.CARDS[card_drawn_name][0]
 	
 	card_manager_reference.add_child(new_card)
 	# Adaugam in player hand o carte, acea entitate carte va avea acelasi nume cu ce carte reprezinta ea
@@ -81,7 +81,7 @@ func draw_card(player_hand: PlayerHand) -> void:
 	# Animatie simpla de card flip ptr cartile noastre
 	new_card.get_node("CardFlipAnimation").play("card_flip")
 
-func enemy_draw_card(enemy_hand: Node2D) -> void:
+func enemy_draw_card(enemy_hand: EnemyHand) -> void:
 	var card_drawn_name : String = game_card_pile[0]
 	game_card_pile.erase(card_drawn_name)
 	
@@ -97,8 +97,8 @@ func enemy_draw_card(enemy_hand: Node2D) -> void:
 			card_pile_gen.pile_visibility(false,card_sprite,cards_left_reference)
 	
 	cards_left_reference.text = str(game_card_pile.size())
-	var card_scene: Resource = preload(ENEMY_CARD_SCENE_PATH)
-	var new_card: Node = card_scene.instantiate()
+	var card_scene: PackedScene = preload(ENEMY_CARD_SCENE_PATH)
+	var new_card: CardClass = card_scene.instantiate()
 	
 	# Custom card images
 	var card_image_path : String = str("res://Textures/Cards/"+ card_drawn_name +".png")
@@ -112,6 +112,7 @@ func enemy_draw_card(enemy_hand: Node2D) -> void:
 	new_card.get_node("CardName").text = card_drawn_name
 	
 	# Settings the card type and class of a card
+	new_card.card_dice_roll = int(card_databate_reference.CARDS[card_drawn_name][0])
 	new_card.card_type = card_databate_reference.CARDS[card_drawn_name][2]
 	new_card.card_class = card_databate_reference.CARDS[card_drawn_name][3]
 	

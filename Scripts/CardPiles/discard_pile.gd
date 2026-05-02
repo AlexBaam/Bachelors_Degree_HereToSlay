@@ -87,9 +87,9 @@ func draw_discarded_card(player_hand: PlayerHand) -> void:
 	new_card.get_node("CardName").text = card_drawn_name
 	
 	# Settings the card type and class of a card
+	new_card.card_dice_roll = int(card_databate_reference.CARDS[card_drawn_name][0])
 	new_card.card_type = card_databate_reference.CARDS[card_drawn_name][2]
 	new_card.card_class = card_databate_reference.CARDS[card_drawn_name][3]
-	new_card.card_dice_roll = card_databate_reference.CARDS[card_drawn_name][0]
 	
 	card_manager.add_child(new_card)
 	# Adaugam in player hand o carte, acea entitate carte va avea acelasi nume cu ce carte reprezinta ea
