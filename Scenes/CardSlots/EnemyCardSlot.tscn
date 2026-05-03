@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://c4xxdlkwr2nbd"]
 
+[ext_resource type="Script" uid="uid://bltvr5hfyun2b" path="res://Scripts/Slots/card_slot.gd" id="1_85vlu"]
 [ext_resource type="Texture2D" uid="uid://scalydaq17nx" path="res://Textures/CardSlotVertical.png" id="2_lplxp"]
 
 [node name="EnemySlot" type="Node2D" unique_id=1269968676]
 z_index = -1
+script = ExtResource("1_85vlu")
 
 [node name="CardSlotImage" type="Sprite2D" parent="." unique_id=925873138]
 texture = ExtResource("2_lplxp")

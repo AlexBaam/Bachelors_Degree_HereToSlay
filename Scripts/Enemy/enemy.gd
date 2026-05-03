@@ -34,7 +34,7 @@ func define_enemy_components() -> void:
 	var enemy_components: Array = get_children()
 	
 	enemy_hand = enemy_components[0]
-	enemy_slots	= enemy_components[1]
+	enemy_slots = enemy_components[1]
 
 func enemy_take_action(card_pile: CardPileClass, turn_points_remaining: int) -> int:
 	var random_number: float = randf()
@@ -74,11 +74,14 @@ func enemy_play_card() -> bool:
 		return false
 	
 	# Obtinem un slot random dintre cele ale inamicului in care sa punem cartea
-	var random_empty_enemy_slot: Node2D = enemy_hand.empty_enemy_slots.pick_random()
+	var random_empty_enemy_slot: SlotClass = enemy_hand.empty_enemy_slots.pick_random()
 	enemy_hand.empty_enemy_slots.erase(random_empty_enemy_slot)
+	random_empty_enemy_slot.card_in_slot = true
 	
 	# Play the first card in hand
 	var card_to_play: CardClass = enemy_hand.enemy_hand[0]
+	
+	card_to_play.slot_of_the_card = random_empty_enemy_slot
 	
 	# Animate card into position
 	var tween: Tween = enemy_hand.get_tree().create_tween()
@@ -105,4 +108,13 @@ func get_enemy_hand() -> EnemyHand:
 
 func remove_card_from_party(card_to_remove: CardClass) -> void:
 		cards_played_by_opponent.erase(card_to_remove)
+		
+		var slot: SlotClass = card_to_remove.slot_of_the_card
+		
+		slot.card_in_slot = false
+		
+		enemy_hand.add_slot_to_empty_slots(slot)
+		
+		card_to_remove.slot_of_the_card = null
+		
 		print(cards_played_by_opponent)

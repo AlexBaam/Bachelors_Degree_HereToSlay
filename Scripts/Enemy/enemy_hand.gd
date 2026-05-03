@@ -29,7 +29,7 @@ var x_hand_position: float
 var y_hand_position: float
 
 var enemy_hand : Array = []
-var empty_enemy_slots: Array = []
+var empty_enemy_slots: Array[SlotClass] = []
 var center_screen_y: float
 var center_screen_x: float
 
@@ -41,8 +41,11 @@ func _ready() -> void:
 	center_screen_y = get_viewport().size.y /2
 	center_screen_x = get_viewport().size.x /2
 	
-	for child in enemy.get_child(1).get_children():
-		empty_enemy_slots.append(child)
+	for slot: SlotClass in enemy.get_child(1).get_children():
+		self.add_slot_to_empty_slots(slot)
+
+func add_slot_to_empty_slots(slot: SlotClass) -> void:
+	empty_enemy_slots.append(slot)
 
 func get_parent_position() -> Vector2:
 	var parent_x: float = enemy.position.x
