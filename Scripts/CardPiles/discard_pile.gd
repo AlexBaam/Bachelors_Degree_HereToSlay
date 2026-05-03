@@ -48,7 +48,7 @@ func add_to_discard_pile(card: CardClass) -> void:
 	game_discard_pile.append(card_name)
 	cards_in_discard_pile.text = str(game_discard_pile.size())
 	card.queue_free()
-	
+
 # We empty the discard pile so after refilling the card pile we can delete it
 func empty_discard_pile() -> void:
 	game_discard_pile.clear()

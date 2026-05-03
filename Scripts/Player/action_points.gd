@@ -29,9 +29,21 @@ func do(action: Array) -> void:
 func get_action_points_left() -> int:
 	return action_points_left
 
+func check_action_possibility(points_to_subtract: int) -> bool:
+	if action_points_left - points_to_subtract >= 0:
+		return true
+	
+	return false
+
 func update_player_action_points(points_to_subtract: int) -> void:
-	action_points_left -= points_to_subtract
-	update_sprite(action_points_left)
+	if check_action_possibility(points_to_subtract):
+		action_points_left -= points_to_subtract
+		update_sprite(action_points_left)
+		print("Action succesfully realised! Used " + str(points_to_subtract) + " action points!")
+	else:
+		print("Action failed! This action requires " 
+		+ str(points_to_subtract) + " but you only have " 
+		+ str(action_points_left) + " action points!")
 
 func reset_player_turn_points_without_texture_update() -> void:
 	action_points_left = 3

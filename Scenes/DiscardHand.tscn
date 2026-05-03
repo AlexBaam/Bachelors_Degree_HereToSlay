@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://di003h83saugr"]
+
+[ext_resource type="Script" uid="uid://cnchfgtlqpk1x" path="res://Scripts/discard_hand.gd" id="1_oalen"]
+
+[node name="DiscardHand" type="Node2D" unique_id=614811649]
+script = ExtResource("1_oalen")
+
+[node name="DiscardHandButton" type="Button" parent="." unique_id=1182936107]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Discard Hand
+(3 action points)"
+
+[connection signal="hand_discarded" from="." to="." method="_on_hand_discarded"]
+[connection signal="pressed" from="DiscardHandButton" to="." method="_on_discard_hand_button_pressed"]

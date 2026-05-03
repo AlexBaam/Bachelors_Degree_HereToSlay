@@ -12,7 +12,9 @@
 [ext_resource type="Script" uid="uid://d3n1jyev62aab" path="res://Scripts/Turns/battle_manager.gd" id="12_grg3l"]
 [ext_resource type="PackedScene" uid="uid://dsv3ydy6cidtp" path="res://Scenes/EnemyComponents/Enemy.tscn" id="13_frkhe"]
 [ext_resource type="PackedScene" uid="uid://bgscqfaayohr2" path="res://Scenes/PlayerComponents/Player.tscn" id="14_1p5hy"]
+[ext_resource type="PackedScene" uid="uid://brkghe14h5o58" path="res://Scenes/GameOverScene.tscn" id="14_erwvk"]
 [ext_resource type="PackedScene" uid="uid://vpvo5so38p0u" path="res://Scenes/ChooseEnemy.tscn" id="14_h1m7h"]
+[ext_resource type="PackedScene" uid="uid://di003h83saugr" path="res://Scenes/DiscardHand.tscn" id="15_h1m7h"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 
@@ -83,5 +85,12 @@ one_shot = true
 
 [node name="ChooseEnemy" parent="GameLogic" unique_id=2085281118 instance=ExtResource("14_h1m7h")]
 position = Vector2(0, 43)
+
+[node name="GameOver" parent="GameLogic" unique_id=1749484813 instance=ExtResource("14_erwvk")]
+position = Vector2(0, 145)
+
+[node name="DiscardHand" parent="." unique_id=614811649 instance=ExtResource("15_h1m7h")]
+position = Vector2(71, 918)
+scale = Vector2(2, 2)
 
 [connection signal="end_player_turn" from="GameLogic/BattleManager" to="GameLogic/BattleManager" method="_on_end_player_turn"]

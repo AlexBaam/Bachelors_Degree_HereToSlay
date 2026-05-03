@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://brkghe14h5o58"]
+
+[ext_resource type="Script" uid="uid://bsnsvjuq4ih71" path="res://Scripts/game_over.gd" id="1_re8an"]
+
+[node name="GameOver" type="Node2D" unique_id=1749484813]
+script = ExtResource("1_re8an")
+
+[node name="WinText" type="RichTextLabel" parent="." unique_id=1567915025]
+offset_right = 65.0
+offset_bottom = 31.0
+text = "X won!"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ReplayButton" type="Button" parent="." unique_id=1479781925]
+offset_top = 31.0
+offset_right = 65.0
+offset_bottom = 62.0
+text = "Replay"
+metadata/_edit_use_anchors_ = true
+
+[node name="ExitButton" type="Button" parent="." unique_id=546364812]
+offset_top = 62.0
+offset_right = 65.0
+offset_bottom = 93.0
+text = "Exit"
+metadata/_edit_use_anchors_ = true
