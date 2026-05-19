@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ch8dhgum2bfcw" path="res://Scenes/PlayerComponents/CardPlayer/CardPlay.tscn" id="4_dewec"]
 [ext_resource type="PackedScene" uid="uid://b7qtbnkqkydkn" path="res://Scenes/PlayerComponents/ActionPoints.tscn" id="4_nn08x"]
 [ext_resource type="PackedScene" uid="uid://bxtgfodppmhsf" path="res://Scenes/PlayerComponents/PlayerCardSlots.tscn" id="5_lci06"]
+[ext_resource type="PackedScene" uid="uid://di003h83saugr" path="res://Scenes/PlayerComponents/DiscardHand.tscn" id="7_e4n0f"]
 
 [node name="Player" type="Node" unique_id=1056602264]
 script = ExtResource("1_rpqav")
@@ -21,3 +22,7 @@ z_index = -15
 position = Vector2(960, 885)
 
 [node name="CardPlayer" parent="." unique_id=571106932 instance=ExtResource("4_dewec")]
+
+[node name="DiscardHand" parent="." unique_id=614811649 instance=ExtResource("7_e4n0f")]
+position = Vector2(70, 920)
+scale = Vector2(2, 2)

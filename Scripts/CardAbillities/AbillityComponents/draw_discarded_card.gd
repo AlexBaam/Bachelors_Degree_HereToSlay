@@ -3,7 +3,7 @@ extends AbilityComponent
 class_name DrawDiscardedCardClass
 
 var battle_manager: BattleManager
-var discard_pile: DiscardPile
+var discard_pile: DiscardPileClass
 
 const PLAYER_HAND: String = "player_hand"
 

@@ -4,7 +4,7 @@ class_name DiscardCardClass
 
 var choose_enemy: ChooseEnemy
 var battle_manager: BattleManager
-var discard_pile: DiscardPile
+var discard_pile: DiscardPileClass
 
 func _ready() -> void:
 	choose_enemy = $"../../../GameLogic/ChooseEnemy"

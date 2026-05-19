@@ -6,11 +6,13 @@ const ACTION_POINTS: String = "action_points"
 const PLAYER_HAND: String =  "player_hand"
 const CARD_PLAY_BUTTON: String = "play_button"
 const PLAYER_CARD_SLOTS: String = "player_card_slots"
+const DISCARD_HAND_BUTTON: String = "discard_hand"
 
 var action_points: ActionPoints 
 var player_hand: PlayerHand
 var card_play: Node2D
 var player_slots: Node2D
+var discard_hand: DiscardHandClass
 
 var cards_in_slots: Array = []
 
@@ -26,6 +28,7 @@ func define_player_components() -> void:
 	player_hand = player_components[1]
 	action_points = player_components[2]
 	card_play = player_components[3]
+	discard_hand = player_components[4]
 
 func update_player_cards_in_party(card_played: CardClass) -> void:
 	cards_in_slots.append(card_played)
@@ -46,8 +49,9 @@ func get_child_via_name(child_name: String) -> Node2D:
 	elif child_name == CARD_PLAY_BUTTON:
 		return card_play
 	elif child_name == PLAYER_CARD_SLOTS:
-		print("Will return the slots child!")
 		return player_slots
+	elif child_name == DISCARD_HAND_BUTTON:
+		return discard_hand
 	
 	return null
 

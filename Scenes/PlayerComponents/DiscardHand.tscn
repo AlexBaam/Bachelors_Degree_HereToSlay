@@ -11,5 +11,4 @@ offset_bottom = 8.0
 text = "Discard Hand
 (3 action points)"
 
-[connection signal="hand_discarded" from="." to="." method="_on_hand_discarded"]
 [connection signal="pressed" from="DiscardHandButton" to="." method="_on_discard_hand_button_pressed"]

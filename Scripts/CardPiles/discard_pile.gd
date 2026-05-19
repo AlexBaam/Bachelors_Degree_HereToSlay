@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name DiscardPile
+class_name DiscardPileClass
 
 const PLAYER_CARD_SCENE_PATH = "res://Scenes/Cards/PlayerCards.tscn"
 const ENEMY_CARD_SCENE_PATH = "res://Scenes/Cards/EnemyCards.tscn"

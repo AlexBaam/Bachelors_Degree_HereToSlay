@@ -91,3 +91,9 @@ func convert_card_functionality(card: CardClass) -> void:
 	card.rotation = update_card_rotation(collision_mask, card_rotation)
 	
 	card.get_node("CardFlipAnimation").play("card_flip")
+
+func get_card_collider() -> CollisionShape2D:
+	var area2D: Area2D = self.get_child(2)
+	var collision_shape2D: CollisionShape2D = area2D.get_child(0)
+	
+	return collision_shape2D

@@ -29,6 +29,8 @@ var turn_based_gen: TurnBasedGen = TurnBasedGen.new()
 
 signal end_player_turn
 
+signal dealt_cards
+
 func _process(delta: float) -> void:
 	check_player_turn()
 
@@ -48,6 +50,8 @@ func _ready() -> void:
 	await turn_based_gen.wait(battle_timer,0.5)
 	
 	# Letting the player start his turn
+	await dealt_cards
+	
 	turn_based_gen.enable_player_UI()
 
 func deal_cards() -> void:
@@ -67,6 +71,8 @@ func deal_cards() -> void:
 		card_pile.enemy_draw_card(enemy_3_hand)
 		
 		await turn_based_gen.wait(battle_timer,0.2)
+	
+	emit_signal("dealt_cards")
 
 func set_enemies() -> void:
 	enemies.append(enemy_1)

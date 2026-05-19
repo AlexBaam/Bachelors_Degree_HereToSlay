@@ -68,3 +68,6 @@ func remove_card_from_hand(card_to_remove: CardClass) -> void:
 	if card_to_remove in player_hand:
 		player_hand.erase(card_to_remove)
 		update_hand_positions(DEFAULT_CARD_MOVE_SPEED)
+
+func remove_every_card_from_hand() -> void: 
+	player_hand.clear()

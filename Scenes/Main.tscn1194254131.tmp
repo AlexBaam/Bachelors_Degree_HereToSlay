@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dsv3ydy6cidtp" path="res://Scenes/EnemyComponents/Enemy.tscn" id="13_frkhe"]
 [ext_resource type="PackedScene" uid="uid://bgscqfaayohr2" path="res://Scenes/PlayerComponents/Player.tscn" id="14_1p5hy"]
 [ext_resource type="PackedScene" uid="uid://brkghe14h5o58" path="res://Scenes/GameOverScene.tscn" id="14_erwvk"]
-[ext_resource type="PackedScene" uid="uid://vpvo5so38p0u" path="res://Scenes/PlayerComponents/ChooseEnemy.tscn" id="14_h1m7h"]
+[ext_resource type="PackedScene" uid="uid://vpvo5so38p0u" path="res://Scenes/ChooseEnemy.tscn" id="14_h1m7h"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 

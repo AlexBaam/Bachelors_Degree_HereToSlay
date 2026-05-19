@@ -17,7 +17,7 @@ var card_databate_reference: Resource = preload(CARDS_DATABASE_PATH)
 
 @export var card_draw_speed : float = 0.5
 
-@onready var discard_pile_reference: DiscardPile = $"../DiscardPile"
+@onready var discard_pile_reference: DiscardPileClass = $"../DiscardPile"
 @onready var card_manager_reference: Node2D = $"../../CardManager"
 @onready var cards_left_reference: RichTextLabel = $RichTextLabel
 @onready var card_pile_collider: CollisionShape2D = $Area2D/CollisionShape2D
