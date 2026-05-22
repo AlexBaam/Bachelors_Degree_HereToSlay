@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://u64fkepatsi1"]
 
+[ext_resource type="Script" uid="uid://6deai5ing1il" path="res://Scripts/Cards/monster_card.gd" id="1_wqcf2"]
 [ext_resource type="Texture2D" uid="uid://d0y4nk2se40gg" path="res://Textures/Monster.png" id="1_xhoai"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i44lo"]
@@ -7,6 +8,7 @@ size = Vector2(84, 144)
 
 [node name="Monster" type="Node2D" unique_id=468001762]
 z_index = -2020
+script = ExtResource("1_wqcf2")
 
 [node name="CardImage" type="Sprite2D" parent="." unique_id=1284749939]
 texture = ExtResource("1_xhoai")

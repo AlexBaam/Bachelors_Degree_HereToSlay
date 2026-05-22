@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://di003h83saugr"]
 
-[ext_resource type="Script" uid="uid://cnchfgtlqpk1x" path="res://Scripts/discard_hand.gd" id="1_oalen"]
+[ext_resource type="Script" uid="uid://cnchfgtlqpk1x" path="res://Scripts/GameLogic/discard_hand.gd" id="1_oalen"]
 
 [node name="DiscardHand" type="Node2D" unique_id=614811649]
 script = ExtResource("1_oalen")

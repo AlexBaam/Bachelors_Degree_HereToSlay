@@ -10,6 +10,8 @@ var enemy_slots: Node2D
 
 var cards_played_by_opponent: Array[CardClass] = []
 
+var monsters_slayed: int
+
 @onready var enemies: Node = $".."
 @onready var player: PlayerClass = $"../../Player"
 
@@ -18,6 +20,8 @@ var all_possible_enemies: Array
 func _ready() -> void:
 	define_enemy_components()
 	define_possible_enemies()
+	
+	monsters_slayed = 0
 
 func define_possible_enemies() -> void:
 	all_possible_enemies.append(player)

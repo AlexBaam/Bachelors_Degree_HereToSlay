@@ -16,13 +16,14 @@ const COLLISION_MASK_CARD_PILE = 4
 ## The collision mask of the monster card scene.
 const COLLISION_MASK_MONSTER_CARD = 64
 
-@onready var player: Node = $"../Player"
+@onready var player: PlayerClass = $"../Player"
 const ACTION_POINTS: String = "action_points"
 const PLAYER_HAND: String =  "player_hand"
 enum {UPDATE = 3}
 
-@onready var card_manager_reference: Node2D = $"../CardManager"
-@onready var card_pile_reference: Node2D = $"../CardPiles/CardPile"
+@onready var card_manager_reference: CardManager = $"../CardManager"
+@onready var card_pile_reference: CardPileClass = $"../CardPiles/CardPile"
+@onready var monster_manager: MonsterManager = $"../GameLogic/MonsterManager"
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -42,7 +43,7 @@ func raycast_at_cursor() -> void:
 		var result_collision_mask = result[0].collider.collision_mask
 		if result_collision_mask == COLLISION_MASK_CARD:
 			# Card clicked
-			var card_found: Node2D = result[0].collider.get_parent()
+			var card_found: CardClass = result[0].collider.get_parent()
 			print(card_found)
 			if card_found:
 				card_manager_reference.card_clicked(card_found)
@@ -51,5 +52,6 @@ func raycast_at_cursor() -> void:
 			card_pile_reference.draw_card(player.get_child_via_name(PLAYER_HAND))
 			player.call_child(ACTION_POINTS, [UPDATE, 1])
 		elif result_collision_mask == COLLISION_MASK_MONSTER_CARD:
-			# Monster slot clicked
-			print("You click a monster!")
+			var monster_found: MonsterCard = result[0].collider.get_parent()
+			print(monster_found)
+			monster_manager.select_monster(monster_found)

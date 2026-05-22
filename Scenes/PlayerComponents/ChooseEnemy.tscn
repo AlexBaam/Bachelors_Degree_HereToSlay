@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://vpvo5so38p0u"]
 
-[ext_resource type="Script" uid="uid://b8ls4uvgq8tt6" path="res://Scripts/choose_enemy.gd" id="1_yewn6"]
+[ext_resource type="Script" uid="uid://b8ls4uvgq8tt6" path="res://Scripts/GameLogic/choose_enemy.gd" id="1_yewn6"]
+
 
 [node name="ChooseEnemy" type="Node2D" unique_id=691130218]
 script = ExtResource("1_yewn6")

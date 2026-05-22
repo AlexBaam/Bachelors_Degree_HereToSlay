@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://clchfi2840t8u"]
+
+[ext_resource type="Script" uid="uid://c200mgbwcwjr7" path="res://Scripts/Player/monster_slayer.gd" id="1_jrymn"]
+[ext_resource type="PackedScene" uid="uid://1n4qkxooxoxf" path="res://Scenes/PlayerComponents/CardPlayer/Dice.tscn" id="1_wewa3"]
+
+[node name="MonsterSlayer" type="Node2D" unique_id=1607745684]
+script = ExtResource("1_jrymn")
+
+[node name="AttackMonsterButton" type="Button" parent="." unique_id=1510101957]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Attack"
+
+[node name="Dice" parent="." unique_id=1823160856 instance=ExtResource("1_wewa3")]
+position = Vector2(960, 630)
+
+[connection signal="pressed" from="AttackMonsterButton" to="." method="_on_attack_monster_button_pressed"]

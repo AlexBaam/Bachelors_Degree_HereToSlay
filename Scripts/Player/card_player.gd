@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name CardPlayer
+
 @onready var play_card_button: Button = $PlayCardButton
 @onready var dice: Node2D = $Dice
 @onready var card_manager: Node2D = $"../../CardManager"

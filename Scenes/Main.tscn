@@ -9,11 +9,12 @@
 [ext_resource type="Script" uid="uid://cna18h5mybs3l" path="res://Scripts/CardPiles/discard_pile.gd" id="8_50glp"]
 [ext_resource type="PackedScene" uid="uid://bcg07wl6lt2c6" path="res://Scenes/CardPiles/MonsterPile.tscn" id="9_vy5pj"]
 [ext_resource type="PackedScene" uid="uid://24ybs6fe8ds4" path="res://Scenes/CardSlots/MonsterCardSlot.tscn" id="10_bmxlf"]
-[ext_resource type="Script" uid="uid://d3n1jyev62aab" path="res://Scripts/Turns/battle_manager.gd" id="12_grg3l"]
+[ext_resource type="Script" uid="uid://d3n1jyev62aab" path="res://Scripts/GameLogic/battle_manager.gd" id="12_grg3l"]
 [ext_resource type="PackedScene" uid="uid://dsv3ydy6cidtp" path="res://Scenes/EnemyComponents/Enemy.tscn" id="13_frkhe"]
 [ext_resource type="PackedScene" uid="uid://bgscqfaayohr2" path="res://Scenes/PlayerComponents/Player.tscn" id="14_1p5hy"]
 [ext_resource type="PackedScene" uid="uid://brkghe14h5o58" path="res://Scenes/GameOverScene.tscn" id="14_erwvk"]
 [ext_resource type="PackedScene" uid="uid://vpvo5so38p0u" path="res://Scenes/PlayerComponents/ChooseEnemy.tscn" id="14_h1m7h"]
+[ext_resource type="Script" uid="uid://lor8ldk3v54h" path="res://Scripts/GameLogic/attack_monster.gd" id="15_h1m7h"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 
@@ -87,5 +88,8 @@ position = Vector2(0, 43)
 
 [node name="GameOver" parent="GameLogic" unique_id=1749484813 instance=ExtResource("14_erwvk")]
 position = Vector2(0, 145)
+
+[node name="MonsterManager" type="Node" parent="GameLogic" unique_id=970166858]
+script = ExtResource("15_h1m7h")
 
 [connection signal="end_player_turn" from="GameLogic/BattleManager" to="GameLogic/BattleManager" method="_on_end_player_turn"]

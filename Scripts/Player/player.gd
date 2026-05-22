@@ -7,17 +7,23 @@ const PLAYER_HAND: String =  "player_hand"
 const CARD_PLAY_BUTTON: String = "play_button"
 const PLAYER_CARD_SLOTS: String = "player_card_slots"
 const DISCARD_HAND_BUTTON: String = "discard_hand"
+const MONSTER_SLAYER: String = "monster_slayer"
 
 var action_points: ActionPoints 
 var player_hand: PlayerHand
 var card_play: Node2D
 var player_slots: Node2D
 var discard_hand: DiscardHandClass
+var monster_slayer: MonsterSlayer
 
 var cards_in_slots: Array = []
 
+var monsters_slayed: int 
+
 func _ready() -> void:
 	define_player_components()
+	
+	monsters_slayed = 0
 
 func define_player_components() -> void:
 	var player_components: Array = get_children()
@@ -29,6 +35,7 @@ func define_player_components() -> void:
 	action_points = player_components[2]
 	card_play = player_components[3]
 	discard_hand = player_components[4]
+	monster_slayer = player_components[5]
 
 func update_player_cards_in_party(card_played: CardClass) -> void:
 	cards_in_slots.append(card_played)
@@ -52,6 +59,8 @@ func get_child_via_name(child_name: String) -> Node2D:
 		return player_slots
 	elif child_name == DISCARD_HAND_BUTTON:
 		return discard_hand
+	elif child_name == MONSTER_SLAYER:
+		return monster_slayer
 	
 	return null
 
