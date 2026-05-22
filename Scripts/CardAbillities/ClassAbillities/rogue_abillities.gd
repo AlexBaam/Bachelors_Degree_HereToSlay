@@ -4,7 +4,7 @@ class_name RogueClass
 
 const STEAL_CARD_SCENE = "res://Scenes/Abillities/StealCard.tscn"
 
-const NUMBER_OF_CARDS_TO_BE_DESTROYED: int = 2
+const NUMBER_OF_CARDS_TO_BE_DESTROYED: int = 1
 
 func use() -> void:
 	var abillity_scene: PackedScene = preload(STEAL_CARD_SCENE)
