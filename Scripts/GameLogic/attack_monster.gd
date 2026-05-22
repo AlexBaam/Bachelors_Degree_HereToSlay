@@ -10,7 +10,10 @@ const SELECTED_CARD_Y_UPDATE: int = 20
 
 const ACTION_COST: int = 2
 
+const UPDATE: int = 3
+
 @onready var player: PlayerClass = $"../../Player"
+@onready var monster_pile: MonsterPile = $"../../CardPiles/MonsterPile"
 
 var selected_monster: MonsterCard
 
@@ -22,7 +25,20 @@ func player_attack(player_received: PlayerClass, monster: MonsterCard) -> void:
 	if action_points.check_action_possibility(ACTION_COST):
 		if player_received.get_party_size() >= monster.heroes_required_to_attack:
 			if self.check_slay_conditions(monster, player_received):
-				print("To be implemented further!")
+				var dice: DiceClass = player.get_dice()
+				var result: int = await dice.roll_dice()
+				
+				if result >= monster.monster_dice_roll:
+					print("Dice roll result is: " + str(result))
+					print("Monster slayed yipeee!!!!")
+					
+					player_received.increase_slayed_monsters()
+					self.remove_monster_from_game(monster)
+					
+				else:
+					print("Aw dang it!")
+				
+				player_received.call_child(ACTION_POINTS, [UPDATE, 2])
 			else:
 				print("Cannot attack this monster! Conditions to attack not met!")
 		else:
@@ -60,6 +76,14 @@ func check_slay_conditions(monster: MonsterCard, player_received: PlayerClass) -
 		return true
 	else:
 		return false
+
+func remove_monster_from_game(monster: MonsterCard) -> void:
+	var monster_slot: MonsterSlot = monster.get_monster_slot()
+	monster_slot.monster_in_slot = false
+	
+	monster.queue_free()
+	
+	monster_pile.draw_monster(monster_slot)
 
 func select_monster(monster: MonsterCard) -> void:
 	if selected_monster:

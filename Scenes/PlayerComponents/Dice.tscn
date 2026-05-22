@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://1n4qkxooxoxf"]
 
-[ext_resource type="PackedScene" uid="uid://c08m6nr5cg803" path="res://Scenes/PlayerComponents/CardPlayer/Die.tscn" id="1_22shg"]
+[ext_resource type="PackedScene" uid="uid://c08m6nr5cg803" path="res://Scenes/PlayerComponents/Die.tscn" id="1_22shg"]
 [ext_resource type="Script" uid="uid://b0jauladocc5a" path="res://Scripts/Player/dice.gd" id="1_pedoj"]
+
 
 [node name="Dice" type="Node2D" unique_id=1823160856]
 script = ExtResource("1_pedoj")

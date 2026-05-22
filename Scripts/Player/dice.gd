@@ -1,5 +1,9 @@
 extends Node2D
 
+# Looking back on this code I am really confused what I was thinking
+# Pretty sure this is the worst implementation possible
+class_name DiceClass
+
 const FIRST_DIE: int = 1
 const SECOND_DIE: int = 2
 const FAILED_TO_ROLL_DICE = -9999

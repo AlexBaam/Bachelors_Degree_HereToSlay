@@ -14,5 +14,10 @@ var slay_conditions: Array[String]
 ## This variable defines how many members are needed in the party to attack this monster
 var heroes_required_to_attack: int 
 
+var slot_of_the_monster: MonsterSlot
+
 func compute_req_heroes() -> void:
 	self.heroes_required_to_attack = slay_conditions.size()
+
+func get_monster_slot() -> MonsterSlot:
+	return self.slot_of_the_monster

@@ -77,6 +77,8 @@ func draw_monster(monster_slot: MonsterSlot) -> void:
 	monster_slot.get_node("Area2D/CollisionShape2D").disabled = true
 	
 	new_monster.monster_name = drawn_monster_name
+	new_monster.slot_of_the_monster = monster_slot
+	
 	new_monster.monster_dice_roll = int(monster_database_reference.MONSTERS[drawn_monster_name][0])
 	
 	var heroes_array: Array = Array(monster_database_reference.MONSTERS[drawn_monster_name][2])
