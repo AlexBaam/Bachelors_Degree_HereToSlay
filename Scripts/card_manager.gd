@@ -118,7 +118,7 @@ func finish_drag() -> void:
 		card_slot_found.card_in_slot = true
 		card_slot_found.get_node("Area2D/CollisionShape2D").disabled = true
 		
-		player.update_player_cards_in_party(card_dragged)
+		player.add_card_to_player_party(card_dragged)
 		
 		player.call_child(CARD_PLAY_BUTTON, [PLAY, card_dragged])
 	else: 

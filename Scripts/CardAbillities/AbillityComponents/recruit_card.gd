@@ -24,7 +24,7 @@ func recruit(card: CardClass, enemy: EnemyClass, player: PlayerClass, empty_play
 	
 	card.slot_of_the_card = slot
 	
-	player.update_player_cards_in_party(card)
+	player.add_card_to_player_party(card)
 
 func ability_config(number: int) -> void:
 	choose_enemy.show_buttons()

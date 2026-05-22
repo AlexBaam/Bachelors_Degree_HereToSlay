@@ -2,6 +2,7 @@ extends Node2D
 
 class_name PlayerCardSlotsClass
 
+## This function returns the empty slots of the player
 func get_empty_slots() -> Array:
 	var all_slots: Array = get_children()
 	var empty_slots: Array[SlotClass]

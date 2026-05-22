@@ -6,7 +6,7 @@ const DEFAULT_CARD_MOVE_SPEED: float = 0.1 # Cards default speed around the deck
 
 ## This variable is the width we set between the cards in hand. 
 ## This is used in the following function: "calculate_card_position" where it is used as multiplier for the x_offset and x_position
-@export var card_width = 85
+@export var card_width: float = 85
 
 ## Position on the Y axis of the cards
 @export var y_card_position: float = 1000
