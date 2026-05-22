@@ -41,15 +41,6 @@ func define_player_components() -> void:
 	discard_hand = player_components[4]
 	monster_slayer = player_components[5]
 
-## This function adds a card to the player party. A party is formed of the cards in the slots that can be played every turn
-func add_card_to_player_party(card_played: CardClass) -> void:
-	cards_in_slots.append(card_played)
-	print(cards_in_slots)
-
-## This function returns how many action points the player has at that respective moment
-func get_action_points_left() -> int:
-	return action_points.get_action_points_left()
-
 ## This function allows the parent to call a child based on it's string name
 ## THe first parameter is the child name, and the second is an actions array that defines what do we want that child to do
 func call_child(child_name: String, action: Array) -> void:
@@ -80,7 +71,20 @@ func get_child_via_name(child_name: String) -> Node2D:
 	
 	return null
 
+## This function returns how many action points the player has at that respective moment
+func get_action_points_left() -> int:
+	return action_points.get_action_points_left()
+
 ## This function resets the card played status of the cards in the party after the turn ends
 func reset_played_cards_status() -> void: 
 	for card: CardClass in cards_in_slots:
 		card.card_played_this_turn = false
+
+## This function adds a card to the player party. A party is formed of the cards in the slots that can be played every turn
+func add_card_to_player_party(card_played: CardClass) -> void:
+	cards_in_slots.append(card_played)
+	print(cards_in_slots)
+
+## This method returns the size of the player party
+func get_party_size() -> int:
+	return cards_in_slots.size()

@@ -42,7 +42,7 @@ func _on_discard_hand_button_pressed() -> void:
 		
 		turn_based_gen.enable_player_UI()
 	else:
-		print("Cannot do this action! Not enough action points!")
+		print("Cannot discard the hand! Not enough action points!")
 
 func remove_old_cards_from_hand(hand: PlayerHand) -> void:
 	for card: CardClass in hand.player_hand:

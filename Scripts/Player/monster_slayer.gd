@@ -53,5 +53,5 @@ func attach_to_card(monster: MonsterCard) -> void:
 	self.show_button()
 
 func _on_attack_monster_button_pressed() -> void:
-	monster_manager.player_attack(player)
+	monster_manager.player_attack(player, monster_to_attack)
 	monster_manager.unselect_monster()
