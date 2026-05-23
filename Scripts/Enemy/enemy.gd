@@ -16,12 +16,14 @@ var monsters_slayed: int
 @onready var player: PlayerClass = $"../../Player"
 
 var all_possible_enemies: Array
+var turn_points_remaining: int
 
 func _ready() -> void:
 	define_enemy_components()
 	define_possible_enemies()
 	
-	monsters_slayed = 0
+	self.reset_slayed_monsters_number()
+	self.reset_turn_action_points()
 
 func define_possible_enemies() -> void:
 	all_possible_enemies.append(player)
@@ -40,7 +42,7 @@ func define_enemy_components() -> void:
 	enemy_hand = enemy_components[0]
 	enemy_slots = enemy_components[1]
 
-func enemy_take_action(card_pile: CardPileClass, turn_points_remaining: int) -> int:
+func enemy_take_action(card_pile: CardPileClass) -> int:
 	var random_number: float = randf()
 	var action_cost: int
 	
@@ -122,3 +124,11 @@ func remove_card_from_party(card_to_remove: CardClass) -> void:
 		card_to_remove.slot_of_the_card = null
 		
 		print(cards_played_by_opponent)
+
+## This method sets back to the inital value the number of action points usable in a turn
+func reset_turn_action_points() -> void:
+	self.turn_points_remaining = 3
+
+## This method resets back to zero the number of monsters slayed in a game by the enemy
+func reset_slayed_monsters_number() -> void:
+	self.monsters_slayed = 0

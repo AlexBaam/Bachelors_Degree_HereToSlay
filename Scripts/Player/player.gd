@@ -91,6 +91,15 @@ func add_card_to_player_party(card_played: CardClass) -> void:
 	cards_in_slots.append(card_played)
 	print(cards_in_slots)
 
+## This method removes a card from the player party. A party is formed of the cards in the slots that can be played every turn
+func remove_card_from_player_party(card: CardClass) -> void:
+	var slot_of_the_card: SlotClass = card.slot_of_the_card
+	slot_of_the_card.card_in_slot = false
+	
+	card.card_played_this_turn = false
+	
+	cards_in_slots.erase(card)
+
 ## This method returns the size of the player party
 func get_party_size() -> int:
 	return cards_in_slots.size()

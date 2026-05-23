@@ -32,7 +32,7 @@ signal end_player_turn
 signal dealt_cards
 
 func _process(delta: float) -> void:
-	check_player_turn()
+	self.check_player_turn()
 
 func _ready() -> void:
 	turn_based_gen.set_variables(card_pile, discard_pile, player)
@@ -93,16 +93,16 @@ func opponent_turn() -> void:
 	turn_based_gen.disable_player_UI()
 	
 	for enemy: EnemyClass in enemies:
-		turn_points_remaining = 3
+		# Wait a bit before acting to give the impression of thinking
+		await turn_based_gen.wait(battle_timer,0.5)
 		
-		# Wait a second before drawing a card for the illusion of thinking
-		await turn_based_gen.wait(battle_timer,1.0)
-		
-		while(turn_based_gen.NUMBER_OF_ACTION_POINTS != turn_points_remaining):
-			turn_points_remaining = enemy.enemy_take_action(card_pile, turn_points_remaining)
+		while(turn_based_gen.NUMBER_OF_ACTION_POINTS != enemy.turn_points_remaining):
+			turn_points_remaining = enemy.enemy_take_action(card_pile)
 			
-			# Wait a second before drawing a card for the illusion of thinking
-			await turn_based_gen.wait(battle_timer,1.0)
+			# Wait almost second before acting for the illusion of thinking
+			await turn_based_gen.wait(battle_timer,0.8)
+		
+		enemy.reset_turn_action_points()
 		
 	# End the turn and go to the next opponent
 	turn_based_gen.enable_player_UI()
