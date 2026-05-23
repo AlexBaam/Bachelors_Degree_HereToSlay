@@ -8,3 +8,5 @@ script = ExtResource("1_c6dcm")
 
 [node name="AcionPointsSprite" type="Sprite2D" parent="." unique_id=1202983871]
 texture = ExtResource("2_bwvkq")
+
+[connection signal="check_win" from="." to="." method="_on_check_win"]

@@ -3,6 +3,8 @@ extends Node2D
 class_name ActionPoints
 
 @onready var action_points_sprite: Sprite2D = $AcionPointsSprite
+@onready var win_checker: WinCheckerClass = $"../../GameLogic/GameOver"
+@onready var player: PlayerClass = $".."
 
 const PLAYER_ZERO_POINTS_PATH: String = "res://Textures/Backgrounds/PlayerZeroPoints.png"
 const PLAYER_ONE_POINT_PATH: String = "res://Textures/Backgrounds/PlayerOnePoint.png"
@@ -12,6 +14,8 @@ const PLAYER_THREE_POINT_PATH: String = "res://Textures/Backgrounds/PlayerThreeP
 var action_points_left: int
 
 enum actions {RESET = 1, RESETT = 2, UPDATE = 3}
+
+signal check_win
 
 func _ready() -> void:
 	action_points_left = 3
@@ -40,6 +44,7 @@ func update_player_action_points(points_to_subtract: int) -> void:
 		action_points_left -= points_to_subtract
 		update_sprite(action_points_left)
 		print("Action succesfully realised! Used " + str(points_to_subtract) + " action points!")
+		emit_signal("check_win")
 	else:
 		print("Action failed! This action requires " 
 		+ str(points_to_subtract) + " but you only have " 
@@ -61,3 +66,7 @@ func update_sprite(points_left: int) -> void:
 		action_points_sprite.texture = load(PLAYER_ONE_POINT_PATH)
 	elif points_left == 0:
 		action_points_sprite.texture = load(PLAYER_ZERO_POINTS_PATH)
+
+
+func _on_check_win() -> void:
+	win_checker.check_player_win(player)

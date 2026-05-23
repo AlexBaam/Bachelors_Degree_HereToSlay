@@ -112,3 +112,20 @@ func get_dice() -> DiceClass:
 func increase_slayed_monsters() -> void:
 	self.monsters_slayed = self.monsters_slayed + 1
 	print("Monsters slayed so far: ", self.monsters_slayed)
+
+## This method returns the diversity of the players party when it comes to classes
+func get_diverse_party_size() -> int:
+	var party_classes: Array[String]
+	
+	for card: CardClass in cards_in_slots:
+		var hero_class: String = card.card_class
+		if hero_class not in party_classes:
+			party_classes.append(hero_class)
+	
+	var number_of_different_classes: int = party_classes.size()
+	
+	return number_of_different_classes
+
+## This method returns the number of monsters slayed by the player this game
+func get_slayed_monsters_number() -> int:
+	return self.monsters_slayed
