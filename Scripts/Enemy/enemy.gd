@@ -15,6 +15,7 @@ var monsters_slayed: int
 
 @onready var enemies: Node = $".."
 @onready var player: PlayerClass = $"../../Player"
+@onready var state_machine: EnemyStateMachine = $StateMachine
 
 var all_possible_enemies: Array
 var turn_points_remaining: int
@@ -51,22 +52,8 @@ func define_enemy_components() -> void:
 	enemy_slots = enemy_components[1]
 	enemy_state_machine = enemy_components[2]
 
-func enemy_take_action(card_pile: CardPileClass) -> int:
-	var random_number: float = randf()
-	var action_cost: int
-	
-	if random_number > 0.5:
-		# Draw a card
-		if self.enemy_draw_card(card_pile):
-			action_cost = 1
-			turn_points_remaining = turn_points_remaining - action_cost
-	else: 
-		# Play the first card in hand
-		if self.enemy_play_card():
-			action_cost = 1
-			turn_points_remaining = turn_points_remaining - action_cost
-			
-	return turn_points_remaining
+func enemy_take_action() -> void:
+	state_machine.current_state.Transitioned.emit(state_machine.current_state, "computing")
 
 func enemy_draw_card(card_pile: CardPileClass) -> bool: 
 	if(card_pile.get_card_pile_size() <= 0):
@@ -162,3 +149,6 @@ func get_slayed_monsters_number() -> int:
 
 func get_action_points() -> int:
 	return turn_points_remaining
+
+func get_hand_size() -> int:
+	return enemy_hand.get_hand_size()

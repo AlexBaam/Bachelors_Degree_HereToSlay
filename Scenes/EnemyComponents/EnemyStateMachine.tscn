@@ -6,8 +6,8 @@
 
 [node name="StateMachine" type="Node" unique_id=1133832667 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_4w8gw")
-initial_state = NodePath("IdleState")
+initial_state = NodePath("Idle")
 
-[node name="IdleState" parent="." unique_id=1787768031 instance=ExtResource("2_3dubx")]
+[node name="Idle" parent="." unique_id=1787768031 instance=ExtResource("2_3dubx")]
 
-[node name="ComputingState" parent="." unique_id=1427389793 instance=ExtResource("3_jm738")]
+[node name="Computing" parent="." unique_id=1427389793 instance=ExtResource("3_jm738")]

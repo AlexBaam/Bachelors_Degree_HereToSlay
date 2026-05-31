@@ -129,3 +129,6 @@ func get_diverse_party_size() -> int:
 ## This method returns the number of monsters slayed by the player this game
 func get_slayed_monsters_number() -> int:
 	return self.monsters_slayed
+
+func get_hand_size() -> int:
+	return self.player_hand.get_hand_size()

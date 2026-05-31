@@ -23,7 +23,6 @@ const player_hand_name: String =  "player_hand"
 
 enum {RESET = 1, RESETT = 2}
 
-var turn_points_remaining: int
 var enemies: Array
 
 var turn_based_gen: TurnBasedGen = TurnBasedGen.new()
@@ -98,7 +97,7 @@ func opponent_turn() -> void:
 		await turn_based_gen.wait(battle_timer,0.5)
 		
 		while(turn_based_gen.NUMBER_OF_ACTION_POINTS != enemy.turn_points_remaining):
-			turn_points_remaining = enemy.enemy_take_action(card_pile)
+			enemy.enemy_take_action()
 			
 			# Wait almost second before acting for the illusion of thinking
 			await turn_based_gen.wait(battle_timer,0.8)

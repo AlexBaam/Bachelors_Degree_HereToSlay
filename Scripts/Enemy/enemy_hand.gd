@@ -28,7 +28,7 @@ var x_hand_position: float
 ## Position on the X axis of the cards
 var y_hand_position: float
 
-var enemy_hand : Array = []
+var enemy_hand : Array[CardClass] = []
 var empty_enemy_slots: Array[SlotClass] = []
 var center_screen_y: float
 var center_screen_x: float
@@ -115,3 +115,6 @@ func remove_card_from_hand(card_to_remove: CardClass) -> void:
 	if card_to_remove in enemy_hand:
 		enemy_hand.erase(card_to_remove)
 		update_hand_positions(card_to_remove.DEFAULT_CARD_MOVE_SPEED)
+
+func get_hand_size() -> int:
+	return self.enemy_hand.size()
