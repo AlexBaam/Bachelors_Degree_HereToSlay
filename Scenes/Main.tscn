@@ -7,15 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://dvwl3nxpgoppo" path="res://Scenes/CardPiles/DiscardPile.tscn" id="7_50glp"]
 [ext_resource type="Script" uid="uid://b812w7pi7o6ba" path="res://Scripts/Player/input_manager.gd" id="7_jw32o"]
 [ext_resource type="Script" uid="uid://cna18h5mybs3l" path="res://Scripts/CardPiles/discard_pile.gd" id="8_50glp"]
-[ext_resource type="PackedScene" uid="uid://ct4rn0hoowg1i" path="res://Scenes/MonsterCardSlots.tscn" id="8_h1m7h"]
+[ext_resource type="PackedScene" uid="uid://ct4rn0hoowg1i" path="res://Scenes/CardSlots/MonsterCardSlots.tscn" id="8_h1m7h"]
 [ext_resource type="PackedScene" uid="uid://bcg07wl6lt2c6" path="res://Scenes/CardPiles/MonsterPile.tscn" id="9_vy5pj"]
 [ext_resource type="Script" uid="uid://d3n1jyev62aab" path="res://Scripts/GameLogic/battle_manager.gd" id="12_grg3l"]
 [ext_resource type="PackedScene" uid="uid://dsv3ydy6cidtp" path="res://Scenes/EnemyComponents/Enemy.tscn" id="13_frkhe"]
 [ext_resource type="PackedScene" uid="uid://bgscqfaayohr2" path="res://Scenes/PlayerComponents/Player.tscn" id="14_1p5hy"]
-[ext_resource type="PackedScene" uid="uid://brkghe14h5o58" path="res://Scenes/GameOverScene.tscn" id="14_erwvk"]
+[ext_resource type="PackedScene" uid="uid://brkghe14h5o58" path="res://Scenes/PlayerComponents/GameOverScene.tscn" id="14_erwvk"]
 [ext_resource type="PackedScene" uid="uid://vpvo5so38p0u" path="res://Scenes/PlayerComponents/ChooseEnemy.tscn" id="14_h1m7h"]
 [ext_resource type="Script" uid="uid://lor8ldk3v54h" path="res://Scripts/GameLogic/attack_monster.gd" id="15_h1m7h"]
-[ext_resource type="Script" uid="uid://dk1rrily5m8t4" path="res://Scripts/monster_card_slots.gd" id="16_erwvk"]
+[ext_resource type="Script" uid="uid://dk1rrily5m8t4" path="res://Scripts/Slots/monster_card_slots.gd" id="16_erwvk"]
 
 [node name="Main" type="Node2D" unique_id=2113043468]
 
