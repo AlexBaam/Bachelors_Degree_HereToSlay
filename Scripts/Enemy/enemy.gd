@@ -7,6 +7,7 @@ const CARD_MOVE_SPEED = 0.2
 
 var enemy_hand: EnemyHand
 var enemy_slots: Node2D
+var enemy_state_machine: EnemyStateMachine
 
 var cards_played_by_opponent: Array[CardClass] = []
 
@@ -19,12 +20,14 @@ var all_possible_enemies: Array
 var turn_points_remaining: int
 
 func _ready() -> void:
-	define_enemy_components()
-	define_possible_enemies()
+	self.define_possible_enemies()
+	self.define_enemy_components()
 	
 	self.reset_slayed_monsters_number()
 	self.reset_turn_action_points()
 
+##This method defines all the possible enemies that this enemy instance can have including the player.
+##The information is saved in a typeless array that is a local variable called all_possible_enemies.
 func define_possible_enemies() -> void:
 	all_possible_enemies.append(player)
 	
@@ -36,11 +39,17 @@ func define_possible_enemies() -> void:
 	
 	print("All the enemies of " + str(self) + " are " + str(all_possible_enemies))
 
+## This method returns all_possible_enemies array that contains all the enemies of this enemy instance.
+func get_all_possible_enemies() -> Array:
+	return all_possible_enemies
+
+## This method defines every component of the enemy and adds it to their coresponding variable.
 func define_enemy_components() -> void:
 	var enemy_components: Array = get_children()
 	
 	enemy_hand = enemy_components[0]
 	enemy_slots = enemy_components[1]
+	enemy_state_machine = enemy_components[2]
 
 func enemy_take_action(card_pile: CardPileClass) -> int:
 	var random_number: float = randf()

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bagwtj7f8qd8s"]
+
+[ext_resource type="Script" uid="uid://cstojrqos7qp4" path="res://Scripts/GameLogic/States/computing_state.gd" id="1_p5wba"]
+
+[node name="ComputingState" type="Node" unique_id=1427389793]
+script = ExtResource("1_p5wba")

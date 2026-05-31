@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://hfjaxtof1ssi"]
+
+[ext_resource type="Script" uid="uid://pxhe22kms7pv" path="res://Scripts/GameLogic/States/idle_state.gd" id="1_jgmav"]
+
+[node name="IdleState" type="Node" unique_id=1787768031]
+script = ExtResource("1_jgmav")

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://buqgho8g1jpus"]
+
+[ext_resource type="Script" uid="uid://bdxu8h1cgd2y7" path="res://Scripts/GameLogic/States/state_machine.gd" id="1_4w8gw"]
+[ext_resource type="PackedScene" uid="uid://hfjaxtof1ssi" path="res://Scenes/EnemyComponents/States/IdleState.tscn" id="2_3dubx"]
+[ext_resource type="PackedScene" uid="uid://bagwtj7f8qd8s" path="res://Scenes/EnemyComponents/States/ComputingState.tscn" id="3_jm738"]
+
+[node name="StateMachine" type="Node" unique_id=1133832667 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_4w8gw")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" parent="." unique_id=1787768031 instance=ExtResource("2_3dubx")]
+
+[node name="ComputingState" parent="." unique_id=1427389793 instance=ExtResource("3_jm738")]
