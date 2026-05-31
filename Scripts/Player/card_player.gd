@@ -6,6 +6,7 @@ class_name CardPlayer
 @onready var dice: DiceClass = $"../Dice"
 @onready var card_manager: Node2D = $"../../CardManager"
 @onready var player: PlayerClass = $".."
+@onready var monster_card_slots: MonsterCardSlots = $"../../MonsterCardSlots"
 
 @onready var card_piles: Node2D = $"../../CardPiles"
 @onready var abillity_manager: AbillityManager = $"../../Abillities"
@@ -20,7 +21,7 @@ var card_to_play: CardClass
 var turn_gen: TurnBasedGen = TurnBasedGen.new()
 
 func _ready() -> void:
-	turn_gen.set_variables(card_piles.get_child(0), card_piles.get_child(1), player)
+	turn_gen.set_variables(card_piles.get_child(0), card_piles.get_child(1), player, monster_card_slots)
 	hide_button()
 
 func do(action: Array) -> void:

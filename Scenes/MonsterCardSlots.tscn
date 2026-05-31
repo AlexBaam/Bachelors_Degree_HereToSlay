@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ct4rn0hoowg1i"]
+
+[ext_resource type="PackedScene" uid="uid://24ybs6fe8ds4" path="res://Scenes/CardSlots/MonsterCardSlot.tscn" id="1_2e1fy"]
+
+[node name="MonsterCardSlots" type="Node2D" unique_id=1164190933]
+
+[node name="MonsterSlot1" parent="." unique_id=1837468609 instance=ExtResource("1_2e1fy")]
+position = Vector2(1062, 378)
+
+[node name="MonsterSlot2" parent="." unique_id=539505915 instance=ExtResource("1_2e1fy")]
+position = Vector2(960, 378)
+
+[node name="MonsterSlot3" parent="." unique_id=881816388 instance=ExtResource("1_2e1fy")]
+position = Vector2(858, 378)

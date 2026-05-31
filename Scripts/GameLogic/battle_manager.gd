@@ -13,6 +13,7 @@ const player_hand_name: String =  "player_hand"
 @onready var enemy_2: EnemyClass = $"../../Enemies/Enemy2"
 @onready var enemy_3: EnemyClass = $"../../Enemies/Enemy3"
 @onready var card_manager: Node2D = $"../../CardManager"
+@onready var monster_card_slots: MonsterCardSlots = $"../../MonsterCardSlots"
 
 @onready var enemy_1_hand: Node2D = enemy_1.get_child(0)
 @onready var enemy_2_hand: Node2D = enemy_2.get_child(0)
@@ -35,7 +36,7 @@ func _process(delta: float) -> void:
 	self.check_player_turn()
 
 func _ready() -> void:
-	turn_based_gen.set_variables(card_pile, discard_pile, player)
+	turn_based_gen.set_variables(card_pile, discard_pile, player, monster_card_slots)
 	
 	set_enemies()
 	

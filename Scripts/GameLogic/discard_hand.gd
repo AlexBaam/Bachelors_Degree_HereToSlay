@@ -6,6 +6,7 @@ class_name DiscardHandClass
 @onready var discard_pile: DiscardPileClass = $"../../CardPiles/DiscardPile"
 @onready var card_pile: CardPileClass = $"../../CardPiles/CardPile"
 @onready var battle_timer: Timer = $"../../GameLogic/BattleTimer"
+@onready var monster_card_slots: MonsterCardSlots = $"../../MonsterCardSlots"
 
 var turn_based_gen: TurnBasedGen = TurnBasedGen.new()
 
@@ -19,7 +20,7 @@ signal added_cards_to_hand
 enum actions {UPDATE = 3}
 
 func _ready() -> void:
-	turn_based_gen.set_variables(card_pile, discard_pile, player)
+	turn_based_gen.set_variables(card_pile, discard_pile, player, monster_card_slots)
 
 func _on_discard_hand_button_pressed() -> void:
 	var action_points: ActionPoints = player.get_child_via_name(ACTION_POINTS)

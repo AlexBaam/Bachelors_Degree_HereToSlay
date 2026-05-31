@@ -12,6 +12,7 @@ const BUTTON_ATTACH_X_UPDATE: int = 26
 @onready var dice: Node2D = $Dice
 @onready var player: PlayerClass = $".."
 @onready var monster_manager: MonsterManager = $"../../GameLogic/MonsterManager"
+@onready var monster_card_slots: MonsterCardSlots = $"../../MonsterCardSlots"
 
 @onready var card_piles: Node2D = $"../../CardPiles"
 
@@ -24,7 +25,7 @@ var monster_to_attack: MonsterCard
 var turn_gen: TurnBasedGen = TurnBasedGen.new()
 
 func _ready() -> void:
-	turn_gen.set_variables(card_piles.get_child(0), card_piles.get_child(1), player)
+	turn_gen.set_variables(card_piles.get_child(0), card_piles.get_child(1), player, monster_card_slots)
 	self.hide_button()
 
 ## The "do" method is a general method present in every child of the player scene.

@@ -43,7 +43,6 @@ script = ExtResource("8_50glp")
 
 [node name="MonsterPile" parent="CardPiles" unique_id=295384922 instance=ExtResource("9_vy5pj")]
 position = Vector2(708, 402)
-monster_draw_speed = null
 
 [node name="InputManager" type="Node2D" parent="." unique_id=1059191440]
 script = ExtResource("7_jw32o")

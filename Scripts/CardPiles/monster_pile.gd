@@ -24,13 +24,14 @@ var monster_database_reference: Resource
 @onready var monster_collider: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var monster_name: RichTextLabel = $MonsterName
 
-# References toward the monster slots
-@onready var monster_slot_1: MonsterSlot = $"../../CardSlots/MonsterCardSlots/MonsterSlot1"
-@onready var monster_slot_2: MonsterSlot = $"../../CardSlots/MonsterCardSlots/MonsterSlot2"
-@onready var monster_slot_3: MonsterSlot = $"../../CardSlots/MonsterCardSlots/MonsterSlot3"
+@onready var monster_card_slots: MonsterCardSlots = $"../../MonsterCardSlots"
 
 # Array made out of references to every monster slot so I can check them when needed
-@onready var monster_slots: Array[MonsterSlot] = [ monster_slot_1, monster_slot_2, monster_slot_3]
+var monster_slots: Array[MonsterSlot]
+
+var monster_slot_1: MonsterSlot
+var monster_slot_2: MonsterSlot
+var monster_slot_3: MonsterSlot
 
 # CardPileGenerals class instance
 # Used for generalising redundant code
@@ -38,10 +39,19 @@ var card_pile_gen: CardPileGenerals = CardPileGenerals.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	self.define_monster_slots()
+	
+	monster_slots = [ monster_slot_1, monster_slot_2, monster_slot_3]
+	
 	monster_pile.shuffle() # Shuffling the deck for random cards
 	monsters_left_reference.text = str(monster_pile.size())
 	monster_database_reference = preload(MONSTER_DATABASE_PATH)
 	fill_monster_slots(monster_slots)
+
+func define_monster_slots() -> void:
+	monster_slot_1 = monster_card_slots.get_child(0)
+	monster_slot_2 = monster_card_slots.get_child(1)
+	monster_slot_3 = monster_card_slots.get_child(2)
 
 func fill_monster_slots(monster_slots_array: Array[MonsterSlot]) -> void:
 	for monster_slot: MonsterSlot in monster_slots_array:
@@ -74,6 +84,7 @@ func draw_monster(monster_slot: MonsterSlot) -> void:
 	# Adaugam pe masa un monstru, acea entitate monstru va avea acelasi nume cu ce monstru reprezinta ea
 	new_monster.name = drawn_monster_name
 	new_monster.position = monster_slot.position
+	
 	monster_slot.get_node("Area2D/CollisionShape2D").disabled = true
 	
 	new_monster.monster_name = drawn_monster_name
@@ -87,3 +98,5 @@ func draw_monster(monster_slot: MonsterSlot) -> void:
 		new_monster.slay_conditions.append(hero_class)
 	
 	new_monster.compute_req_heroes()
+	
+	monster_slot.monster_card_in_slot = new_monster
