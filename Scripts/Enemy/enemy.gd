@@ -141,3 +141,24 @@ func reset_turn_action_points() -> void:
 ## This method resets back to zero the number of monsters slayed in a game by the enemy
 func reset_slayed_monsters_number() -> void:
 	self.monsters_slayed = 0
+
+func get_party_size() -> int:
+	return cards_played_by_opponent.size()
+
+func get_diverse_party_size() -> int:
+	var party_classes: Array[String]
+	
+	for card: CardClass in cards_played_by_opponent:
+		var hero_class: String = card.card_class
+		if hero_class not in party_classes:
+			party_classes.append(hero_class)
+	
+	var number_of_different_classes: int = party_classes.size()
+	
+	return number_of_different_classes
+
+func get_slayed_monsters_number() -> int:
+	return self.monsters_slayed
+
+func get_action_points() -> int:
+	return turn_points_remaining
