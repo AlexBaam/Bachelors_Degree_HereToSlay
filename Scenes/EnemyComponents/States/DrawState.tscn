@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b82xdik514hej"]
+
+[ext_resource type="Script" uid="uid://bsemeg70xsgd1" path="res://Scripts/GameLogic/States/draw_state.gd" id="1_ykxn0"]
+
+[node name="DrawState" type="Node" unique_id=114431321]
+script = ExtResource("1_ykxn0")

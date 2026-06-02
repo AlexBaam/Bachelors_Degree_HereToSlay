@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cme8w15e68dl7"]
+
+[ext_resource type="Script" uid="uid://c28ac3pdulnn6" path="res://Scripts/GameLogic/States/slay_state.gd" id="1_0qtgj"]
+
+[node name="SlayState" type="Node" unique_id=1607915844]
+script = ExtResource("1_0qtgj")

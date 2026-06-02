@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cx8e5t5uej247"]
+
+[ext_resource type="Script" uid="uid://ce0b5f5it5t78" path="res://Scripts/GameLogic/States/choice_state.gd" id="1_7hj7q"]
+
+[node name="ChoiceState" type="Node" unique_id=1137965055]
+script = ExtResource("1_7hj7q")
