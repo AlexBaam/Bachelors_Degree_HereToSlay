@@ -8,7 +8,9 @@ const ACTION_COST: int = 1
 
 func enter() -> void:
 	print("Entered attack state!")
-	if state_machine.parent_enemy.enemy_play_card(state_machine.target_card_to_play, state_machine.target_card_is_from, state_machine.target_enemy_node):
+	var success: bool = await state_machine.parent_enemy.enemy_play_card(state_machine.target_card_to_play, state_machine.target_card_is_from, state_machine.target_enemy_node)
+	
+	if success:
 		state_machine.parent_enemy.turn_points_remaining = state_machine.parent_enemy.turn_points_remaining - ACTION_COST
 	
 	Transitioned.emit(self, "idle")

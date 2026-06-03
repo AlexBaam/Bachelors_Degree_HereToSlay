@@ -75,6 +75,9 @@ func on_state_transition(state: State, new_state_name: String) -> void:
 	current_state = new_state
 	
 	new_state.enter()
+	
+	if new_state_name.to_lower() =="idle":
+		parent_enemy.action_completed.emit()
 
 func get_parent_of_state_machine() -> EnemyClass:
 	return self.parent_enemy

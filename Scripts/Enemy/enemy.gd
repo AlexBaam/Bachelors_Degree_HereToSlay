@@ -21,6 +21,8 @@ var monsters_slayed: int
 var all_possible_enemies: Array
 var turn_points_remaining: int
 
+signal action_completed
+
 func _ready() -> void:
 	self.define_possible_enemies()
 	self.define_enemy_components()
@@ -71,14 +73,14 @@ func enemy_play_card(card: CardClass, where_from: String, target: Node) -> bool:
 	var success: bool = false
 	match where_from:
 		"hand":
-			success = self.enemy_play_card_from_hand(card, target)
+			success = await self.enemy_play_card_from_hand(card, target)
 		"party": 
-			success = self.enemy_play_card_from_party(card, target)
+			success = await self.enemy_play_card_from_party(card, target)
 	
 	return success
 
 func enemy_play_card_from_party(card: CardClass, target: Node) -> bool:
-	enemy_card_player.play(card, target)
+	await enemy_card_player.play(card, target)
 	return true
 
 func enemy_play_card_from_hand(card: CardClass, target: Node) -> bool:
@@ -118,7 +120,7 @@ func enemy_play_card_from_hand(card: CardClass, target: Node) -> bool:
 	
 	print(cards_played_by_opponent)
 	
-	enemy_card_player.play(card_to_play, target)
+	await enemy_card_player.play(card_to_play, target)
 	
 	return true
 
@@ -175,7 +177,11 @@ func get_cards_in_hand() -> Array[CardClass]:
 
 func get_enemy_slots() -> Array[SlotClass]:
 	var slots: Array[SlotClass] = []
-	for slot: SlotClass in self.enemy_slots:
+	for slot: SlotClass in self.enemy_slots.get_children():
 		slots.append(slot)
 	
 	return slots
+
+func reset_played_cards_status() -> void:
+	for card: CardClass in self.cards_played_by_opponent:
+		card.card_played_this_turn = false

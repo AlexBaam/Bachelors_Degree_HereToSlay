@@ -37,8 +37,9 @@ func ability_config(number: int) -> void:
 	var enemy: EnemyClass = battle_manager.get_enemy(enemy_to_attack)
 	
 	for n in number:
-		var random_card: CardClass = enemy.cards_played_by_opponent.pick_random()
-		self.destroy_card(random_card, enemy)
+		if enemy.cards_played_by_opponent.size() > 0:
+			var random_card: CardClass = enemy.cards_played_by_opponent.pick_random()
+			self.destroy_card(random_card, enemy)
 
 func enemy_ability_config(number: int, target: Node) -> void:
 	var player: PlayerClass = null

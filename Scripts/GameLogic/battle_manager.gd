@@ -97,15 +97,18 @@ func opponent_turn() -> void:
 	for enemy: EnemyClass in enemies:
 		self.current_enemy = enemy
 		# Wait a bit before acting to give the impression of thinking
-		await turn_based_gen.wait(battle_timer,0.5)
+		await turn_based_gen.wait(battle_timer,0.7)
 		
 		while(turn_based_gen.NUMBER_OF_ACTION_POINTS != enemy.turn_points_remaining):
 			enemy.enemy_take_action()
 			
+			await enemy.action_completed
+			
 			# Wait almost second before acting for the illusion of thinking
-			await turn_based_gen.wait(battle_timer,0.8)
+			await turn_based_gen.wait(battle_timer,0.5)
 		
 		enemy.reset_turn_action_points()
+		enemy.reset_played_cards_status()
 		
 	# End the turn and go to the next opponent
 	turn_based_gen.enable_player_UI()
