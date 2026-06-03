@@ -55,10 +55,11 @@ position = Vector2(1420, 465)
 
 [node name="Enemy2" parent="Enemies" unique_id=140054195 instance=ExtResource("13_frkhe")]
 position = Vector2(960, 126)
-rotation = 1.5707964
+rotation = -1.5707964
 
 [node name="Enemy3" parent="Enemies" unique_id=1878216842 instance=ExtResource("13_frkhe")]
 position = Vector2(500, 465)
+rotation = 3.1415927
 
 [node name="Player" parent="." unique_id=532426696 instance=ExtResource("14_1p5hy")]
 

@@ -2,6 +2,7 @@ extends State
 class_name AttackState
 
 @onready var state_machine: EnemyStateMachine = $".."
+@onready var enemy_card_player: EnemyCardPlayer = $"../../EnemyCardPlayer"
 
 const ACTION_COST: int = 1
 

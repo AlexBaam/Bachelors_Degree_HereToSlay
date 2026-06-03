@@ -27,6 +27,8 @@ var enemies: Array
 
 var turn_based_gen: TurnBasedGen = TurnBasedGen.new()
 
+var current_enemy: EnemyClass = null
+
 signal end_player_turn
 
 signal dealt_cards
@@ -93,6 +95,7 @@ func opponent_turn() -> void:
 	turn_based_gen.disable_player_UI()
 	
 	for enemy: EnemyClass in enemies:
+		self.current_enemy = enemy
 		# Wait a bit before acting to give the impression of thinking
 		await turn_based_gen.wait(battle_timer,0.5)
 		
@@ -114,3 +117,6 @@ func check_player_turn() -> void:
 		print("The player's turn ended!")
 		emit_signal("end_player_turn")
 		player.call_child(action_points_name, [RESET])
+
+func get_current_enemy() -> EnemyClass:
+	return self.current_enemy

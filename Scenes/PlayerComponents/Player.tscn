@@ -32,4 +32,4 @@ scale = Vector2(2, 2)
 [node name="MonsterSlayer" parent="." unique_id=1607745684 instance=ExtResource("8_1t3k2")]
 
 [node name="Dice" parent="." unique_id=1823160856 instance=ExtResource("9_p8qwg")]
-position = Vector2(960, 630)
+position = Vector2(1203, 690)

@@ -17,3 +17,5 @@ script = ExtResource("2_omxo3")
 [node name="StateMachine" parent="." unique_id=1133832667 instance=ExtResource("4_d7wnv")]
 
 [node name="EnemyCardPlayer" parent="." unique_id=968021825 instance=ExtResource("5_kcnqp")]
+position = Vector2(-120, -180)
+rotation = 1.5707964

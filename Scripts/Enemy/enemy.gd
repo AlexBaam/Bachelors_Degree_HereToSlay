@@ -172,3 +172,10 @@ func get_hand_size() -> int:
 
 func get_cards_in_hand() -> Array[CardClass]:
 	return self.enemy_hand.get_cards_in_hand().duplicate(true)
+
+func get_enemy_slots() -> Array[SlotClass]:
+	var slots: Array[SlotClass] = []
+	for slot: SlotClass in self.enemy_slots:
+		slots.append(slot)
+	
+	return slots

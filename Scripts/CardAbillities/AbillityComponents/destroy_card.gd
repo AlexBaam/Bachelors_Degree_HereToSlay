@@ -19,6 +19,14 @@ func destroy_card(card: CardClass, enemy: EnemyClass) -> void:
 		
 		discard_pile.add_to_discard_pile(card)
 
+func destroy_player_card(card: CardClass, enemy: PlayerClass) -> void:
+	if card:
+		card.animate_card_to_position(card, discard_pile.get_discard_pile_position(), card.DEFAULT_CARD_MOVE_SPEED)
+		
+		enemy.remove_card_from_player_party(card)
+		
+		discard_pile.add_to_discard_pile(card)
+
 func ability_config(number: int) -> void:
 	choose_enemy.show_buttons()
 	
@@ -31,3 +39,21 @@ func ability_config(number: int) -> void:
 	for n in number:
 		var random_card: CardClass = enemy.cards_played_by_opponent.pick_random()
 		self.destroy_card(random_card, enemy)
+
+func enemy_ability_config(number: int, target: Node) -> void:
+	var player: PlayerClass = null
+	var enemy: EnemyClass = null
+	
+	if target is PlayerClass:
+		player = target
+		
+		for n in number:
+			var random_card: CardClass = player.cards_in_slots.pick_random()
+			self.destroy_player_card(random_card, player)
+			
+	elif target is EnemyClass:
+		enemy = target
+		
+		for n in number:
+			var random_card: CardClass = enemy.cards_played_by_opponent.pick_random()
+			self.destroy_card(random_card, enemy)

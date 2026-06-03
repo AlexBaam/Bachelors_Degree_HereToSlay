@@ -13,3 +13,11 @@ func use() -> void:
 	add_child(destroy_card)
 	
 	destroy_card.ability_config(NUMBER_OF_CARDS_TO_BE_DESTROYED)
+
+func enemy_use(target: Node) -> void:
+	var abillity_scene: PackedScene = preload(DESTROY_CARD_SCENE)
+	var destroy_card: DestroyCardClass = abillity_scene.instantiate()
+	
+	add_child(destroy_card)
+	
+	destroy_card.enemy_ability_config(NUMBER_OF_CARDS_TO_BE_DESTROYED, target)

@@ -98,3 +98,37 @@ func draw_discarded_card(player_hand: PlayerHand) -> void:
 	
 	# Animatie simpla de card flip ptr cartile noastre
 	new_card.get_node("CardFlipAnimation").play("card_flip")
+
+func enemy_draw_discarded_card(enemy_hand: EnemyHand) -> void:
+	var card_drawn_name : String = game_discard_pile[0]
+	game_discard_pile.erase(card_drawn_name)
+	
+	# Setting the deck to invisible if there are no cards left
+	if game_discard_pile.size() == 0:
+		discard_pile_collider.disabled = true
+		card_pile_gen.pile_visibility(false,discard_pile_sprite,cards_in_discard_pile)
+	
+	cards_in_discard_pile.text = str(game_discard_pile.size())
+	var card_scene: PackedScene = preload(ENEMY_CARD_SCENE_PATH)
+	var new_card: CardClass = card_scene.instantiate()
+	
+	# Custom card images
+	var card_image_path : String = str("res://Textures/Cards/"+ card_drawn_name +".png")
+	new_card.get_node("CardImageFront").texture = load(card_image_path)
+	
+	# Settings the dice roll and the description of the card
+	new_card.get_node("DiceRoll").text = card_databate_reference.CARDS[card_drawn_name][0]
+	new_card.get_node("Description").text = card_databate_reference.CARDS[card_drawn_name][1]
+	
+	# Setting a name on the card so we know what card we dragged
+	new_card.get_node("CardName").text = card_drawn_name
+	
+	# Settings the card type and class of a card
+	new_card.card_dice_roll = int(card_databate_reference.CARDS[card_drawn_name][0])
+	new_card.card_type = card_databate_reference.CARDS[card_drawn_name][2]
+	new_card.card_class = card_databate_reference.CARDS[card_drawn_name][3]
+	
+	card_manager.add_child(new_card)
+	# Adaugam in player hand o carte, acea entitate carte va avea acelasi nume cu ce carte reprezinta ea
+	new_card.name = card_drawn_name
+	enemy_hand.add_card_to_hand(new_card, card_draw_speed)
