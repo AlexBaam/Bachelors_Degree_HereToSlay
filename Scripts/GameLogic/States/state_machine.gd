@@ -28,13 +28,16 @@ var parent_score: float
 var target_action: String = ""
 
 ##This variable will store the name of the monster that we chose for slay action
-var target_monster_name: String = ""
+var target_monster: MonsterCard = null
 
 ##This variable will store the chosen enemy to attack in the attack state
 var target_enemy_node: Node = null
 
 ##This variable will store the chosen card to play in attack state
 var target_card_to_play: CardClass
+
+##This variable tells me where the card I want to play is from, the party or the hand
+var target_card_is_from: String = ""
 
 const REQ_MONSTERS_TO_WIN: int = 3
 const REQ_NUMBER_OF_DIFFERENT_CLASSES_TO_WIN: int = 6
@@ -69,9 +72,9 @@ func on_state_transition(state: State, new_state_name: String) -> void:
 	if current_state:
 		current_state.exit()
 	
-	new_state.enter()
-	
 	current_state = new_state
+	
+	new_state.enter()
 
 func get_parent_of_state_machine() -> EnemyClass:
 	return self.parent_enemy

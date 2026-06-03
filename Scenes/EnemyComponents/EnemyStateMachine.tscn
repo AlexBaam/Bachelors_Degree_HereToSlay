@@ -18,8 +18,8 @@ initial_state = NodePath("Idle")
 
 [node name="Choice" parent="." unique_id=1137965055 instance=ExtResource("4_jm738")]
 
-[node name="AttackState" parent="." unique_id=1858045933 instance=ExtResource("5_pyep5")]
+[node name="Attack" parent="." unique_id=1858045933 instance=ExtResource("5_pyep5")]
 
-[node name="SlayState" parent="." unique_id=1607915844 instance=ExtResource("6_nd07u")]
+[node name="Slay" parent="." unique_id=1607915844 instance=ExtResource("6_nd07u")]
 
-[node name="DrawState" parent="." unique_id=114431321 instance=ExtResource("7_o8we4")]
+[node name="Draw" parent="." unique_id=114431321 instance=ExtResource("7_o8we4")]

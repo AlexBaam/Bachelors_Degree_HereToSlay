@@ -132,3 +132,6 @@ func get_slayed_monsters_number() -> int:
 
 func get_hand_size() -> int:
 	return self.player_hand.get_hand_size()
+
+func get_player_cards_hand() -> Array[CardClass]:
+	return self.player_hand.get_player_cards_hand()

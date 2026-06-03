@@ -16,6 +16,7 @@ var monsters_slayed: int
 @onready var enemies: Node = $".."
 @onready var player: PlayerClass = $"../../Player"
 @onready var state_machine: EnemyStateMachine = $StateMachine
+@onready var enemy_card_player: EnemyCardPlayer = $EnemyCardPlayer
 
 var all_possible_enemies: Array
 var turn_points_remaining: int
@@ -66,7 +67,21 @@ func update_enemy_cards_in_party(card_played: CardClass) -> void:
 	cards_played_by_opponent.append(card_played)
 	print(cards_played_by_opponent)
 
-func enemy_play_card() -> bool:
+func enemy_play_card(card: CardClass, where_from: String, target: Node) -> bool:
+	var success: bool = false
+	match where_from:
+		"hand":
+			success = self.enemy_play_card_from_hand(card, target)
+		"party": 
+			success = self.enemy_play_card_from_party(card, target)
+	
+	return success
+
+func enemy_play_card_from_party(card: CardClass, target: Node) -> bool:
+	enemy_card_player.play(card, target)
+	return true
+
+func enemy_play_card_from_hand(card: CardClass, target: Node) -> bool:
 	# Verificam daca inamicul are carti in mana
 	if enemy_hand.enemy_hand.size() == 0:
 		return false
@@ -81,7 +96,7 @@ func enemy_play_card() -> bool:
 	random_empty_enemy_slot.card_in_slot = true
 	
 	# Play the first card in hand
-	var card_to_play: CardClass = enemy_hand.enemy_hand[0]
+	var card_to_play: CardClass = card
 	
 	card_to_play.slot_of_the_card = random_empty_enemy_slot
 	
@@ -102,6 +117,8 @@ func enemy_play_card() -> bool:
 	cards_played_by_opponent.append(card_to_play)
 	
 	print(cards_played_by_opponent)
+	
+	enemy_card_player.play(card_to_play, target)
 	
 	return true
 
@@ -152,3 +169,6 @@ func get_action_points() -> int:
 
 func get_hand_size() -> int:
 	return enemy_hand.get_hand_size()
+
+func get_cards_in_hand() -> Array[CardClass]:
+	return self.enemy_hand.get_cards_in_hand().duplicate(true)

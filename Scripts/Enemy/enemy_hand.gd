@@ -118,3 +118,6 @@ func remove_card_from_hand(card_to_remove: CardClass) -> void:
 
 func get_hand_size() -> int:
 	return self.enemy_hand.size()
+
+func get_cards_in_hand() -> Array[CardClass]:
+	return self.enemy_hand.duplicate(true)

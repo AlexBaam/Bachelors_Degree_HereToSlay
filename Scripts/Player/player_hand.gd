@@ -74,3 +74,6 @@ func remove_every_card_from_hand() -> void:
 
 func get_hand_size() -> int:
 	return self.player_hand.size()
+
+func get_player_cards_hand() -> Array[CardClass]:
+	return self.player_hand
