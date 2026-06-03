@@ -1,14 +1,14 @@
 extends State
 class_name ChoiceState
 
-@onready var computing: ComputingState = $"../Computing"
+@onready var state_machine: EnemyStateMachine = $".."
 @onready var card_pile: CardPileClass = $"../../../../CardPiles/CardPile"
 
 var parent_enemy: EnemyClass
 
 func enter() -> void:
 	print("I am in the choice state now!")
-	parent_enemy = computing.parent_enemy
+	parent_enemy = state_machine.parent_enemy
 	var random_number: float = randf()
 	var action_cost: int 
 	if random_number > 0.5:
