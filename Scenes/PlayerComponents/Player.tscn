@@ -24,6 +24,7 @@ z_index = -15
 position = Vector2(960, 885)
 
 [node name="CardPlayer" parent="." unique_id=571106932 instance=ExtResource("4_dewec")]
+z_index = 3
 
 [node name="DiscardHand" parent="." unique_id=614811649 instance=ExtResource("7_e4n0f")]
 position = Vector2(70, 920)

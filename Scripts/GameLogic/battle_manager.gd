@@ -15,6 +15,8 @@ const player_hand_name: String =  "player_hand"
 @onready var card_manager: Node2D = $"../../CardManager"
 @onready var monster_card_slots: MonsterCardSlots = $"../../MonsterCardSlots"
 
+@onready var game_over: WinCheckerClass = $"../GameOver"
+
 @onready var enemy_1_hand: Node2D = enemy_1.get_child(0)
 @onready var enemy_2_hand: Node2D = enemy_2.get_child(0)
 @onready var enemy_3_hand: Node2D = enemy_3.get_child(0)
@@ -100,6 +102,8 @@ func opponent_turn() -> void:
 		await turn_based_gen.wait(battle_timer,0.7)
 		
 		while(turn_based_gen.NUMBER_OF_ACTION_POINTS != enemy.turn_points_remaining):
+			game_over.check_enemy_win(enemy)
+			
 			enemy.enemy_take_action()
 			
 			await enemy.action_completed

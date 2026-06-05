@@ -75,7 +75,7 @@ one_shot = true
 position = Vector2(0, 43)
 
 [node name="GameOver" parent="GameLogic" unique_id=1749484813 instance=ExtResource("14_erwvk")]
-position = Vector2(0, 145)
+position = Vector2(960, 540)
 
 [node name="MonsterManager" type="Node2D" parent="GameLogic" unique_id=186689297]
 script = ExtResource("15_h1m7h")
