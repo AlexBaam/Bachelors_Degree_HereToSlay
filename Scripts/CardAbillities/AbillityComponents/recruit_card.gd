@@ -45,7 +45,7 @@ func enemy_recruit(card: CardClass, enemy: Node, who_is_recruiting: EnemyClass, 
 		
 		card.slot_of_the_card = slot
 		
-		who_is_recruiting.add_card_to_player_party(card)
+		who_is_recruiting.add_card_to_enemy_party(card)
 
 func ability_config(number: int) -> void:
 	choose_enemy.show_buttons()

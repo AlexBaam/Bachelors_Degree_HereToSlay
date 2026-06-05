@@ -59,9 +59,6 @@ func enemy_take_action() -> void:
 	state_machine.current_state.Transitioned.emit(state_machine.current_state, "computing")
 
 func enemy_draw_card(card_pile: CardPileClass) -> bool: 
-	if(card_pile.get_card_pile_size() <= 0):
-		return false
-		
 	card_pile.enemy_draw_card(enemy_hand)
 	return true
 
@@ -182,6 +179,17 @@ func get_enemy_slots() -> Array[SlotClass]:
 	
 	return slots
 
+func get_enemy_party() -> Array[CardClass]:
+	return self.cards_played_by_opponent
+
 func reset_played_cards_status() -> void:
 	for card: CardClass in self.cards_played_by_opponent:
 		card.card_played_this_turn = false
+
+func increase_slayed_monsters() -> void:
+	self.monsters_slayed = self.monsters_slayed + 1
+	print(str(self.name) + " slayed " + str(monsters_slayed) + " monsters")
+
+func add_card_to_enemy_party(card: CardClass) -> void:
+	self.cards_played_by_opponent.append(card)
+	print(self.cards_played_by_opponent)

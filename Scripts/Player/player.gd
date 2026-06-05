@@ -98,7 +98,7 @@ func remove_card_from_player_party(card: CardClass) -> void:
 	
 	card.card_played_this_turn = false
 	
-	cards_in_slots.erase(card)
+	self.cards_in_slots.erase(card)
 
 ## This method returns the size of the player party
 func get_party_size() -> int:

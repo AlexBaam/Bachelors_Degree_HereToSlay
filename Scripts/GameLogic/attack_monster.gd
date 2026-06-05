@@ -44,8 +44,27 @@ func player_attack(player_received: PlayerClass, monster: MonsterCard) -> void:
 	else:
 		print("Cannot attack monsters! Not enough action points!")
 
-func enemy_attack(enemy: EnemyClass) -> void:
+func enemy_attack(enemy: EnemyClass, monster: MonsterCard) -> bool:
 	print("The " + str(enemy) + " wants to attack a monster!")
+	var party: Array[CardClass] = enemy.get_enemy_party()
+	if monster.check_slay_conditions(party):
+		var dice: DiceClass = player.get_dice()
+		var result: int = await dice.roll_dice()
+			
+		if result >= monster.monster_dice_roll:
+			print("Dice roll result is: " + str(result))
+			print("Monster slayed yipeee!!!!")
+				
+			enemy.increase_slayed_monsters()
+			self.remove_monster_from_game(monster)
+			
+			return true
+		else:
+			print("Aw dang it!")
+			return true
+	else:
+		print("Cannot attack this monster! Conditions to attack not met!")
+		return false
 
 func remove_monster_from_game(monster: MonsterCard) -> void:
 	var monster_slot: MonsterSlot = monster.get_monster_slot()
