@@ -21,8 +21,8 @@ const BASE_HAND_SIZE: int = 5
 func set_variables(card_pile: CardPileClass, discard_pile: DiscardPileClass, player_received: PlayerClass, monster_card_slots_received: MonsterCardSlots) -> void:
 	self.card_pile_collider = card_pile.get_child(1).get_child(0)
 	self.discard_pile_collider = discard_pile.get_child(1).get_child(0)
-	self.player_hand = player_received.get_child(1)
-	self.discard_hand_button = player_received.get_child(4)
+	self.player_hand = player_received.get_player_hand()
+	self.discard_hand_button = player_received.get_discard_hand_button()
 	self.class_player = player_received
 	self.monster_card_slots = monster_card_slots_received
 

@@ -71,14 +71,13 @@ script = ExtResource("12_grg3l")
 [node name="BattleTimer" type="Timer" parent="GameLogic" unique_id=1534095030]
 one_shot = true
 
-[node name="ChooseEnemy" parent="GameLogic" unique_id=2085281118 instance=ExtResource("14_h1m7h")]
-position = Vector2(0, 43)
-
 [node name="GameOver" parent="GameLogic" unique_id=1749484813 instance=ExtResource("14_erwvk")]
 position = Vector2(960, 540)
 
 [node name="MonsterManager" type="Node2D" parent="GameLogic" unique_id=186689297]
 script = ExtResource("15_h1m7h")
+
+[node name="ChooseEnemy" parent="GameLogic" unique_id=691130218 instance=ExtResource("14_h1m7h")]
 
 [node name="MonsterCardSlots" parent="." unique_id=1164190933 instance=ExtResource("8_h1m7h")]
 script = ExtResource("16_erwvk")

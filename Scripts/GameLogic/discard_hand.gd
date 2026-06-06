@@ -3,63 +3,53 @@ extends Node2D
 class_name DiscardHandClass
 
 @onready var player: PlayerClass = $".."
-@onready var discard_pile: DiscardPileClass = $"../../CardPiles/DiscardPile"
-@onready var card_pile: CardPileClass = $"../../CardPiles/CardPile"
-@onready var battle_timer: Timer = $"../../GameLogic/BattleTimer"
-@onready var monster_card_slots: MonsterCardSlots = $"../../MonsterCardSlots"
 
-var turn_based_gen: TurnBasedGen = TurnBasedGen.new()
-
-const ACTION_POINTS: String = "action_points"
-const PLAYER_HAND: String =  "player_hand"
 const ACTION_COST: int = 3
 
+#Signals that make clear when the step is done
 signal removed_cards_from_hand
 signal added_cards_to_hand
 
-enum actions {UPDATE = 3}
-
-func _ready() -> void:
-	turn_based_gen.set_variables(card_pile, discard_pile, player, monster_card_slots)
+#Signals for external calls
+signal request_ui_lock(is_locked: bool)
+signal request_discard_card(card: CardClass)
+signal request_draw_card()
 
 func _on_discard_hand_button_pressed() -> void:
-	var action_points: ActionPoints = player.get_child_via_name(ACTION_POINTS)
-	var hand: PlayerHand = player.get_child_via_name(PLAYER_HAND)
+	var action_points: ActionPoints = player.get_action_points()
+	var player_hand: PlayerHand = player.get_player_hand()
 	
 	if action_points.check_action_possibility(ACTION_COST):
-		turn_based_gen.disable_player_UI()
+		request_ui_lock.emit(true)
 		
-		remove_old_cards_from_hand(hand)
+		self.remove_old_cards_from_hand(player_hand)
 		
 		await self.removed_cards_from_hand
 		
-		add_new_cards_to_hand(hand)
+		self.add_new_cards_to_hand()
 		
 		await self.added_cards_to_hand
 		
-		await turn_based_gen.wait(battle_timer, 1.0)
+		await get_tree().create_timer(1.0).timeout
 		
-		player.call_child(ACTION_POINTS, [actions.UPDATE, 3])
+		player.update_player_action_points(ACTION_COST)
 		
-		turn_based_gen.enable_player_UI()
 	else:
 		print("Cannot discard the hand! Not enough action points!")
 
 func remove_old_cards_from_hand(hand: PlayerHand) -> void:
-	for card: CardClass in hand.player_hand:
-		await turn_based_gen.wait(battle_timer, 0.5)
-		
-		var discard_pile_position: Vector2 = discard_pile.get_discard_pile_position()
-		
-		card.animate_card_to_position(card, discard_pile_position, card.DEFAULT_CARD_MOVE_SPEED)
-		discard_pile.add_to_discard_pile(card)
+	var current_cards: Array[CardClass] = hand.get_player_cards_hand().duplicate()
+	
+	for card: CardClass in current_cards:
+		await get_tree().create_timer(0.5).timeout
+		request_discard_card.emit(card) 
 	
 	hand.remove_every_card_from_hand()
-	emit_signal("removed_cards_from_hand")
+	removed_cards_from_hand.emit()
 
-func add_new_cards_to_hand(hand: PlayerHand) -> void:
+func add_new_cards_to_hand() -> void:
 	for iterator: int in 5:
-		await turn_based_gen.wait(battle_timer, 0.5)
-		card_pile.draw_card(hand)
+		await get_tree().create_timer(0.5).timeout
+		request_draw_card.emit()
 	
-	emit_signal("added_cards_to_hand")
+	added_cards_to_hand.emit()

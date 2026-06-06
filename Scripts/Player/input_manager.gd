@@ -17,9 +17,6 @@ const COLLISION_MASK_CARD_PILE = 4
 const COLLISION_MASK_MONSTER_CARD = 64
 
 @onready var player: PlayerClass = $"../Player"
-const ACTION_POINTS: String = "action_points"
-const PLAYER_HAND: String =  "player_hand"
-enum {UPDATE = 3}
 
 @onready var card_manager_reference: CardManager = $"../CardManager"
 @onready var card_pile_reference: CardPileClass = $"../CardPiles/CardPile"
@@ -49,8 +46,8 @@ func raycast_at_cursor() -> void:
 				card_manager_reference.card_clicked(card_found)
 		elif result_collision_mask == COLLISION_MASK_CARD_PILE:
 			# Card pile clicked
-			card_pile_reference.draw_card(player.get_child_via_name(PLAYER_HAND))
-			player.call_child(ACTION_POINTS, [UPDATE, 1])
+			card_pile_reference.draw_card(player.get_player_hand())
+			player.update_player_action_points(1)
 		elif result_collision_mask == COLLISION_MASK_MONSTER_CARD:
 			var monster_found: MonsterCard = result[0].collider.get_parent()
 			print(monster_found)

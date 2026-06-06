@@ -2,22 +2,36 @@ extends Node
 
 class_name PlayerClass
 
-# All the constants here are names that define each child of the player scene so I can call them just using the player
-const ACTION_POINTS: String = "action_points"
-const PLAYER_HAND: String =  "player_hand"
-const CARD_PLAY_BUTTON: String = "play_button"
-const PLAYER_CARD_SLOTS: String = "player_card_slots"
-const DISCARD_HAND_BUTTON: String = "discard_hand"
-const MONSTER_SLAYER: String = "monster_slayer"
-const DICE: String = "dice"
+#ON THE INSIDE
+@onready var player_slots: PlayerCardSlotsClass = $PlayerCardSlots
+@onready var player_hand: PlayerHand = $PlayerHand
+@onready var action_points: ActionPoints = $ActionPoints
+@onready var card_player: CardPlayer = $CardPlayer
+@onready var discard_hand: DiscardHandClass = $DiscardHand
+@onready var monster_slayer: MonsterSlayer = $MonsterSlayer
+@onready var dice: DiceClass = $Dice
+@onready var choose_enemy: ChooseEnemy = $ChooseEnemy
 
-var player_slots: PlayerCardSlotsClass
-var player_hand: PlayerHand
-var action_points: ActionPoints
-var card_play: CardPlayer
-var discard_hand: DiscardHandClass
-var monster_slayer: MonsterSlayer
-var dice: DiceClass
+@export var card_move_speed: float = 0.1 # Cards default speed around the deck
+
+##This signal is a result of the check_win signal from ActionPoints class
+signal request_player_win_check(player: PlayerClass)
+
+#SIGNALS THAT WILL SEND FURTHER THE CARD PLAYER REQUESTS
+##The card player requests to activate the ability for this class
+signal request_ability_activation(card_class: String)
+##The card player requests for the card to be unselected
+signal request_card_unselect()
+##The card player requests for the UI to be locked/unlocked
+signal ui_lock_requested(is_locked: bool)
+
+#SIGNALS THAT WILL SEND FURTHER DISCARD HAND REQUESTS
+signal request_discard_card(card: CardClass)
+signal request_draw_card()
+
+#SIGNALS THAT WILL SEND FURTHER MONSTER SLAYER REQUESTS
+signal request_attack_monster(player: PlayerClass, monster: MonsterCard)
+signal request_monster_unselect()
 
 ## This array represents the party
 var cards_in_slots: Array[CardClass] = []
@@ -26,60 +40,19 @@ var cards_in_slots: Array[CardClass] = []
 var monsters_slayed: int 
 
 func _ready() -> void:
-	define_player_components()
-	
+	action_points.check_win.connect(self.check_player_win)
 	monsters_slayed = 0
-
-## This function sets each component of the player to it's variable
-func define_player_components() -> void:
-	var player_components: Array = get_children()
 	
-	print("The list of player components is: ", player_components)
+	card_player.request_ability_use.connect(self._redirect_ability)
+	card_player.request_card_unselect.connect(self._redirect_unselect)
+	card_player.request_ui_lock.connect(self._redirect_ui_lock)
 	
-	player_slots = player_components[0]
-	player_hand = player_components[1]
-	action_points = player_components[2]
-	card_play = player_components[3]
-	discard_hand = player_components[4]
-	monster_slayer = player_components[5]
-	dice = player_components[6]
-
-## This function allows the parent to call a child based on it's string name
-## THe first parameter is the child name, and the second is an actions array that defines what do we want that child to do
-func call_child(child_name: String, action: Array) -> void:
-	var child: Node2D = get_child_via_name(child_name)
-	child.do(action)
-
-## This function returns a child component of the player scene based on a predefined string.
-## The allowed strings are:[br]
-## Player's action points: "action_points"[br]
-## The card hand of the player: "player_hand"[br]
-## Play card button: "play_button"[br]
-## Card slots of the player: "player_card_slots"[br]
-## Discard hand button: "discard_hand"[br]
-## Attack monster button: "monster_slayer"[br]
-## Dice: "dice"[br]
-func get_child_via_name(child_name: String) -> Node2D:
-	if child_name == ACTION_POINTS:
-		return action_points
-	elif child_name == PLAYER_HAND:
-		return player_hand
-	elif child_name == CARD_PLAY_BUTTON:
-		return card_play
-	elif child_name == PLAYER_CARD_SLOTS:
-		return player_slots
-	elif child_name == DISCARD_HAND_BUTTON:
-		return discard_hand
-	elif child_name == MONSTER_SLAYER:
-		return monster_slayer
-	elif child_name == DICE:
-		return dice
+	discard_hand.request_ui_lock.connect(self._redirect_ui_lock)
+	discard_hand.request_discard_card.connect(self._redirect_discard_card)
+	discard_hand.request_draw_card.connect(self._redirect_draw_card)
 	
-	return null
-
-## This function returns how many action points the player has at that respective moment
-func get_action_points_left() -> int:
-	return action_points.get_action_points_left()
+	monster_slayer.request_attack_monster.connect(self._redirect_attack_monster)
+	monster_slayer.request_monster_unselect.connect(self._redirect_monster_unselect)
 
 ## This function resets the card played status of the cards in the party after the turn ends
 func reset_played_cards_status() -> void: 
@@ -104,10 +77,6 @@ func remove_card_from_player_party(card: CardClass) -> void:
 func get_party_size() -> int:
 	return cards_in_slots.size()
 
-## This method returns the dice scene for rolling
-func get_dice() -> DiceClass:
-	return self.dice
-
 ## This method increases the number of monsters slayed by one
 func increase_slayed_monsters() -> void:
 	self.monsters_slayed = self.monsters_slayed + 1
@@ -126,12 +95,113 @@ func get_diverse_party_size() -> int:
 	
 	return number_of_different_classes
 
-## This method returns the number of monsters slayed by the player this game
+##Method that returns the number of monsters slayed by the player this game
 func get_slayed_monsters_number() -> int:
 	return self.monsters_slayed
 
+# HERE STARTS PLAYER HAND
+
+##Method that adds a card to the player hand
+func add_card_to_hand(card: CardClass) -> void:
+	self.player_hand.add_card_to_hand(card, self.card_move_speed)
+
+##Method that removes a card from the player hand
+func remove_card_from_hand(card_to_remove: CardClass) -> void:
+	self.player_hand.remove_card_from_hand(card_to_remove, self.card_move_speed)
+
+func get_player_hand() -> PlayerHand:
+	return self.player_hand
+
+##Method that returns the hand size of the player
 func get_hand_size() -> int:
 	return self.player_hand.get_hand_size()
 
+##Method that returns the cards in the player hand
 func get_player_cards_hand() -> Array[CardClass]:
 	return self.player_hand.get_player_cards_hand()
+
+# HERE STARTS ACTION POINTS
+
+## This function returns how many action points the player has at that respective moment
+func get_action_points() -> ActionPoints:
+	return self.action_points
+
+func get_action_points_left() -> int:
+	return action_points.get_action_points_left()
+
+func reset_player_turn_points_without_texture_update() -> void:
+	self.action_points.reset_player_turn_points_without_texture_update()
+
+func reset_player_turn_points_with_texture_update() -> void:
+	self.action_points.reset_player_turn_points_with_texture_update()
+
+func update_player_action_points(points_to_subtract: int) -> void:
+	self.action_points.update_player_action_points(points_to_subtract)
+
+#HERE START THE PLAYER CARD SLOTS
+
+func get_empty_card_slots() -> Array[SlotClass]:
+	return self.player_slots.get_empty_card_slots()
+
+func get_card_slots() -> Array[SlotClass]:
+	return self.player_slots.get_card_slots()
+
+#HERE STARTS THE CARD PLAYER
+
+func play_card(card: CardClass) -> void:
+	self.card_player.play(card)
+
+func attach_to_card(card: CardClass) -> void:
+	self.card_player.attach_to_card(card)
+
+func hide_button() -> void:
+	self.card_player.hide_button()
+
+#HERE START THE DISCARD HAND BUTTON
+
+func get_discard_hand_button() -> DiscardHandClass:
+	return self.discard_hand
+
+#HERE START THE DICE CLASS:
+
+## This method returns the dice scene for rolling
+func get_dice() -> DiceClass:
+	return self.dice
+
+#HERE STARTS THE CHOOSE ENEMY:
+func get_choose_enemy() -> ChooseEnemy:
+	return self.choose_enemy
+
+#HERE START METHODS FROM MONSTER SLAYER:
+
+func attach_to_monster_card(monster: MonsterCard) -> void:
+	self.monster_slayer.attach_to_card(monster)
+
+func hide_attack_monster_button() -> void:
+	self.monster_slayer.hide_button()
+
+#METHODS THAT REDIRECT SIGNALS OUTSIDE THE PLAYER CLASS
+
+func check_player_win() -> void:
+	request_player_win_check.emit(self)
+
+func _redirect_ability(card_class: String) -> void:
+	request_ability_activation.emit(card_class)
+
+func _redirect_unselect() -> void:
+	request_card_unselect.emit()
+
+func _redirect_ui_lock(is_locked: bool) -> void:
+	ui_lock_requested.emit(is_locked)
+
+func _redirect_discard_card(card: CardClass) -> void:
+	request_discard_card.emit(card)
+
+func _redirect_draw_card() -> void:
+	request_draw_card.emit()
+
+func _redirect_attack_monster(monster: MonsterCard) -> void:
+	request_attack_monster.emit(self, monster)
+
+func _redirect_monster_unselect() -> void:
+	request_monster_unselect.emit()

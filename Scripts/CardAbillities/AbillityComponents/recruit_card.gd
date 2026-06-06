@@ -5,8 +5,6 @@ class_name RecruitCardClass
 var choose_enemy: ChooseEnemy
 var battle_manager: BattleManager
 
-const PLAYER_CARD_SLOTS: String = "player_card_slots"
-
 func _ready() -> void:
 	choose_enemy = $"../../../GameLogic/ChooseEnemy"
 	battle_manager = $"../../../GameLogic/BattleManager"
@@ -58,9 +56,7 @@ func ability_config(number: int) -> void:
 	
 	var player: PlayerClass = battle_manager.get_player()
 	
-	var player_slots: PlayerCardSlotsClass = player.get_child_via_name(PLAYER_CARD_SLOTS)
-	
-	var empty_player_slots: Array[SlotClass] = player_slots.get_empty_slots()
+	var empty_player_slots: Array[SlotClass] = player.get_empty_card_slots()
 	
 	for n in number:
 		if enemy.cards_played_by_opponent.size() > 0 and empty_player_slots.size() > 0:

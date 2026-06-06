@@ -9,15 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://di003h83saugr" path="res://Scenes/PlayerComponents/DiscardHand.tscn" id="7_e4n0f"]
 [ext_resource type="PackedScene" uid="uid://clchfi2840t8u" path="res://Scenes/PlayerComponents/MonsterSlayer.tscn" id="8_1t3k2"]
 [ext_resource type="PackedScene" uid="uid://1n4qkxooxoxf" path="res://Scenes/PlayerComponents/Dice.tscn" id="9_p8qwg"]
+[ext_resource type="PackedScene" uid="uid://vpvo5so38p0u" path="res://Scenes/PlayerComponents/ChooseEnemy.tscn" id="10_uyrsi"]
 
 [node name="Player" type="Node" unique_id=1056602264]
 script = ExtResource("1_rpqav")
-
-[node name="PlayerCardSlots" parent="." unique_id=606186446 instance=ExtResource("5_lci06")]
-script = ExtResource("3_e5n6n")
-
-[node name="PlayerHand" parent="." unique_id=1080421033 instance=ExtResource("2_dewec")]
-position = Vector2(-3, 0)
 
 [node name="ActionPoints" parent="." unique_id=174833359 instance=ExtResource("4_nn08x")]
 z_index = -15
@@ -26,11 +21,19 @@ position = Vector2(960, 885)
 [node name="CardPlayer" parent="." unique_id=571106932 instance=ExtResource("4_dewec")]
 z_index = 3
 
+[node name="ChooseEnemy" parent="." unique_id=691130218 instance=ExtResource("10_uyrsi")]
+
+[node name="Dice" parent="." unique_id=1823160856 instance=ExtResource("9_p8qwg")]
+position = Vector2(1203, 690)
+
 [node name="DiscardHand" parent="." unique_id=614811649 instance=ExtResource("7_e4n0f")]
 position = Vector2(70, 920)
 scale = Vector2(2, 2)
 
 [node name="MonsterSlayer" parent="." unique_id=1607745684 instance=ExtResource("8_1t3k2")]
 
-[node name="Dice" parent="." unique_id=1823160856 instance=ExtResource("9_p8qwg")]
-position = Vector2(1203, 690)
+[node name="PlayerCardSlots" parent="." unique_id=606186446 instance=ExtResource("5_lci06")]
+script = ExtResource("3_e5n6n")
+
+[node name="PlayerHand" parent="." unique_id=1080421033 instance=ExtResource("2_dewec")]
+position = Vector2(-3, 0)

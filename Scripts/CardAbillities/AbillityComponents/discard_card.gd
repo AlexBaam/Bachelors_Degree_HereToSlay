@@ -6,6 +6,8 @@ var choose_enemy: ChooseEnemy
 var battle_manager: BattleManager
 var discard_pile: DiscardPileClass
 
+var speed: float = 0.1
+
 const PLAYER_HAND: String = "player_hand"
 
 func _ready() -> void:
@@ -40,7 +42,7 @@ func enemy_discard_card(card: CardClass, enemy_hand: PlayerHand) -> void:
 	if card:
 		card.animate_card_to_position(card, discard_pile.get_discard_pile_position(), card.DEFAULT_CARD_MOVE_SPEED)
 		
-		enemy_hand.remove_card_from_hand(card)
+		enemy_hand.remove_card_from_hand(card, speed)
 		
 		discard_pile.add_to_discard_pile(card)
 
@@ -50,7 +52,7 @@ func enemy_ability_config(number: int, target: Node) -> void:
 	
 	if target is PlayerClass:
 		player = target
-		var player_hand: PlayerHand = player.get_child_via_name(PLAYER_HAND)
+		var player_hand: PlayerHand = player.get_player_hand()
 		
 		for n in number:
 			var random_card: CardClass = player_hand.player_hand.pick_random()

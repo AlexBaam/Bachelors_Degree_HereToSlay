@@ -107,7 +107,7 @@ func finish_drag() -> void:
 	var discard_pile_found = raycast_check_for_discard_pile()
 	if card_slot_found and not card_slot_found.card_in_slot:
 		#Card dropped over the slot and the slot is empty
-		player.call_child(PLAYER_HAND, [REMOVE, card_dragged])
+		player.remove_card_from_hand(card_dragged)
 		card_dragged.position = card_slot_found.position
 		
 		# Adjust card scale after the slot
@@ -120,9 +120,9 @@ func finish_drag() -> void:
 		
 		player.add_card_to_player_party(card_dragged)
 		
-		player.call_child(CARD_PLAY_BUTTON, [PLAY, card_dragged])
+		player.play_card(card_dragged)
 	else: 
-		player.call_child(PLAYER_HAND, [ADD, card_dragged, DEFAULT_CARD_MOVE_SPEED])
+		player.add_card_to_hand(card_dragged)
 	card_dragged = null
 
 func connect_card_signals(card: Node2D) -> void:
@@ -158,26 +158,26 @@ func highlight_card(card: Node2D, hovered) -> void:
 
 func select_card(card: CardClass) -> void:
 	if selected_card:
-		if is_this_card_already_selected(card):
-			unselect_card()
+		if self.is_this_card_already_selected(card):
+			self.unselect_card()
 		else:
-			change_selected_card(card)
+			self.change_selected_card(card)
 	else:
 		selected_card = card
 		selected_card.position.y -= SELECTED_CARD_Y_UPDATE
-		player.call_child(CARD_PLAY_BUTTON, [ATTACH, selected_card])
+		player.attach_to_card(selected_card)
 
 func unselect_card() -> void:
 	if selected_card:
 		selected_card.position.y += SELECTED_CARD_Y_UPDATE
-		player.call_child(CARD_PLAY_BUTTON, [HIDE])
+		player.hide_button()
 		selected_card = null
 
 func change_selected_card(card: CardClass) -> void:
 	selected_card.position.y += SELECTED_CARD_Y_UPDATE
 	selected_card = card
 	selected_card.position.y -= SELECTED_CARD_Y_UPDATE
-	player.call_child(CARD_PLAY_BUTTON, [ATTACH, selected_card])
+	player.attach_to_card(selected_card)
 
 func is_this_card_already_selected(card: CardClass) -> bool:
 	if selected_card == card:

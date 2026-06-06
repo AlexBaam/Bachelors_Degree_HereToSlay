@@ -14,7 +14,7 @@ func _ready() -> void:
 func ability_config(number: int) -> void:
 	var player: PlayerClass = battle_manager.get_player()
 	
-	var player_hand: PlayerHand = player.get_child_via_name(PLAYER_HAND)
+	var player_hand: PlayerHand = player.get_player_hand()
 	
 	for n in number:
 		if discard_pile.get_discard_pile_size() > 0:

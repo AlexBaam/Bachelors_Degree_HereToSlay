@@ -5,6 +5,8 @@ class_name StealCardClass
 var choose_enemy: ChooseEnemy
 var battle_manager: BattleManager
 
+var speed: float = 0.1
+
 const PLAYER_HAND: String = "player_hand"
 
 func _ready() -> void:
@@ -21,7 +23,7 @@ func steal_card(card: CardClass, enemy_hand: EnemyHand, player_hand: PlayerHand)
 
 func enemy_steal_card(card: CardClass, enemy_hand: Node, my_hand: EnemyHand) -> void:
 	if card:
-		enemy_hand.remove_card_from_hand(card)
+		enemy_hand.remove_card_from_hand(card, speed)
 		
 		if enemy_hand is PlayerHand:
 			card.convert_card_functionality(card)
@@ -41,7 +43,7 @@ func ability_config(number: int) -> void:
 	
 	var player: PlayerClass = battle_manager.get_player()
 	
-	var player_hand: PlayerHand = player.get_child_via_name(PLAYER_HAND)
+	var player_hand: PlayerHand = player.get_player_hand()
 	
 	for n in number:
 		var random_card: CardClass = enemy_hand.enemy_hand.pick_random()
@@ -56,7 +58,7 @@ func enemy_ability_config(number: int, target: Node) -> void:
 	
 	if target is PlayerClass:
 		player = target
-		var player_hand: PlayerHand = player.get_child_via_name(PLAYER_HAND)
+		var player_hand: PlayerHand = player.get_player_hand()
 		
 		for n in number:
 			var random_card: CardClass = player_hand.player_hand.pick_random()

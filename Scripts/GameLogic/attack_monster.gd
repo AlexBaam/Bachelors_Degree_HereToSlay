@@ -10,17 +10,13 @@ const SELECTED_CARD_Y_UPDATE: int = 20
 
 const ACTION_COST: int = 2
 
-const UPDATE: int = 3
-
 @onready var player: PlayerClass = $"../../Player"
 @onready var monster_pile: MonsterPile = $"../../CardPiles/MonsterPile"
 
 var selected_monster: MonsterCard
 
-enum {SHOW = 1, HIDE = 2, ATTACH = 3}
-
 func player_attack(player_received: PlayerClass, monster: MonsterCard) -> void:
-	var action_points: ActionPoints = player.get_child_via_name(ACTION_POINTS)
+	var action_points: ActionPoints = player.get_action_points()
 	
 	if action_points.check_action_possibility(ACTION_COST):
 		var party: Array[CardClass] = player_received.cards_in_slots
@@ -38,7 +34,7 @@ func player_attack(player_received: PlayerClass, monster: MonsterCard) -> void:
 			else:
 				print("Aw dang it!")
 				
-			player_received.call_child(ACTION_POINTS, [UPDATE, 2])
+			player_received.update_player_action_points(ACTION_COST)
 		else:
 			print("Cannot attack this monster! Conditions to attack not met!")
 	else:
@@ -83,7 +79,7 @@ func select_monster(monster: MonsterCard) -> void:
 	else:
 		selected_monster = monster
 		selected_monster.position.y -= SELECTED_CARD_Y_UPDATE
-		player.call_child(MONSTER_SLAYER, [ATTACH, selected_monster])
+		player.attach_to_monster_card(selected_monster)
 
 func is_this_monster_already_selected(monster: MonsterCard) -> bool:
 	if selected_monster == monster:
@@ -94,11 +90,11 @@ func is_this_monster_already_selected(monster: MonsterCard) -> bool:
 func unselect_monster() -> void:
 	if selected_monster:
 		selected_monster.position.y += SELECTED_CARD_Y_UPDATE
-		player.call_child(MONSTER_SLAYER, [HIDE])
+		player.hide_attack_monster_button()
 		selected_monster = null
 
 func change_selected_monster(monster: MonsterCard) -> void:
 	selected_monster.position.y += SELECTED_CARD_Y_UPDATE
 	selected_monster = monster
 	selected_monster.position.y -= SELECTED_CARD_Y_UPDATE
-	player.call_child(MONSTER_SLAYER, [ATTACH, selected_monster])
+	player.attach_to_monster_card(selected_monster)
