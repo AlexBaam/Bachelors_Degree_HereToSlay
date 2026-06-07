@@ -29,6 +29,8 @@ var turn_based_gen: TurnBasedGen = TurnBasedGen.new()
 
 var current_enemy: EnemyClass = null
 
+var choose_enemy: ChooseEnemy
+
 signal end_player_turn
 signal dealt_cards
 
@@ -40,9 +42,18 @@ func _ready() -> void:
 	
 	set_enemies()
 	
+	choose_enemy = player.get_choose_enemy()
+	
+	abillities.setup_ability_manager(self, discard_pile)
+	
 	player.request_player_win_check.connect(game_over.check_player_win)
 	
-	player.request_ability_activation.connect(abillities.play_abillity)
+	player.request_ability_activation.connect(self._on_player_ability_request)
+	
+	enemy_1.request_ability_activation.connect(abillities.play_ability)
+	enemy_2.request_ability_activation.connect(abillities.play_ability)
+	enemy_3.request_ability_activation.connect(abillities.play_ability)
+	
 	player.request_card_unselect.connect(card_manager.unselect_card)
 	player.ui_lock_requested.connect(self._on_ui_lock)
 	
@@ -72,6 +83,22 @@ func _on_ui_lock(is_locked: bool) -> void:
 		turn_based_gen.disable_player_UI()
 	else:
 		turn_based_gen.enable_player_UI()
+
+func _on_player_ability_request(card_class: String) -> void:
+	var target: Node = null
+	var sanitized_class: String = card_class.to_lower()
+	
+	if sanitized_class != "bard": 
+		choose_enemy.show_buttons()
+		
+		await choose_enemy.any_button_pressed
+		
+		var enemy_index: int = choose_enemy.get_button_pressed()
+		target = get_enemy(enemy_index)
+	else:
+		target = player 
+		
+	abillities.play_ability(card_class, player, target)
 
 func deal_cards() -> void:
 	for i in range(turn_based_gen.BASE_HAND_SIZE):

@@ -80,17 +80,27 @@ func update_card_rotation(collision_mask: int, card_rotation: float) -> float:
 	return card_rotation
 
 ## A function used to change a cards behavior and aspect from an enemy card to a player card
-func convert_card_functionality(card: CardClass) -> void:
-	var collision_mask: int = card.get_child(2).collision_mask
-	var card_rotation: float = card.rotation
+func convert_card_functionality(target_owner: String, should_flip: bool = false) -> void:
+	var area2d = self.get_child(2)
+	var flip_anim: AnimationPlayer = self.get_node("CardFlipAnimation")
 	
-	# Changing the collision mask is essential for the card to be interactable to the player
-	# collision mask = 1 is for player cards, and collision mask = 256 is for enemy cards (2 at the 8th power, meaning the 9th value in the collision mask table as it starts from 1 and not 0)
-	card.get_child(2).collision_mask = self.change_card_collision_mask(collision_mask)
-	
-	card.rotation = update_card_rotation(collision_mask, card_rotation)
-	
-	card.get_node("CardFlipAnimation").play("card_flip")
+	if target_owner == "player":
+		area2d.collision_mask = COLLISION_MASK_PLAYER_CARD
+		
+		self.rotation = VERTICAL_CARDS_ROTATION 
+		
+		if should_flip:
+			flip_anim.speed_scale = 2.0 
+			flip_anim.play("card_flip") 
+			
+	elif target_owner == "enemy":
+		area2d.collision_mask = COLLISION_MASK_ENEMY_CARD
+		
+		self.rotation = HORIZONTAL_CARDS_ROTATION 
+		
+		if should_flip:
+			flip_anim.speed_scale = 2.0 
+			flip_anim.play_backwards("card_flip")
 
 func get_card_collider() -> CollisionShape2D:
 	var area2D: Area2D = self.get_child(2)

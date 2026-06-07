@@ -29,7 +29,6 @@ var x_hand_position: float
 var y_hand_position: float
 
 var enemy_hand : Array[CardClass] = []
-var empty_enemy_slots: Array[SlotClass] = []
 var center_screen_y: float
 var center_screen_x: float
 
@@ -40,12 +39,7 @@ func _ready() -> void:
 	set_hand_position()
 	center_screen_y = get_viewport().size.y /2
 	center_screen_x = get_viewport().size.x /2
-	
-	for slot: SlotClass in enemy.get_child(1).get_children():
-		self.add_slot_to_empty_slots(slot)
 
-func add_slot_to_empty_slots(slot: SlotClass) -> void:
-	empty_enemy_slots.append(slot)
 
 func get_parent_position() -> Vector2:
 	var parent_x: float = enemy.position.x
@@ -111,10 +105,10 @@ func calculate_vertical_card_position(index: int) -> float:
 	var x_position: float = center_screen_x + index * CARD_WIDTH - x_offset / 2
 	return x_position
 
-func remove_card_from_hand(card_to_remove: CardClass) -> void:
+func remove_card_from_hand(card_to_remove: CardClass, speed: float = 0.1) -> void:
 	if card_to_remove in enemy_hand:
 		enemy_hand.erase(card_to_remove)
-		update_hand_positions(card_to_remove.DEFAULT_CARD_MOVE_SPEED)
+		update_hand_positions(speed)
 
 func get_hand_size() -> int:
 	return self.enemy_hand.size()

@@ -21,6 +21,7 @@ var monsters_slayed: int
 var all_possible_enemies: Array
 var turn_points_remaining: int
 
+signal request_ability_activation(card_class: String, user: Node, target: Node)
 signal action_completed
 
 func _ready() -> void:
@@ -29,6 +30,11 @@ func _ready() -> void:
 	
 	self.reset_slayed_monsters_number()
 	self.reset_turn_action_points()
+	
+	enemy_card_player.request_ability_use.connect(self._redirect_ability)
+
+func _redirect_ability(card_class: String, target: Node) -> void:
+	request_ability_activation.emit(card_class, self, target)
 
 ##This method defines all the possible enemies that this enemy instance can have including the player.
 ##The information is saved in a typeless array that is a local variable called all_possible_enemies.
@@ -86,12 +92,12 @@ func enemy_play_card_from_hand(card: CardClass, target: Node) -> bool:
 		return false
 		
 	# Verificam daca avem slots ptr cartiile inamicului
-	if enemy_hand.empty_enemy_slots.size() == 0:
+	var empty_slots: Array[SlotClass] = self.get_empty_enemy_slots()
+	if empty_slots.size() == 0:
 		return false
 	
 	# Obtinem un slot random dintre cele ale inamicului in care sa punem cartea
-	var random_empty_enemy_slot: SlotClass = enemy_hand.empty_enemy_slots.pick_random()
-	enemy_hand.empty_enemy_slots.erase(random_empty_enemy_slot)
+	var random_empty_enemy_slot: SlotClass = empty_slots.pick_random()
 	random_empty_enemy_slot.card_in_slot = true
 	
 	# Play the first card in hand
@@ -125,17 +131,15 @@ func get_enemy_hand() -> EnemyHand:
 	return self.get_child(0)
 
 func remove_card_from_party(card_to_remove: CardClass) -> void:
-		cards_played_by_opponent.erase(card_to_remove)
-		
-		var slot: SlotClass = card_to_remove.slot_of_the_card
-		
+	cards_played_by_opponent.erase(card_to_remove)
+	
+	var slot: SlotClass = card_to_remove.slot_of_the_card
+	if slot:
 		slot.card_in_slot = false
-		
-		enemy_hand.add_slot_to_empty_slots(slot)
-		
-		card_to_remove.slot_of_the_card = null
-		
-		print(cards_played_by_opponent)
+	
+	card_to_remove.slot_of_the_card = null
+	
+	print(cards_played_by_opponent)
 
 ## This method sets back to the inital value the number of action points usable in a turn
 func reset_turn_action_points() -> void:
@@ -178,6 +182,14 @@ func get_enemy_slots() -> Array[SlotClass]:
 		slots.append(slot)
 	
 	return slots
+
+func get_empty_enemy_slots() -> Array[SlotClass]:
+	var empty_slots: Array[SlotClass] = []
+	for slot: SlotClass in self.get_enemy_slots():
+		if slot.card_in_slot == false:
+			empty_slots.append(slot)
+	
+	return empty_slots
 
 func get_enemy_party() -> Array[CardClass]:
 	return self.cards_played_by_opponent

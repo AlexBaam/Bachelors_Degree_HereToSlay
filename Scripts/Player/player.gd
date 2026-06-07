@@ -67,8 +67,11 @@ func add_card_to_player_party(card_played: CardClass) -> void:
 ## This method removes a card from the player party. A party is formed of the cards in the slots that can be played every turn
 func remove_card_from_player_party(card: CardClass) -> void:
 	var slot_of_the_card: SlotClass = card.slot_of_the_card
-	slot_of_the_card.card_in_slot = false
-	
+	if slot_of_the_card:
+		slot_of_the_card.card_in_slot = false
+		slot_of_the_card.get_node("Area2D/CollisionShape2D").disabled = false
+		
+	card.slot_of_the_card = null 
 	card.card_played_this_turn = false
 	
 	self.cards_in_slots.erase(card)
