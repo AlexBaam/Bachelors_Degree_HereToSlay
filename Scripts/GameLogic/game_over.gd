@@ -13,13 +13,17 @@ const Y_SCREEN_CENTER: float = 540.0
 @onready var win_text: RichTextLabel = $WinText
 
 func _ready() -> void:
+	self.process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	self.hide_game_over_screen()
 	print("The game over scene is ready to be used!")
 
-func game_over(winner: Node) -> void:
-	self.prepare_winner_text(winner)
+func game_over(winner: Node, reason: String) -> void:
+	self.prepare_winner_text(winner, reason)
 	self.show_game_over_screen()
 	print("Game ended!")
+	
+	get_tree().paused = true
 
 func hide_game_over_screen() -> void: 
 	win_text.visible = false
@@ -35,43 +39,35 @@ func show_game_over_screen() -> void:
 
 func check_enemy_win(enemy: EnemyClass) -> void:
 	print("I will check if the " + str(enemy) + " wins!")
-	var win_this_turn: bool = false
 	
 	var number_of_different_classes_in_party: int = enemy.get_diverse_party_size()
+	var number_of_monsters_slayed: int = enemy.get_slayed_monsters_number()
 	
 	if number_of_different_classes_in_party == self.REQ_CLASSES_TO_WIN:
 		print(str(enemy) + " won with enough classes!")
-		win_this_turn = true
+		self.game_over(enemy, " assembled a full party of six classes ")
 	
-	var number_of_monsters_slayed: int = enemy.get_slayed_monsters_number()
+	elif number_of_monsters_slayed == self.REQ_MONSTERS_TO_WIN:
+		print(str(enemy) + " won with enough monsters ")
+		self.game_over(enemy, "slayed three monsters!")
 	
-	if number_of_monsters_slayed == self.REQ_MONSTERS_TO_WIN:
-		print(str(enemy) + " won with enough monsters!")
-		win_this_turn = true
-	
-	if win_this_turn:
-		self.game_over(enemy)
 	else:
 		print(str(enemy) + " did not win yet!")
 
 func check_player_win(player: PlayerClass) -> void:
 	print("I will check if the player wins!")
-	var win_this_turn: bool = false
 	
 	var number_of_different_classes_in_party: int = player.get_diverse_party_size()
+	var number_of_monsters_slayed: int = player.get_slayed_monsters_number()
 	
 	if number_of_different_classes_in_party == REQ_CLASSES_TO_WIN:
 		print("Player won with enough classes!")
-		win_this_turn = true
+		self.game_over(player, " assembled a full party of six classes ")
 	
-	var number_of_monsters_slayed: int = player.get_slayed_monsters_number()
-	
-	if number_of_monsters_slayed == REQ_MONSTERS_TO_WIN:
+	elif number_of_monsters_slayed == REQ_MONSTERS_TO_WIN:
 		print("Player won with enough monsters!")
-		win_this_turn = true
+		self.game_over(player, " slayed three monsters ")
 	
-	if win_this_turn:
-		self.game_over(player)
 	else:
 		print("Player did not win yet!")
 
@@ -91,13 +87,14 @@ func disable_replay_button() -> void:
 	replay_button.visible = false
 	replay_button.disabled = true
 
-func prepare_winner_text(winner: Node) -> void:
+func prepare_winner_text(winner: Node, reason: String) -> void:
 	if winner is PlayerClass:
-		win_text.text = "You've won! Congratulations!"
+		win_text.text = "You've" + reason + "so you've won! \nCongratulations!"
 	elif winner is EnemyClass:
-		win_text.text = str(winner.name) + " has won!"
+		win_text.text = str(winner.name) + reason + "has won!"
 
 func _on_replay_button_pressed() -> void:
+	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 func _on_exit_button_pressed() -> void:
