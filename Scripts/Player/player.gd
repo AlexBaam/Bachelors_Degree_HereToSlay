@@ -171,6 +171,9 @@ func get_discard_hand_button() -> DiscardHandClass:
 func get_dice() -> DiceClass:
 	return self.dice
 
+func roll_dice() -> int:
+	return await self.dice.roll_dice()
+
 #HERE STARTS THE CHOOSE ENEMY:
 func get_choose_enemy() -> ChooseEnemy:
 	return self.choose_enemy

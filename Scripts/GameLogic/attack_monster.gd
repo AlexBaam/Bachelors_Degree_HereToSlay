@@ -21,8 +21,7 @@ func player_attack(player_received: PlayerClass, monster: MonsterCard) -> void:
 	if action_points.check_action_possibility(ACTION_COST):
 		var party: Array[CardClass] = player_received.cards_in_slots
 		if monster.check_slay_conditions(party):
-			var dice: DiceClass = player.get_dice()
-			var result: int = await dice.roll_dice()
+			var result: int = await player.roll_dice()
 				
 			if result >= monster.monster_dice_roll:
 				print("Dice roll result is: " + str(result))

@@ -4,7 +4,6 @@ class_name CardPlayer
 
 @onready var play_card_button: Button = $PlayCardButton
 @onready var player: PlayerClass = $".."
-@onready var dice: DiceClass = $"../Dice"
 
 const ACTION_COST: int = 1
 var card_to_play: CardClass
@@ -38,7 +37,7 @@ func play(card: CardClass) -> void:
 		request_ui_lock.emit(true)
 		
 		print("Card's dice roll to activate: " + str(card.card_dice_roll))
-		var result: int = await dice.roll_dice()
+		var result: int = await player.roll_dice()
 		print("Roll result is: ", result)
 		
 		if result >= card.card_dice_roll:
