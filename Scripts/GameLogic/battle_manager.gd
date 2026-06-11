@@ -54,7 +54,7 @@ func _ready() -> void:
 	enemy_2.request_ability_activation.connect(abillities.play_ability)
 	enemy_3.request_ability_activation.connect(abillities.play_ability)
 	
-	player.request_card_unselect.connect(card_manager.unselect_card)
+	player.request_card_unselect.connect(card_manager.unselect_card) 
 	player.ui_lock_requested.connect(self._on_ui_lock)
 	
 	player.request_discard_card.connect(self._on_player_discard_card)

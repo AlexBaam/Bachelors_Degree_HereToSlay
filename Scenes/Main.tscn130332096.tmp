@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://bmvsemixpl63l"]
+
+[ext_resource type="Script" uid="uid://h7anxnw4biuy" path="res://Scripts/CardAbillities/abillity_manager.gd" id="1_1p5hy"]
+[ext_resource type="Script" uid="uid://co701idtmni5j" path="res://Scripts/card_manager.gd" id="1_idj7w"]
+[ext_resource type="Texture2D" uid="uid://b5k4md166us1b" path="res://Textures/Backgrounds/bigger_background.png" id="2_50glp"]
+[ext_resource type="PackedScene" uid="uid://cg2jseaexr3pe" path="res://Scenes/CardPiles/CardPile.tscn" id="5_v1gob"]
+[ext_resource type="PackedScene" uid="uid://dvwl3nxpgoppo" path="res://Scenes/CardPiles/DiscardPile.tscn" id="7_50glp"]
+[ext_resource type="Script" uid="uid://b812w7pi7o6ba" path="res://Scripts/Player/input_manager.gd" id="7_jw32o"]
+[ext_resource type="Script" uid="uid://cna18h5mybs3l" path="res://Scripts/CardPiles/discard_pile.gd" id="8_50glp"]
+[ext_resource type="PackedScene" uid="uid://ct4rn0hoowg1i" path="res://Scenes/CardSlots/MonsterCardSlots.tscn" id="8_h1m7h"]
+[ext_resource type="PackedScene" uid="uid://bcg07wl6lt2c6" path="res://Scenes/CardPiles/MonsterPile.tscn" id="9_vy5pj"]
+[ext_resource type="Script" uid="uid://d3n1jyev62aab" path="res://Scripts/GameLogic/battle_manager.gd" id="12_grg3l"]
+[ext_resource type="PackedScene" uid="uid://dsv3ydy6cidtp" path="res://Scenes/EnemyComponents/Enemy.tscn" id="13_frkhe"]
+[ext_resource type="PackedScene" uid="uid://bgscqfaayohr2" path="res://Scenes/PlayerComponents/Player.tscn" id="14_1p5hy"]
+[ext_resource type="PackedScene" uid="uid://brkghe14h5o58" path="res://Scenes/PlayerComponents/GameOverScene.tscn" id="14_erwvk"]
+[ext_resource type="Script" uid="uid://lor8ldk3v54h" path="res://Scripts/GameLogic/attack_monster.gd" id="15_h1m7h"]
+[ext_resource type="Script" uid="uid://dk1rrily5m8t4" path="res://Scripts/Slots/monster_card_slots.gd" id="16_erwvk"]
+
+[node name="Main" type="Node2D" unique_id=2113043468]
+
+[node name="Abillities" type="Node" parent="." unique_id=365728511]
+script = ExtResource("1_1p5hy")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1067400795]
+z_index = -4096
+position = Vector2(960, 540)
+texture = ExtResource("2_50glp")
+metadata/_edit_lock_ = true
+
+[node name="CardManager" type="Node2D" parent="." unique_id=1097512592]
+script = ExtResource("1_idj7w")
+
+[node name="CardPiles" type="Node2D" parent="." unique_id=1009674647]
+
+[node name="CardPile" parent="CardPiles" unique_id=489780070 instance=ExtResource("5_v1gob")]
+position = Vector2(858, 525)
+
+[node name="DiscardPile" parent="CardPiles" unique_id=388114536 instance=ExtResource("7_50glp")]
+z_index = -1
+position = Vector2(1062, 525)
+script = ExtResource("8_50glp")
+
+[node name="MonsterPile" parent="CardPiles" unique_id=295384922 instance=ExtResource("9_vy5pj")]
+position = Vector2(708, 402)
+monster_draw_speed = null
+
+[node name="InputManager" type="Node2D" parent="." unique_id=1059191440]
+script = ExtResource("7_jw32o")
+
+[node name="Enemies" type="Node" parent="." unique_id=1399036422]
+
+[node name="Enemy1" parent="Enemies" unique_id=1724859655 instance=ExtResource("13_frkhe")]
+position = Vector2(1420, 465)
+
+[node name="Enemy2" parent="Enemies" unique_id=140054195 instance=ExtResource("13_frkhe")]
+position = Vector2(960, 126)
+rotation = -1.5707964
+
+[node name="Enemy3" parent="Enemies" unique_id=1878216842 instance=ExtResource("13_frkhe")]
+position = Vector2(500, 465)
+rotation = 3.1415927
+
+[node name="Player" parent="." unique_id=532426696 instance=ExtResource("14_1p5hy")]
+
+[node name="GameLogic" type="Node" parent="." unique_id=1106219574]
+
+[node name="BattleManager" type="Node" parent="GameLogic" unique_id=254983697]
+script = ExtResource("12_grg3l")
+
+[node name="BattleTimer" type="Timer" parent="GameLogic" unique_id=1534095030]
+one_shot = true
+
+[node name="GameOver" parent="GameLogic" unique_id=1749484813 instance=ExtResource("14_erwvk")]
+position = Vector2(960, 540)
+
+[node name="MonsterManager" type="Node2D" parent="GameLogic" unique_id=186689297]
+script = ExtResource("15_h1m7h")
+
+[node name="MonsterCardSlots" parent="." unique_id=1164190933 instance=ExtResource("8_h1m7h")]
+script = ExtResource("16_erwvk")
+
+[connection signal="end_player_turn" from="GameLogic/BattleManager" to="GameLogic/BattleManager" method="_on_end_player_turn"]
